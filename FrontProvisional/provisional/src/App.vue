@@ -1,15 +1,33 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <header>
+    <div class="contenedor-imagen-nombre">
+      <img src="/assets/logo.png" alt="Logo Profesional">
+      <div class="contenedor-titulo">
+        <h1 class="marca-nombre">Red Panda</h1>
+        <h2 class="marca_definicion">Sabores Autenticos</h2>
+      </div>
+    </div>
+    <nav class="contenedor-enlaces">
+      <li>Inicio</li>
+      <li>Tienda</li>
+    </nav>
+    <div class="contenedor-carrito-perfil">
+      <button class="carrito"></button>
+      <button class="perfil"></button>
+    </div>
+  </header>
+  <main>
+
+  </main>
+  <footer>
+
+  </footer>
 </template>
 
-<style scoped>
-
+<style lang="scss" scoped>
 
   
+
 </style>
