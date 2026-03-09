@@ -27,6 +27,18 @@
 </template>
 
 <style lang="scss" scoped>
+  header {
+    display: flex;
+
+    .contenedor-imagen-nombre {
+      display: flex;
+
+      img {
+        width: 100px;
+        height: 80px;
+      }
+    }
+  }
 
   
 
