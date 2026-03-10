@@ -1,6 +1,69 @@
 {
 	"header": {
-		"titulo": "Red Panda"
-
+		"titulo": "Red Panda",
+		"descripcion": "Sabores Auténticos",
+		"nav": {
+			"inicio": "Inicio",
+			"tienda": "Tienda"
+		},
+		"botones": {
+			"iniciar": "Iniciar Sesión"
+		}
+	},
+	"inicio": {
+		"descripcion": "Sabores Auténticos de Asia",
+		"descripcionLarga": "Descubre la mejor comida asiática, preparada con pasión y entregada en tu puerta",
+		"tiempoEntrega": "Entrega en 30-45 minutos",
+		"razones": "¿Por Qué Elegirnos?",
+		"razonesOpciones": {
+			"titulos": {
+				"chef": "Chefs Expertos",
+				"ingredientes": "Ingredientes Frescos",
+				"entrega": "Entrega Rápìda",
+				"calidad": "Calidad Premium"
+			},
+			"detalle": {
+				"chef": "Nuestros chefs con años de experiencia en cocina asiatica",
+				"ingredientes": "Seleccionamos los mejores ingredientes cada dia",
+				"entrega": "Tu pedido en 30-45 minutos o gratis",
+				"calidad": "Premiados por nuestra excelencia"
+			}
+		},
+		"especialidades": "Nuestras especialidades",
+		"especialidadesDescripcion": "Explora nuestra selección de platos auténticos",
+		"especialidadesOpciones": {
+			"titulos": {
+			"sushi": "Sushi",
+			"ramen": "Ramen",
+			"gyozas": "Gyozas",
+			"bebidas": "Bebidas"
+			},
+			"detalle": {
+				"sushi": "Fresco y delicioso",
+				"ramen": "Caldos artesanales",
+				"gyozas": "Bocados perfectos",
+				"bebidas": "Bubble tea y más"
+			}
+		},
+		"clientes": "Lo Que Dicen Nuestros Clientes",
+		"clientesDescripcion": "Miles de clientes satisfechos",
+		"clientesOpciones": {
+			"nombre": {
+				"nombre1": "María González",
+				"nombre2": "Carlos Ruiz",
+				"nombre3": "Laura Martin"
+			},
+			"comentarios": {
+				"comentario1": "\"¡El mejor sushi que he probado! Fresco, delicioso y la entrega fue rapidísima.\"",
+				"comentario2": "\"El ramen es increíble, sabe exactamente como en Japón. Totalmente recomendado.\"",
+				"comentario3": "\"Pedimos dim sum para toda la familia. ¡Espectacular! Repetiremos seguro.\""
+			}
+		},
+		"listo": "¿Listo Para Ordenar?",
+		"listoDescripcion": "Haz tu pedido ahora y disfurta de los mejores sabores asiáticso en casa",
+		"botones": {
+			"pedir": "Pedir Ahora",
+			"verMenu": "Ver Menú Completo"
+		}
 	}
 }
