@@ -1,0 +1,15 @@
+@use "variables" as *;
+
+// TAMAÑO MOVIL
+@mixin mobile-down {
+	@media (max-width: #{$movil}) {
+		@content;
+	}
+}
+
+// TAMAÑO TABLET
+@mixin tablet-up {
+	@media (min-width: #{$tablet}) {
+		@content;
+	}
+}

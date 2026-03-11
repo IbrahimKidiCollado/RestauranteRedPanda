@@ -1,4 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+// Variable que controla si el menú está abierto o no
+const menuAbierto = ref(false)
+</script>
 
 <template>
 	<header>
@@ -17,17 +22,25 @@
 			<button class="carrito"><img src="/assets/carrito.png" alt="icono-carrito"></button>
 			<!-- MODIFICAR PARA LA COMPROBACION DE USUARIO -->
 			<button class="perfil"><img src="/assets/user-icon.png" alt="icono-user">{{ $t("header.botones.iniciar") }}</button>
-		</div>
-	</header>
-	<main>
-		
-	</main>
-	<footer>
-		
-	</footer>
+			<button 
+			class="menu-hamburguesa" 
+			:class="{ 'is-active': menuAbierto }" 
+			@click="menuAbierto = !menuAbierto"
+			>
+			<span></span>
+		</button>
+	</div>
+</header>
+<main>
+	
+</main>
+<footer>
+	
+</footer>
 </template>
 
 <style lang="scss" scoped>
+
 header {
 	display: flex;
 	justify-content:space-around;
@@ -45,6 +58,11 @@ header {
 		img {
 			width: 100px;
 			height: 80px;
+			
+			@include mobile-down {
+				width: 60px;
+				height: auto;
+			}
 		}
 		
 		.contenedor-titulo {
@@ -53,12 +71,20 @@ header {
 			h1 {
 				color: $color-texto-blanco;
 				font-size: 30px;
+				
+				@include mobile-down {
+					font-size: 20px;
+				}
 			}
 			
 			h2 {
 				color: $color-rojo-fuerte-textos;
 				font-size: 13px;
 				font-weight: 400;
+				
+				@include mobile-down {
+					font-size: 9px;
+				}
 			}
 		}
 	}
@@ -73,6 +99,10 @@ header {
 			list-style: none;
 			font-size: 15px;
 			font-weight: 600;
+			
+			@include mobile-down {
+				display: none;
+			}
 			
 			&::after {
 				content: "";
@@ -140,6 +170,10 @@ header {
 			border-radius: 10px;
 			transition: transform 0.2s ease, background-color 0.2s ease;
 			
+			@include mobile-down {
+				display: none;
+			}
+			
 			img {
 				width: 17px;
 				height: 17px
@@ -148,6 +182,74 @@ header {
 			&:hover {
 				transform: scale(1.05);
 				background-color: $color-rojo-oscuro-claro;
+			}
+		}
+
+		.menu-hamburguesa {
+			display: none;
+		}
+		
+		@include mobile-down {
+			.menu-hamburguesa {
+				width: 40px;
+				height: 40px;
+				background: transparent;
+				border: none;
+				cursor: pointer;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				position: relative;
+				z-index: 100; // Importante para que el botón siempre quede por encima del menú desplegable
+				
+				// La línea del centro
+				span {
+					display: block;
+					width: 30px;
+					height: 3px;
+					background-color: $color-texto-blanco; // Usa tu variable de color
+					border-radius: 2px;
+					position: relative;
+					transition: all 0.3s ease;
+					
+					// Las líneas de arriba y abajo
+					&::before,
+					&::after {
+						content: '';
+						position: absolute;
+						left: 0;
+						width: 30px;
+						height: 3px;
+						background-color: $color-texto-blanco; // Usa tu variable de color
+						border-radius: 2px;
+						transition: all 0.3s ease;
+					}
+					
+					// Posicionamos la de arriba
+					&::before {
+						transform: translateY(-8px); 
+					}
+					
+					// Posicionamos la de abajo
+					&::after {
+						transform: translateY(8px);
+					}
+				}
+				
+				// --- LA MAGIA: CUANDO VUE PONE LA CLASE ACTIVA ---
+				&.is-active {
+					span {
+						background-color: transparent; // Ocultamos la línea del centro
+						
+						&::before {
+							transform: translateY(0) rotate(45deg); // Forma la barra /
+						}
+						
+						&::after {
+							transform: translateY(0) rotate(-45deg); // Forma la barra \
+						}
+					}
+				}
 			}
 		}
 	}
