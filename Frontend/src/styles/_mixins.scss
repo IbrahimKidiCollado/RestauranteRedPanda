@@ -8,8 +8,8 @@
 }
 
 // TAMAÑO TABLET
-@mixin tablet-up {
-	@media (min-width: #{$tablet}) {
-		@content;
-	}
+@mixin tablet-down {
+    @media (max-width: #{$desktop - 1px}) {
+        @content;
+    }
 }

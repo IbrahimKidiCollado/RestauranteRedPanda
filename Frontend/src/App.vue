@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -12,6 +12,22 @@ const listaBotonesInicio = computed( () => [ // Computed para traducir dinamicam
 {id: 1, texto: t("header.nav.tienda") },
 {id: 2, texto: t("header.botones.iniciar")}
 ]) // Objeto para crear botones dinamicos para el inicio
+
+const tabletMovil = ref(false)
+
+const revisarTamaño = () => {
+	// Guardamos true si la pantalla es menor a 768px y mayor que la minima de movil
+	tabletMovil.value = window.innerWidth <= 768 && window.innerWidth > 391
+}
+
+onMounted(() => {
+	revisarTamaño() // Revisar al cargar
+	window.addEventListener('resize', revisarTamaño) // Revisar al cambiar el tamaño
+})
+
+onUnmounted(() => {
+	window.removeEventListener('resize', revisarTamaño) // Limpiar el evento al destruir el componente
+})
 
 </script>
 
@@ -31,7 +47,6 @@ const listaBotonesInicio = computed( () => [ // Computed para traducir dinamicam
 			</nav>
 			<div class="contenedor-carrito-perfil">
 				<button class="carrito"><img src="/assets/carrito.png" alt="icono-carrito"></button>
-				<!-- MODIFICAR PARA LA COMPROBACION DE USUARIO -->
 				<button class="perfil"><img src="/assets/user-icon.png" alt="icono-user">{{ $t("header.botones.iniciar") }}</button>
 				<button
 				class="menu-hamburguesa"
@@ -46,16 +61,19 @@ const listaBotonesInicio = computed( () => [ // Computed para traducir dinamicam
 	<div 
 	class="contenedor-2-header" 
 	:class="{ 'esta-abierto': menuAbierto }"
-	@click.self="menuAbierto = false"
 	>
-	<button
-	v-for="boton in listaBotonesInicio"
-	:key="boton.id"
-	:class="{'is-active2': opcionMenuAbierto === boton.id}"
-	@click="opcionMenuAbierto = boton.id"
-	>
-	{{ boton.texto }}
-</button>
+	<template v-for="boton in listaBotonesInicio" :key="boton.id">
+    <button
+        v-if="!(tabletMovil && boton.id === 2)"
+        :class="{
+            'is-active2': opcionMenuAbierto === boton.id,
+            'none': opcionMenuAbierto === 2
+        }"
+        @click="opcionMenuAbierto = boton.id; menuAbierto = false"
+    >
+        {{ boton.texto }}
+    </button>
+</template>
 </div>
 </header>
 <main>
@@ -176,7 +194,7 @@ header {
 				font-size: 15px;
 				font-weight: 600;
 				
-				@include mobile-down {
+				@include tablet-down {
 					display: none;
 				}
 				
@@ -265,7 +283,7 @@ header {
 				display: none;
 			}
 			
-			@include mobile-down {
+			@include tablet-down {
 				.menu-hamburguesa {
 					width: 40px;
 					height: 40px;
