@@ -1,5 +1,7 @@
 package com.redpanda.restaurante.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -23,6 +25,22 @@ public class Entrante {
     //Clave foranea FK
     @ManyToOne
     @JoinColumn(name = "id_carta")
+    @JsonIgnore
     private Carta carta;
+
+    //Getters
+    public Long getId() {
+        return id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public double getPrecio() {
+        return precio;
+    }
+
 
 }

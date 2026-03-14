@@ -1,1 +1,2 @@
+DROP DATABASE restaurante_red_panda;
 CREATE DATABASE restaurante_red_panda;

@@ -26,5 +26,22 @@ public class Carrito {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
+    //Getters
+    public Long getId() {
+        return id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public double getPrecio() {
+        return precio;
+    }
+    public int getCantidad() {
+        return cantidad;
+    }
+    
 
 }

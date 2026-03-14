@@ -3,6 +3,8 @@ package com.redpanda.restaurante.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 //Nombre de la tabla
 @Table(name = "sushi")
@@ -24,6 +26,7 @@ public class Sushi {
     //Varios shushis pueden estar en una carta
     @ManyToOne
     @JoinColumn(name = "id_carta")
+    @JsonIgnore
     private Carta carta;
 
     //Relacion N a M 
@@ -38,5 +41,22 @@ public class Sushi {
         inverseJoinColumns = @JoinColumn(name = "id_ingrediente")
     )
     private List<Ingrediente> ingredientes;
+
+    public Long getId() {
+        return id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public int getNumeroPiezas() {
+        return numeroPiezas;
+    }
+    public double getPrecio() {
+        return precio;
+    }
+
 
 }

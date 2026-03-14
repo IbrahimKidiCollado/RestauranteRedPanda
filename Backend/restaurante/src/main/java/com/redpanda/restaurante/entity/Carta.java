@@ -38,4 +38,24 @@ public class Carta {
     @OneToMany(mappedBy = "carta")
     private List<Bebida> bebidas;
 
+    public Long getId() {
+        return id;
+    }
+
+    public List<Sushi> getSushi() {
+        return sushi;
+    }
+
+    public List<Ramen> getRamen() {
+        return ramen;
+    }
+
+    public List<Entrante> getEntrantes() {
+        return entrantes;
+    }
+
+    public List<Bebida> getBebidas() {
+        return bebidas;
+    }
+
 }

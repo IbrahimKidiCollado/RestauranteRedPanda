@@ -16,4 +16,12 @@ public class Ingrediente {
     //Campos de la tabla
     private String nombre;
 
+    //Getters
+    public Long getId() {
+        return id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+
 }
