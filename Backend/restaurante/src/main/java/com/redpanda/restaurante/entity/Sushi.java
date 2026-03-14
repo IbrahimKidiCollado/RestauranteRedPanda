@@ -20,6 +20,12 @@ public class Sushi {
     private int numeroPiezas;
     private double precio;
 
+    //Relacion 1 a N 
+    //Varios shushis pueden estar en una carta
+    @ManyToOne
+    @JoinColumn(name = "id_carta")
+    private Carta carta;
+
     //Relacion N a M 
     //Un sushi puede tener varios ingredientes y un ingrediente pueden estar en varios sushis
     @ManyToMany

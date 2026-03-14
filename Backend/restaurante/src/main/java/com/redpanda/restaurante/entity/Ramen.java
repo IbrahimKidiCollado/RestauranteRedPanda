@@ -19,6 +19,12 @@ public class Ramen {
     private int cantidad;
     private double precio;
 
+    //Relacion 1 a N 
+    //Varios ramenes pueden estar en una carta
+    @ManyToOne
+    @JoinColumn(name = "id_carta")
+    private Carta carta;
+    
     //Relacion N a M 
     //En un ramen hay varios ingredientes y un ingrediente esta en varios ramenes
     @ManyToMany
