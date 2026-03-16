@@ -32,18 +32,30 @@ onUnmounted(() => {
 </script>
 
 <template>
-	<header>
-		<div class="contenedor-1-header">
-			<div class="contenedor-imagen-nombre">
-				<img src="/assets/logo.png" alt="Logo Profesional">
-				<div class="contenedor-titulo">
-					<h1>{{ $t("header.titulo") }}</h1>
-					<h2>{{ $t("header.descripcion") }}</h2>
+	<div  class="contenedor-principal">
+		<header>
+			<div class="contenedor-1-header">
+				<div class="contenedor-imagen-nombre">
+					<img src="/assets/logo.png" alt="Logo Profesional">
+					<div class="contenedor-titulo">
+						<h1>{{ $t("header.titulo") }}</h1>
+						<h2>{{ $t("header.descripcion") }}</h2>
+					</div>
 				</div>
-			</div>
-			<nav class="contenedor-enlaces">
-				<li>{{ $t("header.nav.inicio") }}</li>
-				<li>{{ $t("header.nav.tienda") }}</li>
+				<nav class="contenedor-enlaces">
+					<li 
+					v-for="(enlace) in [ {id: 0, t: 'header.nav.inicio'}, {id: 1, t: 'header.nav.tienda'} ]" 
+					:key="enlace.id"
+					:class="{ 'active': opcionMenuAbierto === enlace.id }"
+					@click="opcionMenuAbierto = enlace.id"
+					>
+					{{ $t(enlace.t) }}
+				</li>
+				
+				<div 
+				class="barra-deslizante" 
+				:style="{ transform: `translateX(${opcionMenuAbierto * 100}%) translateX(${opcionMenuAbierto * 30}px)` }"
+				></div>
 			</nav>
 			<div class="contenedor-carrito-perfil">
 				<button class="carrito"><img src="/assets/carrito.png" alt="icono-carrito"></button>
@@ -58,21 +70,21 @@ onUnmounted(() => {
 		</div>
 	</div>
 	<!-- bucle para recorrer el array de botones de inicio con llave obligatoria y cambiando la clase active en funcion de que boton se haya pulsado -->
-	<div 
-	class="contenedor-2-header" 
+	<div
+	class="contenedor-2-header"
 	:class="{ 'esta-abierto': menuAbierto }"
 	>
 	<template v-for="boton in listaBotonesInicio" :key="boton.id">
-    <button
-        v-if="!(tabletMovil && boton.id === 2)"
-        :class="{
-            'is-active2': opcionMenuAbierto === boton.id,
-            'none': opcionMenuAbierto === 2
-        }"
-        @click="opcionMenuAbierto = boton.id; menuAbierto = false"
-    >
-        {{ boton.texto }}
-    </button>
+		<button
+		v-if="!(tabletMovil && boton.id === 2)"
+		:class="{
+			'is-active2': opcionMenuAbierto === boton.id,
+			'none': opcionMenuAbierto === 2
+		}"
+		@click="opcionMenuAbierto = boton.id; menuAbierto = false"
+		>
+		{{ boton.texto }}
+	</button>
 </template>
 </div>
 </header>
@@ -80,16 +92,75 @@ onUnmounted(() => {
 	
 </main>
 <footer>
-	
+	<div>
+		<div>
+			<div>
+				<div><img src="/assets/logo.png" alt="Logo Profesional"></div>
+				<div>{{ $t("header.titulo") }}</div>
+			</div>
+			<p>{{ $t("footer.descripcion") }}</p>
+		</div>
+		<div>
+			<span>{{ $t("footer.titulos.enlaces") }}</span>
+			<li>{{ $t("header.nav.inicio") }}</li>
+			<li>{{ $t("header.nav.tienda") }}</li>
+		</div>
+		<div>
+			<span>{{ $t("footer.titulos.contacto") }}</span>
+			<div>
+				<img src="" alt="">
+				<p></p>
+			</div>
+			<div>
+				<img src="" alt="">
+				<p></p>
+			</div>
+			<div>
+				<img src="" alt="">
+				<p></p>
+			</div>
+		</div>
+		<div>
+			<span>{{ $t("footer.titulos.horario") }}</span>
+			<p>{{ $t("footer.horario.diario") }}</p>
+			<p>{{ $t("footer.horario.findes") }}</p>
+			<div>
+				<button><img src="" alt=""></button>
+				<button><img src="" alt=""></button>
+				<button><img src="" alt=""></button>
+			</div>
+		</div>
+	</div>
+	<div>{{ $t("footer.derechos") }}</div>
 </footer>
+</div>
+
 </template>
 
 <style lang="scss" scoped>
+
+.contenedor-principal {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	
+	main {
+		flex-grow: 1;
+	}
+	
+	footer {
+		flex-shrink: 0;
+	}
+}
 
 header {
 	background-color: $color-fondo-oscuro;
 	display: flex;
 	flex-direction: column;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	flex-shrink: 0;
 	
 	.contenedor-2-header {
 		color: $color-blanco-sucio;
@@ -187,46 +258,42 @@ header {
 			display: flex;
 			gap: 30px;
 			align-items: center;
+			position: relative;
+			padding-bottom: 5px;
+			
+			@include tablet-down {
+				display: none;
+			}
 			
 			li {
 				color: $color-blanco-sucio;
 				list-style: none;
 				font-size: 15px;
 				font-weight: 600;
-				
-				@include tablet-down {
-					display: none;
-				}
-				
-				&::after {
-					content: "";
-					position: absolute;
-					bottom: 0;
-					left: 0;
-					width: 100%;
-					height: 3px;
-					background-color: $color-rojo-panda;
-					transform: scaleX(0);
-					transform-origin: right;
-					transition: transform 0.3s ease-in-out;
-				}
+				cursor: pointer;
+				transition: color 0.3s ease;
+				position: relative;
+				width: 80px;
+				text-align: center;
 				
 				&:hover {
 					color: $color-texto-blanco;
-					transition: 200ms;
-					&::after {
-						transform: scaleX(1);
-						transform-origin: left;
-					}
 				}
 				
-				&.router-link-active {
+				&.active {
 					color: $color-rojo-panda;
-					&::after {
-						transform: scaleX(1);
-						transform-origin: left;
-					}
 				}
+			}
+			
+			.barra-deslizante {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 80px;
+				height: 3px;
+				background-color: $color-rojo-panda;
+				transition: transform 0.3s ease-in-out;
+				pointer-events: none;
 			}
 		}
 		
@@ -296,17 +363,15 @@ header {
 					position: relative;
 					z-index: 100;
 					
-					// La línea del centro
 					span {
 						display: block;
 						width: 30px;
 						height: 3px;
-						background-color: $color-texto-blanco; // Usa tu variable de color
+						background-color: $color-texto-blanco;
 						border-radius: 2px;
 						position: relative;
 						transition: all 0.3s ease;
 						
-						// Las líneas de arriba y abajo
 						&::before,
 						&::after {
 							content: '';
@@ -314,33 +379,30 @@ header {
 							left: 0;
 							width: 30px;
 							height: 3px;
-							background-color: $color-texto-blanco; // Usa tu variable de color
+							background-color: $color-texto-blanco;
 							border-radius: 2px;
 							transition: all 0.3s ease;
 						}
 						
-						// Posicionamos la de arriba
 						&::before {
-							transform: translateY(-8px); 
+							transform: translateY(-8px);
 						}
 						
-						// Posicionamos la de abajo
 						&::after {
 							transform: translateY(8px);
 						}
 					}
 					
-					// --- LA MAGIA: CUANDO VUE PONE LA CLASE ACTIVA ---
 					&.is-active {
 						span {
-							background-color: transparent; // Ocultamos la línea del centro
+							background-color: transparent;
 							
 							&::before {
-								transform: translateY(0) rotate(45deg); // Forma la barra /
+								transform: translateY(0) rotate(45deg);
 							}
 							
 							&::after {
-								transform: translateY(0) rotate(-45deg); // Forma la barra \
+								transform: translateY(0) rotate(-45deg);
 							}
 						}
 					}
@@ -348,5 +410,9 @@ header {
 			}
 		}
 	}
+}
+
+footer {
+	
 }
 </style>

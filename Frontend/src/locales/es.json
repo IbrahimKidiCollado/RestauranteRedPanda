@@ -65,5 +65,23 @@
 			"pedir": "Pedir Ahora",
 			"verMenu": "Ver Menú Completo"
 		}
+	},
+	"footer": {
+		"descripcion": "Auténtica comida asiática preparada con ingredientes frescos y recetas tradicionales.",
+		"titulos": {
+			"enlaces": "Enlaces Rápidos",
+			"contacto": "Contacto",
+			"horario": "Horario"
+		},
+		"contacto": {
+			"calle": "Calle Principal 123, Madrid, España",
+			"tlf": "+34 912 345 678",
+			"email": "info@redpanda.com"
+		},
+		"horario": {
+			"diario": "Lunes - Viernes: 12:00 - 23:00",
+			"findes": "Sábado - Domingo: 12:00 - 00:00"
+		},
+		"derechos": "© 2026 Asian Delight. Todos los derechos reservados."
 	}
 }

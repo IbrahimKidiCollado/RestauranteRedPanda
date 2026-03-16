@@ -1,4 +1,14 @@
 * {
-    font-family: $fuente-principal;
+	font-family: $fuente-principal;
 	margin: 0px;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%; /* Obliga al navegador a tener altura real */
+}
+
+#app {
+  height: 100%; /* El contenedor de Vue ocupa toda la altura */
 }
