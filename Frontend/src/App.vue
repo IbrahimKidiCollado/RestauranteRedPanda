@@ -92,52 +92,148 @@ onUnmounted(() => {
 	
 </main>
 <footer>
-	<div>
-		<div>
+	<div class="contenedor-1-footer">
+		<div class="contenedor-1">
 			<div>
-				<div><img src="/assets/logo.png" alt="Logo Profesional"></div>
-				<div>{{ $t("header.titulo") }}</div>
+				<div class="contenedor-1-imagenNombre">
+					<img src="/assets/logo.png" alt="Logo Profesional">
+					<h2>{{ $t("header.titulo") }}</h2>
+				</div>
 			</div>
 			<p>{{ $t("footer.descripcion") }}</p>
 		</div>
-		<div>
+		<div class="contenedor-2">
 			<span>{{ $t("footer.titulos.enlaces") }}</span>
 			<li>{{ $t("header.nav.inicio") }}</li>
 			<li>{{ $t("header.nav.tienda") }}</li>
 		</div>
-		<div>
+		<div class="contenedor-3">
 			<span>{{ $t("footer.titulos.contacto") }}</span>
 			<div>
-				<img src="" alt="">
-				<p></p>
+				<img src="/assets/marcador.png" alt="ubicacion">
+				<p>{{ $t("footer.contacto.calle") }}</p>
 			</div>
 			<div>
-				<img src="" alt="">
-				<p></p>
+				<img src="/assets/llamada-telefonica.png" alt="telefono">
+				<p>{{ $t("footer.contacto.tlf")}}</p>
 			</div>
 			<div>
-				<img src="" alt="">
-				<p></p>
+				<img src="/assets/sobre.png" alt="email">
+				<p>{{ $t("footer.contacto.email") }}</p>
 			</div>
 		</div>
-		<div>
+		<div class="contenedor-4">
 			<span>{{ $t("footer.titulos.horario") }}</span>
 			<p>{{ $t("footer.horario.diario") }}</p>
 			<p>{{ $t("footer.horario.findes") }}</p>
-			<div>
-				<button><img src="" alt=""></button>
-				<button><img src="" alt=""></button>
-				<button><img src="" alt=""></button>
+			<div class="contenedor-social">
+				<button><img src="/assets/facebook.png" alt="logoFacebook"></button>
+				<button><img src="/assets/instagram.png" alt="logoInstagram"></button>
+				<button><img src="/assets/gorjeo.png" alt="logoGorjeo"></button>
 			</div>
 		</div>
 	</div>
-	<div>{{ $t("footer.derechos") }}</div>
+	<div class="contenedor-2-footer">{{ $t("footer.derechos") }}</div>
 </footer>
 </div>
 
 </template>
 
 <style lang="scss" scoped>
+
+footer {
+	background-color: $color-fondo-masOscuro;
+	color: $color-texto-blanco;
+	max-height: 400px;
+	
+	.contenedor-1-footer {
+		display: flex;
+		justify-content:center;
+		min-width: 600;
+		
+		&>div {
+			width: 300px;
+			margin-left: 40px;
+			padding-top: 50px;
+		}
+		
+		div>span {
+			font-size: 20px;
+			font-weight: 600;
+			line-height: 50px;
+		}
+		
+		.contenedor-1 {
+			margin-top:-13px;
+			
+			img {
+				width: 90px;
+				height: 70px;
+			}
+			
+			.contenedor-1-imagenNombre {
+				display: flex;
+				align-items:center;
+			}
+		}
+		
+		.contenedor-2 {
+			list-style: none;
+			li {
+				margin-bottom: 10px;
+			}
+		}
+		
+		.contenedor-3 {
+			div {
+				display: flex;
+				align-items: center;
+				margin-bottom: 20px;
+				gap:10px;
+				
+				p {
+					margin-bottom: auto !important;
+				}
+			}
+		}
+		
+		.contenedor-4 {
+			p {
+				margin-bottom: 10px;
+			}
+			
+			.contenedor-social {
+				display: flex;
+				gap: 10px;
+				button {
+					width: 40px;  /* Ancho fijo */
+					height: 40px; /* Alto fijo (igual al ancho) */
+					border-radius: 50%;
+					
+					background: none;
+					border: 1px solid $color-rojo-fuerte-textos;
+					background-color: $color-rojo-oscuro;
+					transition: transform 0.2s ease, background-color 0.2s ease;
+
+					&:hover {
+						transform: scale(1.05);
+						background-color: $color-rojo-oscuro-claro;
+					}
+				}
+			}
+		}
+	}
+}
+
+.contenedor-2-footer {
+	text-align: center;
+	margin: 30px 50px 60px 50px;
+	border-top: 1px solid $color-rojo-oscuro-claro;
+	font-size: 18px;
+	color: $color-texto-blanco;
+	padding-top: 50px;
+}
+
 
 .contenedor-principal {
 	display: flex;
@@ -153,14 +249,20 @@ onUnmounted(() => {
 	}
 }
 
+main {
+	height: 800px;
+}
+
 header {
 	background-color: $color-fondo-oscuro;
 	display: flex;
 	flex-direction: column;
 	position: sticky;
 	top: 0;
+	width: 100%;
 	z-index: 1000;
 	flex-shrink: 0;
+	
 	
 	.contenedor-2-header {
 		color: $color-blanco-sucio;
@@ -235,7 +337,7 @@ header {
 				
 				h1 {
 					color: $color-texto-blanco;
-					font-size: 30px;
+					font-size: clamp(1.8rem, 2.5vw, 2.5rem);
 					
 					@include mobile-down {
 						font-size: 20px;
@@ -268,7 +370,7 @@ header {
 			li {
 				color: $color-blanco-sucio;
 				list-style: none;
-				font-size: 15px;
+				font-size: clamp(1rem, 1vw , 1.5rem);
 				font-weight: 600;
 				cursor: pointer;
 				transition: color 0.3s ease;
@@ -410,9 +512,5 @@ header {
 			}
 		}
 	}
-}
-
-footer {
-	
 }
 </style>
