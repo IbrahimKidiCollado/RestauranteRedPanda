@@ -26,7 +26,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public List<Usuario> obteneUsuario(@RequestBody Usuario usuario, String correo, String contrasena){
+    public List<Usuario> obteneUsuario(@RequestBody Usuario loginData) {
         return usuarioRepository.findBy(null, null);
     }
 
