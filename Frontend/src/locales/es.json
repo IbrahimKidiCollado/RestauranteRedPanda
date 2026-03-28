@@ -66,6 +66,14 @@
 			"verMenu": "Ver Menú Completo"
 		}
 	},
+	"tienda":{
+		"titulo": "Nuestro Menú",
+		"descripcion": "Descubre nuestras delicias asiáticas",
+		"buscador": {
+			"buscar": "Buscar platos",
+			"categ": "Categorías"
+		}
+	},
 	"footer": {
 		"descripcion": "Auténtica comida asiática preparada con ingredientes frescos y recetas tradicionales.",
 		"titulos": {

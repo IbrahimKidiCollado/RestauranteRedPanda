@@ -57,7 +57,7 @@ onUnmounted(() => {
 					</div>
 				</div>
 				<nav class="contenedor-enlaces">
-					<li 
+					<li
 					v-for="enlace in enlaces" 
 					:key="enlace.id"
 					:class="{ 'active': opcionMenuAbierto === enlace.id }"
@@ -102,7 +102,7 @@ onUnmounted(() => {
 </div>
 </header>
 
-<main>
+<main class="contenido">
 	<RouterView />
 </main>
 
@@ -153,100 +153,6 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 
-footer {
-	background-color: $color-fondo-masOscuro;
-	color: $color-texto-blanco;
-	max-height: 400px;
-	
-	.contenedor-1-footer {
-		display: flex;
-		justify-content:center;
-		min-width: 600;
-		
-		&>div {
-			width: 300px;
-			margin-left: 40px;
-			padding-top: 50px;
-		}
-		
-		div>span {
-			font-size: 20px;
-			font-weight: 600;
-			line-height: 50px;
-		}
-		
-		.contenedor-1 {
-			margin-top:-13px;
-			
-			img {
-				width: 90px;
-				height: 70px;
-			}
-			
-			.contenedor-1-imagenNombre {
-				display: flex;
-				align-items:center;
-			}
-		}
-		
-		.contenedor-2 {
-			list-style: none;
-			li {
-				margin-bottom: 10px;
-			}
-		}
-		
-		.contenedor-3 {
-			div {
-				display: flex;
-				align-items: center;
-				margin-bottom: 20px;
-				gap:10px;
-				
-				p {
-					margin-bottom: auto !important;
-				}
-			}
-		}
-		
-		.contenedor-4 {
-			p {
-				margin-bottom: 10px;
-			}
-			
-			.contenedor-social {
-				display: flex;
-				gap: 10px;
-				button {
-					width: 40px;  /* Ancho fijo */
-					height: 40px; /* Alto fijo (igual al ancho) */
-					border-radius: 50%;
-					
-					background: none;
-					border: 1px solid $color-rojo-fuerte-textos;
-					background-color: $color-rojo-oscuro;
-					transition: transform 0.2s ease, background-color 0.2s ease;
-					
-					&:hover {
-						transform: scale(1.05);
-						background-color: $color-rojo-oscuro-claro;
-					}
-				}
-			}
-		}
-	}
-}
-
-.contenedor-2-footer {
-	text-align: center;
-	margin: 30px 50px 60px 50px;
-	border-top: 1px solid $color-rojo-oscuro-claro;
-	font-size: 18px;
-	color: $color-texto-blanco;
-	padding-top: 50px;
-}
-
-
 .contenedor-principal {
 	display: flex;
 	flex-direction: column;
@@ -261,12 +167,8 @@ footer {
 	}
 }
 
-main {
-	height: 800px;
-}
-
 header {
-	background-color: $color-fondo-oscuro;
+	background-color: $color-fondo-header;
 	display: flex;
 	flex-direction: column;
 	position: sticky;
@@ -274,6 +176,7 @@ header {
 	width: 100%;
 	z-index: 1000;
 	flex-shrink: 0;
+	border-bottom: 1px solid $color-rojo-oscuro-claro;
 	
 	
 	.contenedor-2-header {
@@ -405,7 +308,7 @@ header {
 				pointer-events: none;
 			}
 		}
-
+		
 		.contenedor-2 {
 			li {
 				cursor: pointer;
@@ -530,6 +433,105 @@ header {
 				}
 			}
 		}
+	}
+}
+
+main {
+	height: 800px;
+	background-color: $color-fondo-main;
+}
+
+footer {
+	background-color: $color-fondo-header;
+	color: $color-texto-blanco;
+	max-height: 400px;
+	border-top: 1px solid $color-rojo-oscuro-claro;
+	
+	.contenedor-1-footer {
+		display: flex;
+		justify-content:center;
+		min-width: 600;
+		
+		&>div {
+			width: 300px;
+			margin-left: 40px;
+			padding-top: 50px;
+		}
+		
+		div>span {
+			font-size: 20px;
+			font-weight: 600;
+			line-height: 50px;
+		}
+		
+		.contenedor-1 {
+			margin-top:-13px;
+			
+			img {
+				width: 90px;
+				height: 70px;
+			}
+			
+			.contenedor-1-imagenNombre {
+				display: flex;
+				align-items:center;
+			}
+		}
+		
+		.contenedor-2 {
+			list-style: none;
+			li {
+				margin-bottom: 10px;
+			}
+		}
+		
+		.contenedor-3 {
+			div {
+				display: flex;
+				align-items: center;
+				margin-bottom: 20px;
+				gap:10px;
+				
+				p {
+					margin-bottom: auto !important;
+				}
+			}
+		}
+		
+		.contenedor-4 {
+			p {
+				margin-bottom: 10px;
+			}
+			
+			.contenedor-social {
+				display: flex;
+				gap: 10px;
+				button {
+					width: 40px;  /* Ancho fijo */
+					height: 40px; /* Alto fijo (igual al ancho) */
+					border-radius: 50%;
+					
+					background: none;
+					border: 1px solid $color-rojo-fuerte-textos;
+					background-color: $color-rojo-oscuro;
+					transition: transform 0.2s ease, background-color 0.2s ease;
+					
+					&:hover {
+						transform: scale(1.05);
+						background-color: $color-rojo-oscuro-claro;
+					}
+				}
+			}
+		}
+	}
+
+	.contenedor-2-footer {
+		text-align: center;
+		margin: 30px 50px 60px 50px;
+		border-top: 1px solid $color-rojo-oscuro-claro;
+		font-size: 18px;
+		color: $color-texto-blanco;
+		padding-top: 50px;
 	}
 }
 </style>

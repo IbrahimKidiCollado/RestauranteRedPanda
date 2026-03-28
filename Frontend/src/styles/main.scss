@@ -10,5 +10,10 @@ html, body {
 }
 
 #app {
-  height: 100%; /* El contenedor de Vue ocupa toda la altura */
+	height: 100%; /* El contenedor de Vue ocupa toda la altura */
 }
+
+h1 {
+	color: $color-texto-blanco;
+}
+
