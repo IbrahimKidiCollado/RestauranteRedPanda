@@ -3,22 +3,15 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    /* {
-      path: '/',
-      name: 'inicio',
-      component: InicioView
+    {
+      path: '/',      // Cuando el usuario entra a la raíz
+      redirect: '/tienda' // Lo mandamos automáticamente a /tienda
     },
     {
-      path: '/carta',
-      name: 'carta',
-      // Carga perezosa (Lazy Loading): solo carga este código si el usuario entra aquí
-      component: () => import('../views/CartaView.vue')
+      path: '/tienda',
+      name: 'tienda',
+      component: () => import('@/views/TiendaView.vue')
     },
-    {
-      path: '/reserva',
-      name: 'reserva',
-      component: () => import('../views/ReservaView.vue')
-    } */
   ],
 })
 

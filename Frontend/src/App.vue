@@ -1,41 +1,55 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
 
-const menuAbierto = ref(false) // Variable que controla si el menú está abierto
-const opcionMenuAbierto = ref(0) // Para ver que menu está abierto
-const { t } = useI18n() // Sacar la funcion t del framework
+const { t } = useI18n()
+const route = useRoute()
+const router = useRouter()
 
-const listaBotonesInicio = computed( () => [ // Computed para traducir dinamicamente con el framework de traduccion
-{id: 0, texto: t("header.nav.inicio") },
-{id: 1, texto: t("header.nav.tienda") },
-{id: 2, texto: t("header.botones.iniciar")}
-]) // Objeto para crear botones dinamicos para el inicio
-
+const menuAbierto = ref(false)
 const tabletMovil = ref(false)
 
+const enlaces = [
+{ id: 0, t: 'header.nav.inicio', path: '/' },
+{ id: 1, t: 'header.nav.tienda', path: '/tienda' }
+]
+
+const opcionMenuAbierto = computed(() => {
+	const rutaActual = enlaces.find(e => e.path === route.path)
+	return rutaActual ? rutaActual.id : 0
+})
+
+const listaBotonesInicio = computed( () => [
+{id: 0, texto: t("header.nav.inicio"), path: '/' },
+{id: 1, texto: t("header.nav.tienda"), path: '/tienda' },
+{id: 2, texto: t("header.botones.iniciar"), path: '/login' }
+])
+
+const navegar = (path: string) => {
+	router.push(path)
+	menuAbierto.value = false
+}
+
 const revisarTamaño = () => {
-	// Guardamos true si la pantalla es menor a 768px y mayor que la minima de movil
 	tabletMovil.value = window.innerWidth <= 768 && window.innerWidth > 391
 }
 
 onMounted(() => {
-	revisarTamaño() // Revisar al cargar
-	window.addEventListener('resize', revisarTamaño) // Revisar al cambiar el tamaño
+	revisarTamaño()
+	window.addEventListener('resize', revisarTamaño)
 })
 
 onUnmounted(() => {
-	window.removeEventListener('resize', revisarTamaño) // Limpiar el evento al destruir el componente
+	window.removeEventListener('resize', revisarTamaño)
 })
-
 </script>
 
 <template>
-	<div  class="contenedor-principal">
+	<div class="contenedor-principal">
 		<header>
 			<div class="contenedor-1-header">
-				<div class="contenedor-imagen-nombre">
+				<div class="contenedor-imagen-nombre" @click="navegar('/')" style="cursor: pointer;">
 					<img src="/assets/logo.png" alt="Logo Profesional">
 					<div class="contenedor-titulo">
 						<h1>{{ $t("header.titulo") }}</h1>
@@ -44,10 +58,10 @@ onUnmounted(() => {
 				</div>
 				<nav class="contenedor-enlaces">
 					<li 
-					v-for="(enlace) in [ {id: 0, t: 'header.nav.inicio'}, {id: 1, t: 'header.nav.tienda'} ]" 
+					v-for="enlace in enlaces" 
 					:key="enlace.id"
 					:class="{ 'active': opcionMenuAbierto === enlace.id }"
-					@click="opcionMenuAbierto = enlace.id"
+					@click="navegar(enlace.path)"
 					>
 					{{ $t(enlace.t) }}
 				</li>
@@ -59,7 +73,9 @@ onUnmounted(() => {
 			</nav>
 			<div class="contenedor-carrito-perfil">
 				<button class="carrito"><img src="/assets/carrito.png" alt="icono-carrito"></button>
-				<button class="perfil"><img src="/assets/user-icon.png" alt="icono-user">{{ $t("header.botones.iniciar") }}</button>
+				<button class="perfil" @click="navegar('/login')">
+					<img src="/assets/user-icon.png" alt="icono-user">{{ $t("header.botones.iniciar") }}
+				</button>
 				<button
 				class="menu-hamburguesa"
 				:class="{ 'is-active': menuAbierto }"
@@ -69,43 +85,40 @@ onUnmounted(() => {
 			</button>
 		</div>
 	</div>
-	<!-- bucle para recorrer el array de botones de inicio con llave obligatoria y cambiando la clase active en funcion de que boton se haya pulsado -->
-	<div
-	class="contenedor-2-header"
-	:class="{ 'esta-abierto': menuAbierto }"
-	>
-	<template v-for="boton in listaBotonesInicio" :key="boton.id">
-		<button
-		v-if="!(tabletMovil && boton.id === 2)"
-		:class="{
-			'is-active2': opcionMenuAbierto === boton.id,
-			'none': opcionMenuAbierto === 2
-		}"
-		@click="opcionMenuAbierto = boton.id; menuAbierto = false"
-		>
-		{{ boton.texto }}
-	</button>
-</template>
+	
+	<div class="contenedor-2-header" :class="{ 'esta-abierto': menuAbierto }">
+		<template v-for="boton in listaBotonesInicio" :key="boton.id">
+			<button
+			v-if="!(tabletMovil && boton.id === 2)"
+			:class="{
+				'is-active2': opcionMenuAbierto === boton.id,
+				'none': opcionMenuAbierto === 2
+			}"
+			@click="navegar(boton.path)"
+			>
+			{{ boton.texto }}
+		</button>
+	</template>
 </div>
 </header>
+
 <main>
-	
+	<RouterView />
 </main>
+
 <footer>
 	<div class="contenedor-1-footer">
 		<div class="contenedor-1">
-			<div>
-				<div class="contenedor-1-imagenNombre">
-					<img src="/assets/logo.png" alt="Logo Profesional">
-					<h2>{{ $t("header.titulo") }}</h2>
-				</div>
+			<div class="contenedor-1-imagenNombre">
+				<img src="/assets/logo.png" alt="Logo Profesional">
+				<h2>{{ $t("header.titulo") }}</h2>
 			</div>
 			<p>{{ $t("footer.descripcion") }}</p>
 		</div>
 		<div class="contenedor-2">
 			<span>{{ $t("footer.titulos.enlaces") }}</span>
-			<li>{{ $t("header.nav.inicio") }}</li>
-			<li>{{ $t("header.nav.tienda") }}</li>
+			<li @click="navegar('/')" style="cursor: pointer;">{{ $t("header.nav.inicio") }}</li>
+			<li @click="navegar('/tienda')" style="cursor: pointer;">{{ $t("header.nav.tienda") }}</li>
 		</div>
 		<div class="contenedor-3">
 			<span>{{ $t("footer.titulos.contacto") }}</span>
@@ -136,7 +149,6 @@ onUnmounted(() => {
 	<div class="contenedor-2-footer">{{ $t("footer.derechos") }}</div>
 </footer>
 </div>
-
 </template>
 
 <style lang="scss" scoped>
@@ -214,7 +226,7 @@ footer {
 					border: 1px solid $color-rojo-fuerte-textos;
 					background-color: $color-rojo-oscuro;
 					transition: transform 0.2s ease, background-color 0.2s ease;
-
+					
 					&:hover {
 						transform: scale(1.05);
 						background-color: $color-rojo-oscuro-claro;
@@ -289,6 +301,7 @@ header {
 		}
 		
 		button {
+			cursor: pointer;
 			padding: 15px;
 			border-radius: 10px;
 			background: none;
@@ -359,31 +372,25 @@ header {
 		.contenedor-enlaces {
 			display: flex;
 			gap: 30px;
-			align-items: center;
 			position: relative;
+			align-items: center;
 			padding-bottom: 5px;
 			
-			@include tablet-down {
-				display: none;
-			}
-			
 			li {
-				color: $color-blanco-sucio;
+				width: 80px;
+				text-align: center;
 				list-style: none;
-				font-size: clamp(1rem, 1vw , 1.5rem);
 				font-weight: 600;
 				cursor: pointer;
 				transition: color 0.3s ease;
-				position: relative;
-				width: 80px;
-				text-align: center;
+				color: $color-blanco-sucio;
 				
 				&:hover {
 					color: $color-texto-blanco;
 				}
 				
 				&.active {
-					color: $color-rojo-panda;
+					color: $color-rojo-panda !important;
 				}
 			}
 			
@@ -398,6 +405,18 @@ header {
 				pointer-events: none;
 			}
 		}
+
+		.contenedor-2 {
+			li {
+				cursor: pointer;
+				transition: color 0.2s;
+				
+				&:hover {
+					color: $color-rojo-panda;
+				}
+			}
+		}
+		
 		
 		.contenedor-carrito-perfil {
 			display: flex;
