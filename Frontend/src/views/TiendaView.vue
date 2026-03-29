@@ -15,18 +15,27 @@
 		<img src="/assets/filtrar.png" alt="filtrar">
 		<p>{{ $t("tienda.buscador.categ") }}</p>
 	</div>
+	<div class="contenedor-filtro">
+		button
+	</div>
 </template>
 
 <style lang="scss" scoped>
 .contenedor-titulos {
 	text-align: center;
 	margin-top: 40px;
-
+	
 	h2 {
 		color: $color-blanco-sucio;
-		font-size: 15px;
+		font-size: clamp(16px, 2vw + 10px, 30px); 
 		font-weight: 400;
 		margin-top: 13px;
+	}
+	
+	h1 {
+		font-size: clamp(24px, 4vw + 10px, 50px);
+		color: $color-texto-blanco;
+		font-weight: 700;
 	}
 }
 
@@ -35,12 +44,12 @@
 	align-items: center;
 	border: 1px solid $color-rojo-oscuro;
 	border-radius: 20px;
-	width: 500px;
+	width: clamp(250px, 90%, 800px);
 	margin:40px auto;
 	
 	gap: 10px;
 	background-color: $color-fondo-header;
-
+	
 	input {
 		border: none;
 		background: none;
@@ -53,11 +62,11 @@
 			outline: none;
 		}
 	}
-
+	
 	img {
 		padding-left: 18px;
 	};
-
+	
 	&:focus-within {
 		border: 1px solid $color-rojo-panda;
 	}

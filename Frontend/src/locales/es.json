@@ -33,10 +33,10 @@
 		"especialidadesDescripcion": "Explora nuestra selección de platos auténticos",
 		"especialidadesOpciones": {
 			"titulos": {
-			"sushi": "Sushi",
-			"ramen": "Ramen",
-			"gyozas": "Gyozas",
-			"bebidas": "Bebidas"
+				"sushi": "Sushi",
+				"ramen": "Ramen",
+				"gyozas": "Gyozas",
+				"bebidas": "Bebidas"
 			},
 			"detalle": {
 				"sushi": "Fresco y delicioso",
@@ -72,6 +72,14 @@
 		"buscador": {
 			"buscar": "Buscar platos",
 			"categ": "Categorías"
+		},
+		"categorias": {
+			"todos": "Todos",
+			"sushi": "Sushi",
+			"ramen": "Ramen",
+			"dimsum": "Dim Sum",
+			"principales": "Platos principales",
+			"bebidas": "Bebidas"
 		}
 	},
 	"footer": {

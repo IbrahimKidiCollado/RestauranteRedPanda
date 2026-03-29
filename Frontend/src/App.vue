@@ -157,6 +157,7 @@ onUnmounted(() => {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	width: 100vw;
 	
 	main {
 		flex-grow: 1;
@@ -272,12 +273,18 @@ header {
 			}
 		}
 		
+		
+		
 		.contenedor-enlaces {
 			display: flex;
 			gap: 30px;
 			position: relative;
 			align-items: center;
 			padding-bottom: 5px;
+			
+			@include tablet-down {
+				display: none;
+			}
 			
 			li {
 				width: 80px;
@@ -444,13 +451,18 @@ main {
 footer {
 	background-color: $color-fondo-header;
 	color: $color-texto-blanco;
-	max-height: 400px;
+	max-height: 100%;
 	border-top: 1px solid $color-rojo-oscuro-claro;
 	
 	.contenedor-1-footer {
 		display: flex;
 		justify-content:center;
 		min-width: 600;
+
+		@include tablet-down {
+			flex-direction: column;
+			align-items: center;
+		}
 		
 		&>div {
 			width: 300px;
@@ -524,7 +536,7 @@ footer {
 			}
 		}
 	}
-
+	
 	.contenedor-2-footer {
 		text-align: center;
 		margin: 30px 50px 60px 50px;

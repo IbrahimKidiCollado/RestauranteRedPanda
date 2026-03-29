@@ -1,0 +1,42 @@
+[
+	{
+		"id": 1,
+		"nombre": "tienda.platos.sushi_deluxe.nombre",
+		"descripcion": "tienda.platos.sushi_deluxe.desc",
+		"precio": 24.99,
+		"categoria_id": 1,
+		"categoria_slug": "sushi",
+		"imagen": "/assets/platos/sushi-deluxe.jpg",
+		"destacado": true
+	},
+	{
+		"id": 2,
+		"nombre": "tienda.platos.ramen_tonkotsu.nombre",
+		"descripcion": "tienda.platos.ramen_tonkotsu.desc",
+		"precio": 16.50,
+		"categoria_id": 2,
+		"categoria_slug": "ramen",
+		"imagen": "/assets/platos/ramen-tonkotsu.jpg",
+		"destacado": false
+	},
+	{
+		"id": 3,
+		"nombre": "tienda.platos.dimsum_mix.nombre",
+		"descripcion": "tienda.platos.dimsum_mix.desc",
+		"precio": 12.00,
+		"categoria_id": 3,
+		"categoria_slug": "dim-sum",
+		"imagen": "/assets/platos/dimsum-variado.jpg",
+		"destacado": false
+	},
+	{
+		"id": 4,
+		"nombre": "tienda.platos.pato_laqueado.nombre",
+		"descripcion": "tienda.platos.pato_laqueado.desc",
+		"precio": 21.95,
+		"categoria_id": 4,
+		"categoria_slug": "platos-principales",
+		"imagen": "/assets/platos/pato-laqueado.jpg",
+		"destacado": true
+	}
+]
