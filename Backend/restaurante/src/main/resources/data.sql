@@ -49,11 +49,6 @@ INSERT INTO pedido (id, id_usuario, nombre, descripcion, precio, cantidad) VALUE
 (1, 2, 'Pedido Sushi', 'Pedido de sushi', 10.5, 1);
 
 
--- CARRITO
-INSERT INTO carrito (id, id_usuario, nombre, descripcion, precio, cantidad) VALUES
-(1, 2, 'Sushi Salmón', '8 piezas de sushi', 10.5, 1);
-
-
 -- RELACION SUSHI INGREDIENTE
 INSERT INTO sushi_ingrediente (id_sushi, id_ingrediente) VALUES
 (1,1),

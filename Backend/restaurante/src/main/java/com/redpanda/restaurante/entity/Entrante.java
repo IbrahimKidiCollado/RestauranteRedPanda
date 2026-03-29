@@ -13,6 +13,8 @@ public class Entrante {
     @Id
     //Se genera automaticamente(AUTO_INCREMENT)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //Para que no mande el ID al devolver el JSON
+    @JsonIgnore
     private Long id;
 
     //Campos de la tabla
