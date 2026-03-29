@@ -80,6 +80,24 @@
 			"dimsum": "Dim Sum",
 			"principales": "Platos principales",
 			"bebidas": "Bebidas"
+		},
+		"platos": {
+			"sushi_deluxe": {
+				"nombre": "Sushi Deluxe",
+				"desc": "Selección premium de nigiri y maki con pescado fresco del día"
+			},
+			"ramen_tonkotsu": {
+				"nombre": "Ramen Tonkotsu",
+				"desc": "Caldo de cerdo cremoso cocinado durante 12 horas con fideos artesanales"
+			},
+			"dimsum_mix": {
+				"nombre": "Dim Sum Variado",
+				"desc": "Cesta de bambú con 6 piezas al vapor: gambas, cerdo y verduras"
+			},
+			"pato_laqueado": {
+				"nombre": "Pato Laqueado",
+				"desc": "Pato crujiente servido con crepes finos, cebolleta y salsa hoisin"
+			}
 		}
 	},
 	"footer": {

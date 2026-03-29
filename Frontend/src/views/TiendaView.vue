@@ -1,5 +1,31 @@
 <script setup lang="ts">
+import { obtenerPlatos } from "@/services/PlatosService";
+import { obtenerCategorias } from "@/services/CategoriasService";
+import TarjetaPlato from "@/components/TarjetaPlato.vue";
+import { onMounted, ref } from "vue";
 
+interface Plato {
+	id: number;
+	nombre: string;
+	precio: number;
+	imagen: string;
+	descripcion:string;
+	categoria_slug: string;
+}
+
+interface Categoria {
+	id: number;
+	nombre: string;
+	slug: string;
+}
+
+const platos = ref<Plato[]>([]);
+const categorias = ref<Categoria[]>([]);
+
+onMounted(async () => {
+	platos.value = await obtenerPlatos();
+	categorias.value = await obtenerCategorias();
+});
 </script>
 
 <template>
@@ -8,7 +34,7 @@
 		<h2>{{ $t("tienda.descripcion") }}</h2>
 	</div>
 	<div class="contenedor-buscador-platos">
-		<img src="/assets/busqueda.png" alt="buscar" @click="buscar">
+		<img src="/assets/busqueda.png" alt="buscar">
 		<input type="text" :placeholder="$t('tienda.buscador.buscar') + '...'">
 	</div>
 	<div class="contenedor-categorias">
@@ -16,7 +42,15 @@
 		<p>{{ $t("tienda.buscador.categ") }}</p>
 	</div>
 	<div class="contenedor-filtro">
-		button
+		<TarjetaPlato
+		v-for="plato in platos"
+		:key="plato.id"
+		:nombre="$t(plato.nombre)"
+		:descripcion="$t(plato.descripcion)"
+		:precio="plato.precio"
+		:imagen="plato.imagen"
+		:categoria_slug="plato.categoria_slug"
+		/>
 	</div>
 </template>
 
@@ -27,7 +61,7 @@
 	
 	h2 {
 		color: $color-blanco-sucio;
-		font-size: clamp(16px, 2vw + 10px, 30px); 
+		font-size: clamp(16px, 2vw + 10px, 30px);
 		font-weight: 400;
 		margin-top: 13px;
 	}
