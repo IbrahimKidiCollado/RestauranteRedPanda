@@ -24,10 +24,5 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Pedido> pedidos;
 
-    //Relacion 1 a 1
-    //Un usuario tiene un carrito
-    //Clave foranea FK
-    @OneToOne(mappedBy = "usuario")
-    private List<Carrito> carrito;
 
 }

@@ -3,6 +3,8 @@ package com.redpanda.restaurante.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 //Nombre de la tabla
 @Table(name = "carta")
@@ -12,6 +14,7 @@ public class Carta {
     @Id
     //Se autogenera solo (AUTO_GENERATED)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     //Relacion 1 a N
