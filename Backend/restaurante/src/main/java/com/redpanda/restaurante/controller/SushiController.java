@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,5 +32,26 @@ public class SushiController {
         return sushiRepository.findAll();
     }
 
+    //Para crear un nuevo sushi y añadirlo a la carta
+    @PostMapping("/sushi/create")
+    public Sushi addSushi(@RequestBody Sushi nuevoSushi) {
+        // El repositorio guarda el sushi y nos devuelve el sushi guardado con su ID generado.
+        return sushiRepository.save(nuevoSushi);
+    }
+
+    //Para borra un sushi de la carta
+    @DeleteMapping("/sushi/delete{id}")
+    public String eliminarSushi(@PathVariable Long id){
+        //Comprobamos si existe un sushi con dicho id
+        if (sushiRepository.existsById(id)) {
+            //Si existe lo eliminamos
+            sushiRepository.deleteById(id);
+            return "Sushi eliminado correctamente: " + id; 
+        }else{
+            //Si no existe devolvemos un mensaje de error
+            return "Error: no existe o no se ha podido eliminar el sushi con id: " + id;
+        }
+    }
+    
     
 }

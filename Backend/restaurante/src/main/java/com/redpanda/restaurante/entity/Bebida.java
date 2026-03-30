@@ -21,6 +21,7 @@ public class Bebida {
     private String nombre;
     private int cantidad;
     private double precio;
+    private String imagen;
 
     //Relacion 1 a N
     //Varias bebidas se encuentran en la carta
@@ -42,5 +43,8 @@ public class Bebida {
     }
     public double getPrecio() {
         return precio;
+    }
+    public String getImagen(){
+        return imagen;
     }
 }

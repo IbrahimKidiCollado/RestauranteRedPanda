@@ -23,6 +23,7 @@ public class Sushi {
     private String descripcion;
     private int numeroPiezas;
     private double precio;
+    private String imagen;
 
     //Relacion 1 a N 
     //Varios shushis pueden estar en una carta
@@ -58,6 +59,9 @@ public class Sushi {
     }
     public double getPrecio() {
         return precio;
+    }
+    public String getImagen() {
+        return imagen;
     }
 
 

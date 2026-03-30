@@ -22,6 +22,8 @@ public class Ramen {
     private String nombre;
     private int cantidad;
     private double precio;
+    private String imagen;
+    
 
     //Relacion 1 a N 
     //Varios ramenes pueden estar en una carta
@@ -55,6 +57,9 @@ public class Ramen {
     }
     public double getPrecio() {
         return precio;
+    }
+    public String getImagen() {
+        return imagen;
     }
     
 
