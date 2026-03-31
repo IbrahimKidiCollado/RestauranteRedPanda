@@ -32,14 +32,14 @@ public class RamenController {
         return ramenRepository.findAll();
     }
 
-    //Para crear un nuevo sushi y añadirlo a la carta
+    //Para crear un nuevo ramen y añadirlo a la carta
     @PostMapping("/ramen/create")
     public Ramen addRamen(@RequestBody Ramen nuevoRamen) {
         // El repositorio guarda el ramen y nos devuelve el ramen guardado con su ID generado.
         return ramenRepository.save(nuevoRamen);
     }
 
-    //Para borra un sushi de la carta
+    //Para borra un ramen de la carta
     @DeleteMapping("/ramen/delete{id}")
     public String eliminarRamen(@PathVariable Long id){
         //Comprobamos si existe un ramen con dicho id
