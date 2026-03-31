@@ -154,18 +154,18 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 
 .contenedor-principal {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    width: 100%;
-
-    main {
-        flex: 1;
-    }
-
-    footer {
-        flex-shrink: 0;
-    }
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	width: 100%;
+	
+	main {
+		flex: 1;
+	}
+	
+	footer {
+		flex-shrink: 0;
+	}
 }
 
 header {
@@ -366,6 +366,10 @@ header {
 					display: none;
 				}
 				
+				@include movil-grande-down {
+					display: none;
+				}
+				
 				img {
 					width: 17px;
 					height: 17px
@@ -458,7 +462,7 @@ footer {
 		display: flex;
 		justify-content:center;
 		min-width: 600;
-
+		
 		@include tablet-down {
 			flex-direction: column;
 			align-items: center;

@@ -15,6 +15,12 @@
 	}
 }
 
+@mixin movil-grande-down {
+	@media (max-width: #{$movil-grande}) {
+		@content;
+	}
+}
+
 // BOTON MUY COMUN
 @mixin boton-rojo() {
 	border: none;

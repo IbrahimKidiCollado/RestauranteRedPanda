@@ -113,7 +113,7 @@
 		"contacto": {
 			"calle": "Calle Principal 123, Madrid, España",
 			"tlf": "+34 912 345 678",
-			"email": "info@redpanda.com"
+			"email": "info{'@'}redpanda.com"
 		},
 		"horario": {
 			"diario": "Lunes - Viernes: 12:00 - 23:00",

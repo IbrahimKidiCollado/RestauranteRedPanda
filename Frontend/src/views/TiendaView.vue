@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
 import { obtenerPlatos } from "@/services/PlatosService";
 import { obtenerCategorias } from "@/services/CategoriasService";
 import TarjetaPlato from "@/components/TarjetaPlato.vue";
-import { onMounted, ref } from "vue";
+import CategoriasFiltro from "@/components/CategoriasFiltro.vue";
 
 interface Plato {
 	id: number;
@@ -38,8 +39,18 @@ onMounted(async () => {
 		<input type="text" :placeholder="$t('tienda.buscador.buscar') + '...'">
 	</div>
 	<div class="contenedor-categorias">
-		<img src="/assets/filtrar.png" alt="filtrar">
-		<p>{{ $t("tienda.buscador.categ") }}</p>
+		<div class="nombre-categoria">
+			<img src="/assets/filtrar.png" alt="filtrar">
+			<p>{{ $t("tienda.buscador.categ") }}</p>
+		</div>
+		<div class="categorias">
+			<CategoriasFiltro
+			v-for="categoria in categorias"
+			:key="categoria.id"
+			:nombre="categoria.nombre"
+			:slug="categoria.slug"
+			/>
+		</div>
 	</div>
 	<div class="contenedor-platos">
 		<TarjetaPlato
@@ -112,11 +123,27 @@ p {
 
 .contenedor-categorias {
 	display: flex;
+	flex-direction: column;
+	
 	align-items: center;
 	justify-content: center;
 	gap:8px;
 	font-size: 13px;
 	font-weight: 600;
+	
+	.nombre-categoria {
+		display: flex;
+		gap: 10px;
+	}
+
+	.categorias {
+		max-width: 1600px;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 20px;
+		margin-top: 20px;
+	}
 }
 
 .contenedor-platos {
