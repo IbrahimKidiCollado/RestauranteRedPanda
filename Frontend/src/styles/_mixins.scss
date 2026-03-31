@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "colores" as *;
 
 // TAMAÑO MOVIL
 @mixin mobile-down {
@@ -9,7 +10,26 @@
 
 // TAMAÑO TABLET
 @mixin tablet-down {
-    @media (max-width: #{$desktop - 1px}) {
-        @content;
-    }
+	@media (max-width: #{$desktop - 1px}) {
+		@content;
+	}
+}
+
+@mixin boton-rojo() {
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	background: $color-rojo-boton;
+	color: $color-texto-blanco;
+	font-weight: 600;
+	font-size: 16px;
+	transition: 200ms;
+	
+	&:hover {
+		transform: scale(1.05);
+	}
+	
+	&:active {
+		transform: scale(0.98);
+	}
 }

@@ -154,18 +154,18 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 
 .contenedor-principal {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	width: 100vw;
-	
-	main {
-		flex-grow: 1;
-	}
-	
-	footer {
-		flex-shrink: 0;
-	}
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+
+    main {
+        flex: 1;
+    }
+
+    footer {
+        flex-shrink: 0;
+    }
 }
 
 header {

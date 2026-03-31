@@ -98,6 +98,9 @@
 				"nombre": "Pato Laqueado",
 				"desc": "Pato crujiente servido con crepes finos, cebolleta y salsa hoisin"
 			}
+		},
+		"tarjeta-plato": {
+			"añadir": "Añadir"
 		}
 	},
 	"footer": {

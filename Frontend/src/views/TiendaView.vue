@@ -41,7 +41,7 @@ onMounted(async () => {
 		<img src="/assets/filtrar.png" alt="filtrar">
 		<p>{{ $t("tienda.buscador.categ") }}</p>
 	</div>
-	<div class="contenedor-filtro">
+	<div class="contenedor-platos">
 		<TarjetaPlato
 		v-for="plato in platos"
 		:key="plato.id"
@@ -117,6 +117,15 @@ p {
 	gap:8px;
 	font-size: 13px;
 	font-weight: 600;
+}
+
+.contenedor-platos {
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+	flex-wrap: wrap;
+	max-width: 1600px;
+	margin: 50px auto;
 }
 
 </style>
