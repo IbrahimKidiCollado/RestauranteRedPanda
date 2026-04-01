@@ -1,13 +1,13 @@
 package com.redpanda.restaurante.controller;
 
-//Importa la entidad Ramen para que el controlador sepa a qué tabla de la base de datos se refiere
+//Importa la entidad Bebida para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Bebida;
-import com.redpanda.restaurante.entity.Ramen;
-//Importa el repositorio de Ramen para que el controlador pueda acceder a los datos de la tabla correspondiente
+//Importa el repositorio de Bebida para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.BebidaRepository;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class BebidaController {
 
     private final  BebidaRepository bebidaRepository;
