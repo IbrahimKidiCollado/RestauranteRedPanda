@@ -23,10 +23,14 @@ interface Categoria {
 const platos = ref<Plato[]>([]);
 const categorias = ref<Categoria[]>([]);
 
+
 onMounted(async () => {
 	platos.value = await obtenerPlatos();
 	categorias.value = await obtenerCategorias();
 });
+
+
+
 </script>
 
 <template>

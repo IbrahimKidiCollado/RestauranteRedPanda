@@ -1,7 +1,7 @@
 <template>
 	<div class="contenedor-tarjeta">
 		<div class="tarjeta-imagen">
-			<img :src="imagen" alt="producto">
+			<img :src="imagen" alt="producto" width="348px" height="238.797px">
 			<p class="categoria">{{categoria_slug}}</p>
 		</div>
 		<div class="tarjeta-info">
