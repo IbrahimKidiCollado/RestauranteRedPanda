@@ -29,19 +29,19 @@ public class CartaController {
         List<ElementoCarta> cartaPlana = new ArrayList<>();
 
         carta.getSushi().forEach(sushi -> 
-            cartaPlana.add(new ElementoCarta(sushi.getId(), sushi.getNombre(), sushi.getDescripcion(), sushi.getPrecio(), sushi.getImagen(), "sushi", 1, null))
+            cartaPlana.add(new ElementoCarta(sushi.getId(), sushi.getNombre(), sushi.getDescripcion(), sushi.getPrecio(), sushi.getImagen(), "sushi", 1, sushi.getCantidad()))
         );
 
         carta.getRamen().forEach(ramen -> 
-            cartaPlana.add(new ElementoCarta(ramen.getId(), ramen.getNombre(), ramen.getDescripcion(), ramen.getPrecio(), ramen.getImagen(), "ramen", 1, null))
+            cartaPlana.add(new ElementoCarta(ramen.getId(), ramen.getNombre(), ramen.getDescripcion(), ramen.getPrecio(), ramen.getImagen(), "ramen", 1, 1))
         );
 
         carta.getBebidas().forEach(bebida -> 
-            cartaPlana.add(new ElementoCarta(bebida.getId(), bebida.getNombre(), bebida.getDescripcion(), bebida.getPrecio(), bebida.getImagen(), "bebida", 1, null))
+            cartaPlana.add(new ElementoCarta(bebida.getId(), bebida.getNombre(), bebida.getDescripcion(), bebida.getPrecio(), bebida.getImagen(), "bebida", 1, 1))
         );
 
         carta.getEntrantes().forEach(entrante -> 
-            cartaPlana.add(new ElementoCarta(entrante.getId(), entrante.getNombre(), entrante.getDescripcion(), entrante.getPrecio(), entrante.getImagen(), "entrante", 1, null))
+            cartaPlana.add(new ElementoCarta(entrante.getId(), entrante.getNombre(), entrante.getDescripcion(), entrante.getPrecio(), entrante.getImagen(), "entrante", 1, entrante.getCantidad()))
         );
 
         return cartaPlana;

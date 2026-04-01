@@ -20,6 +20,7 @@ public class Entrante {
     private String descripcion;
     private double precio;
     private String imagen;
+    private Integer cantidad;
 
     //Relacion 1 a N
     //Varios entrantes estan en la carta
@@ -44,6 +45,9 @@ public class Entrante {
     }
     public String getImagen() {
         return imagen;
+    }
+    public Integer getCantidad() {
+        return cantidad;
     }
 
 

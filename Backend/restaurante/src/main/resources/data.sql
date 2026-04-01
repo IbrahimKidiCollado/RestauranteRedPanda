@@ -21,9 +21,9 @@ INSERT INTO ingrediente (id, nombre) VALUES
 
 
 -- SUSHI
-INSERT INTO sushi (id, nombre, descripcion, numero_piezas, precio, imagen, id_carta) VALUES
-(1, 'Sushi Salmón', 'Salmón fresco con arroz', 8, 10.5, '/assets/carta/sushi_salmon.webp', 1),
-(2, 'Sushi Atún', 'Atún rojo con arroz', 8, 11.0, '/assets/carta/sushi_atun.webp', 1);
+INSERT INTO sushi (id, nombre, cantidad, descripcion, numero_piezas, precio, imagen, id_carta) VALUES
+(1, 'Sushi Salmón', 3, 'Salmón fresco con arroz', 8, 10.5, '/assets/carta/sushi_salmon.webp', 1),
+(2, 'Sushi Atún', 4, 'Atún rojo con arroz', 8, 11.0, '/assets/carta/sushi_atun.webp', 1);
 
 
 -- RAMEN
@@ -39,9 +39,9 @@ INSERT INTO bebida (id, nombre, cantidad, precio, imagen, id_carta, descripcion)
 
 
 -- ENTRANTES
-INSERT INTO entrante (id, nombre, descripcion, precio, imagen, id_carta) VALUES
-(1, 'Gyozas', 'Empanadillas japonesas', 5.5, '/assets/carta/gyozas.webp', 1),
-(2, 'tempura', 'gambas fritas', 4.0, '/assets/carta/tempura.webp', 1);
+INSERT INTO entrante (id, nombre, cantidad descripcion, precio, imagen, id_carta) VALUES
+(1, 'Gyozas', 4, 'Empanadillas japonesas', 5.5, '/assets/carta/gyozas.webp', 1),
+(2, 'tempura', 4, 'gambas fritas', 4.0, '/assets/carta/tempura.webp', 1);
 
 
 -- PEDIDOS
