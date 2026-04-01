@@ -3,7 +3,7 @@
 </template>
 
 <style lang="scss" scoped>
-@use "../styles/mixins" as *;
+@use "@/styles/mixins" as *;
 
 button {
 	@include boton-rojo();

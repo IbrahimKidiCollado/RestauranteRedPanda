@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { obtenerPlatos } from "@/services/PlatosService";
-import { obtenerCategorias } from "@/services/CategoriasService";
-import TarjetaPlato from "@/components/TarjetaPlato.vue";
-import CategoriasFiltro from "@/components/CategoriasFiltro.vue";
+import { obtenerPlatos } from "@/services/Tienda/PlatosService";
+import { obtenerCategorias } from "@/services/Tienda/CategoriasService";
+import TarjetaPlato from "@/components/TiendaComp/TarjetaPlato.vue";
+import CategoriasFiltro from "@/components/TiendaComp/CategoriasFiltro.vue";
 
 interface Plato {
 	id: number;
