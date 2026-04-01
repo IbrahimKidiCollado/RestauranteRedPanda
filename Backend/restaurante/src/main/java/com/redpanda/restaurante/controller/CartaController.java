@@ -1,5 +1,6 @@
 package com.redpanda.restaurante.controller;
 
+import java.util.ArrayList;
 //Importa la entidad Carta para que el controlador sepa a qué tabla de la base de datos se refiere
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.redpanda.restaurante.ElementoCarta;
 import com.redpanda.restaurante.entity.Carta;
 import com.redpanda.restaurante.repository.CartaRepository;
 
@@ -22,8 +24,27 @@ public class CartaController {
     }
 
     @GetMapping("/carta")
-    public List<Carta> obteneCarta(){
-        return cartaRepository.findAll();
+    public List<ElementoCarta> obteneCarta(){
+        Carta carta = cartaRepository.findAll().get(0);
+        List<ElementoCarta> cartaPlana = new ArrayList<>();
+
+        carta.getSushi().forEach(sushi -> 
+            cartaPlana.add(new ElementoCarta(sushi.getId(), sushi.getNombre(), sushi.getDescripcion(), sushi.getPrecio(), sushi.getImagen(), "sushi", 1, null))
+        );
+
+        carta.getRamen().forEach(ramen -> 
+            cartaPlana.add(new ElementoCarta(ramen.getId(), ramen.getNombre(), ramen.getDescripcion(), ramen.getPrecio(), ramen.getImagen(), "ramen", 1, null))
+        );
+
+        carta.getBebidas().forEach(bebida -> 
+            cartaPlana.add(new ElementoCarta(bebida.getId(), bebida.getNombre(), bebida.getDescripcion(), bebida.getPrecio(), bebida.getImagen(), "bebida", 1, null))
+        );
+
+        carta.getEntrantes().forEach(entrante -> 
+            cartaPlana.add(new ElementoCarta(entrante.getId(), entrante.getNombre(), entrante.getDescripcion(), entrante.getPrecio(), entrante.getImagen(), "entrante", 1, null))
+        );
+
+        return cartaPlana;
     }
 
     

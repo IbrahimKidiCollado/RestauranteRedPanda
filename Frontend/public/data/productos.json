@@ -6,8 +6,7 @@
 		"precio": 24.99,
 		"categoria_id": 1,
 		"categoria_slug": "sushi",
-		"imagen": "/assets/platos/sushi.jpg",
-		"destacado": true
+		"imagen": "/assets/platos/sushi.jpg"
 	},
 	{
 		"id": 2,
@@ -16,8 +15,7 @@
 		"precio": 16.50,
 		"categoria_id": 2,
 		"categoria_slug": "ramen",
-		"imagen": "/assets/platos/sushi1.jpg",
-		"destacado": false
+		"imagen": "/assets/platos/sushi1.jpg"
 	},
 	{
 		"id": 3,
@@ -26,8 +24,7 @@
 		"precio": 12.00,
 		"categoria_id": 3,
 		"categoria_slug": "dim-sum",
-		"imagen": "/assets/platos/sushi2.jpg",
-		"destacado": false
+		"imagen": "/assets/platos/sushi2.jpg"
 	},
 	{
 		"id": 4,
@@ -36,8 +33,7 @@
 		"precio": 21.95,
 		"categoria_id": 4,
 		"categoria_slug": "platos-principales",
-		"imagen": "/assets/platos/sushi3.jpg",
-		"destacado": true
+		"imagen": "/assets/platos/sushi3.jpg"
 	},
 	{
 		"id": 1,
@@ -46,8 +42,7 @@
 		"precio": 24.99,
 		"categoria_id": 1,
 		"categoria_slug": "sushi",
-		"imagen": "/assets/platos/sushi.jpg",
-		"destacado": true
+		"imagen": "/assets/platos/sushi.jpg"
 	},
 	{
 		"id": 2,
@@ -56,8 +51,7 @@
 		"precio": 16.50,
 		"categoria_id": 2,
 		"categoria_slug": "ramen",
-		"imagen": "/assets/platos/sushi1.jpg",
-		"destacado": false
+		"imagen": "/assets/platos/sushi1.jpg"
 	},
 	{
 		"id": 3,
@@ -66,8 +60,7 @@
 		"precio": 12.00,
 		"categoria_id": 3,
 		"categoria_slug": "dim-sum",
-		"imagen": "/assets/platos/sushi2.jpg",
-		"destacado": false
+		"imagen": "/assets/platos/sushi2.jpg"
 	},
 	{
 		"id": 4,
@@ -76,7 +69,6 @@
 		"precio": 21.95,
 		"categoria_id": 4,
 		"categoria_slug": "platos-principales",
-		"imagen": "/assets/platos/sushi3.jpg",
-		"destacado": true
+		"imagen": "/assets/platos/sushi3.jpg"
 	}
 ]

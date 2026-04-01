@@ -27,15 +27,15 @@ INSERT INTO sushi (id, nombre, descripcion, numero_piezas, precio, imagen, id_ca
 
 
 -- RAMEN
-INSERT INTO ramen (id, nombre, cantidad, precio, imagen, id_carta) VALUES
-(1, 'Ramen Tonkotsu', 1, 13.5, '/assets/carta/ramen_tonkotsu.webp', 1),
-(2, 'Ramen Miso', 1, 12.0, '/assets/carta/ramen_miso.webp', 1);
+INSERT INTO ramen (id, nombre, cantidad, precio, imagen, id_carta, descripcion) VALUES
+(1, 'Ramen Tonkotsu', 1, 13.5, '/assets/carta/ramen_tonkotsu.webp', 1, 'Caldo de cerdo cremoso con fideos finos'),
+(2, 'Ramen Miso', 1, 12.0, '/assets/carta/ramen_miso.webp', 1, 'Caldo a base de soja fermentada y verduras');
 
 
 -- BEBIDAS
-INSERT INTO bebida (id, nombre, cantidad, precio, imagen, id_carta) VALUES
-(1, 'Té Verde', 1, 2.5, '/assets/carta/te_verde.webp', 1),
-(2, 'Ramune', 1, 3.0, '/assets/carta/ramune.webp', 1);
+INSERT INTO bebida (id, nombre, cantidad, precio, imagen, id_carta, descripcion) VALUES
+(1, 'Té Verde', 1, 2.5, '/assets/carta/te_verde.webp', 1, 'Té verde japonés tradicional caliente'),
+(2, 'Ramune', 1, 3.0, '/assets/carta/ramune.webp', 1, 'Refresco gaseoso japonés original');
 
 
 -- ENTRANTES

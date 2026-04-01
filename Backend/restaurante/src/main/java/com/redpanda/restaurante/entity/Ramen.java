@@ -21,6 +21,7 @@ public class Ramen {
     private int cantidad;
     private double precio;
     private String imagen;
+    private String descripcion;
     
 
     //Relacion 1 a N 
@@ -58,6 +59,9 @@ public class Ramen {
     }
     public String getImagen() {
         return imagen;
+    }
+    public String getDescripcion() {
+        return descripcion;
     }
     
 
