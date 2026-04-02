@@ -5,7 +5,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',      // Cuando el usuario entra a la raíz
-      redirect: '/tienda' // Lo mandamos automáticamente a /tienda
+      redirect: '/inicio' // Lo mandamos automáticamente a /tienda
+    },
+    {
+      path: '/inicio',
+      name: 'inicio',
+      component: () => import('@/views/InicioView.vue')
     },
     {
       path: '/tienda',

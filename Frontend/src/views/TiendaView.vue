@@ -29,8 +29,6 @@ onMounted(async () => {
 	categorias.value = await obtenerCategorias();
 });
 
-
-
 </script>
 
 <template>
