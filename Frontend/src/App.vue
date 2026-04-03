@@ -53,8 +53,6 @@ onUnmounted(() => {
 	}
 }
 
-
-
 main {
 	height: 800px;
 	background-color: $color-fondo-main;
