@@ -77,6 +77,10 @@ footer {
 			width: 300px;
 			margin-left: 40px;
 			padding-top: 50px;
+
+			@include movil-pequeño-down {
+				margin-left: 0px;
+			}
 		}
 		
 		div>span {

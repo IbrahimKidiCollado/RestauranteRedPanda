@@ -11,7 +11,8 @@
 		}
 	},
 	"inicio": {
-		"descripcion": "Sabores Auténticos de Asia",
+		"descripcion": "Sabores Auténticos",
+		"descripcionSpan": " de Asia",
 		"descripcionLarga": "Descubre la mejor comida asiática, preparada con pasión y entregada en tu puerta",
 		"tiempoEntrega": "Entrega en 30-45 minutos",
 		"razones": "¿Por Qué Elegirnos?",
@@ -25,7 +26,7 @@
 			"detalle": {
 				"chef": "Nuestros chefs con años de experiencia en cocina asiatica",
 				"ingredientes": "Seleccionamos los mejores ingredientes cada dia",
-				"entrega": "Tu pedido en 30-45 minutos o gratis",
+				"entrega": "Entrega en 30-45 minutos",
 				"calidad": "Premiados por nuestra excelencia"
 			}
 		},
