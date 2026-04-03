@@ -3,7 +3,7 @@
 		<h1>{{ $t("inicio.descripcion") }}<br><span>{{ $t("inicio.descripcionSpan") }}</span></h1>
 		<p>{{ $t("inicio.descripcionLarga") }}</p>
 		<button>{{ $t("inicio.botones.pedir") }}<img src="/assets/envio-rapido.png" alt="Envio"></button>
-		<p><img src="/assets/reloj-tres.png" alt="tiempo">{{ $t("inicio.razonesOpciones.detalle.entrega") }}</p>
+		<p><img src="/assets/reloj-tres.png" alt="tiempo">{{ $t("inicio.tiempoEntrega") }}</p>
 	</div>
 </template>
 
