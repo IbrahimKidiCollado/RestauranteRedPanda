@@ -39,7 +39,7 @@ INSERT INTO bebida (id, nombre, cantidad, precio, imagen, id_carta, descripcion)
 
 
 -- ENTRANTES
-INSERT INTO entrante (id, nombre, cantidad descripcion, precio, imagen, id_carta) VALUES
+INSERT INTO entrante (id, nombre, cantidad, descripcion, precio, imagen, id_carta) VALUES
 (1, 'Gyozas', 4, 'Empanadillas japonesas', 5.5, '/assets/carta/gyozas.webp', 1),
 (2, 'tempura', 4, 'gambas fritas', 4.0, '/assets/carta/tempura.webp', 1);
 
