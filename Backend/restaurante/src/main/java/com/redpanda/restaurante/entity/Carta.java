@@ -41,6 +41,24 @@ public class Carta {
     @OneToMany(mappedBy = "carta")
     private List<Bebida> bebidas;
 
+    //Relacion 1 a N
+    //Una carta puede tener muchas carnes
+    //Clave foranea FK
+    @OneToMany(mappedBy = "carta")
+    private List<Carne> carne;
+
+    //Relacion 1 a N
+    //Una carta puede tener muchos pescados
+    //Clave foranea FK
+    @OneToMany(mappedBy = "carta")
+    private List<Pescado> pescado;
+
+    //Relacion 1 a N
+    //Una carta puede tener muchos postres
+    //Clave foranea FK
+    @OneToMany(mappedBy = "carta")
+    private List<Postre> postres;
+
     public Long getId() {
         return id;
     }
@@ -59,6 +77,17 @@ public class Carta {
 
     public List<Bebida> getBebidas() {
         return bebidas;
+    }
+
+    public List<Carne> getCarne() {
+        return carne;
+    }
+
+    public List<Pescado> getPescado() {
+        return pescado;
+    }
+    public List<Postre> getPostres() {
+        return postres;
     }
 
 }

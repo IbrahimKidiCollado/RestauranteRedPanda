@@ -44,6 +44,18 @@ public class CartaController {
             cartaPlana.add(new ElementoCarta(entrante.getId(), entrante.getNombre(), entrante.getDescripcion(), entrante.getPrecio(), entrante.getImagen(), "entrante", 1, entrante.getCantidad()))
         );
 
+        carta.getPostres().forEach(postre -> 
+            cartaPlana.add(new ElementoCarta(postre.getId(), postre.getNombre(), postre.getDescripcion(), postre.getPrecio(), postre.getImagen(), "postre", 1, 1))
+        );
+
+        carta.getCarne().forEach(carne -> 
+            cartaPlana.add(new ElementoCarta(carne.getId(), carne.getNombre(), carne.getDescripcion(), carne.getPrecio(), carne.getImagen(), "carne", 1, 1))
+        );
+
+        carta.getPescado().forEach(pescado -> 
+            cartaPlana.add(new ElementoCarta(pescado.getId(), pescado.getNombre(), pescado.getDescripcion(), pescado.getPrecio(), pescado.getImagen(), "pescado", 1, 1))
+        );
+
         return cartaPlana;
     }
 
