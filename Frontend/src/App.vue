@@ -44,6 +44,12 @@ onUnmounted(() => {
 	min-height: 100vh;
 	width: 100%;
 	
+	header {
+		position: sticky;
+		top: 0;
+		z-index: 1000;
+	}
+
 	main {
 		flex: 1;
 	}
