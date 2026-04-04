@@ -5,6 +5,8 @@ $color-rojo-fuerte-textos: #F15A5D; // Rojos mas fuetes para textos que se quire
 $color-rojo-oscuro: #431517;
 $color-rojo-oscuro-claro: #5f1f22;
 $color-rojo-boton: linear-gradient(135deg, #f12519 0%, #b2140d 100%);
+$color-rojo-degradado: radial-gradient(circle at top left,rgba(127, 29, 29, 0.25) 0%,rgba(69, 10, 10, 0.05) 70%,transparent 100%);
+$color-rojo-lateral: linear-gradient(to right, #2e0909 0%, #080000 100%);
 $color-fondo-header: #1A1A1A; // Color de fondo oscuro header
 $color-fondo-main: #0A0A0A;
 $color-texto-blanco: #ffffff; // Blanco basico

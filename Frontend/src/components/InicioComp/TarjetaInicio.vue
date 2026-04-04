@@ -27,13 +27,12 @@ defineProps<Tarjeta>();
 	border:1px solid $color-rojo-oscuro;
 	justify-content: center;
 	align-items: center;
+	background: $color-rojo-degradado;
+	transition: 300ms;
 
-	background: radial-gradient(
-	circle at top left,
-	rgba(127, 29, 29, 0.25) 0%,
-	rgba(69, 10, 10, 0.05) 70%,
-	transparent 100%
-	);
+	&:hover {
+		border: 1px solid $color-rojo-oscuro-claro;
+	}
 
 	h3 {
 		color: $color-texto-blanco;
