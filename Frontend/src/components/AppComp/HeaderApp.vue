@@ -24,6 +24,7 @@
 			></div>
 		</nav>
 		<div class="contenedor-carrito-perfil">
+			<button class="admin" @click="navegar('/admin')"><span>AdmMode</span></button>
 			<button class="carrito"><img src="/assets/carrito.png" alt="icono-carrito"></button>
 			<button class="perfil" @click="navegar('/login')">
 				<img src="/assets/user-icon.png" alt="icono-user">{{ $t("header.botones.iniciar") }}
@@ -274,6 +275,38 @@ header {
 			}
 			
 			.perfil {
+				display: flex;
+				gap: 10px;
+				background: none;
+				color: $color-rojo-claro;
+				font-weight: 600;
+				align-items: center;
+				border: 1px solid $color-rojo-fuerte-textos;
+				background-color: $color-rojo-oscuro;
+				padding: 10px 20px;
+				border-radius: 10px;
+				transition: transform 0.2s ease, background-color 0.2s ease;
+				
+				@include mobile-down {
+					display: none;
+				}
+				
+				@include movil-grande-down {
+					display: none;
+				}
+				
+				img {
+					width: 17px;
+					height: 17px
+				}
+				
+				&:hover {
+					transform: scale(1.05);
+					background-color: $color-rojo-oscuro-claro;
+				}
+			}
+
+			.admin {
 				display: flex;
 				gap: 10px;
 				background: none;
