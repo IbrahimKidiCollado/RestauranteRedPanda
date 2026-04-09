@@ -4,11 +4,11 @@
       <h2 class="titulo-panel">GESTIÓN DE LA CARTA</h2>
       
       <div class="opciones-admin">
-        <div class="opcion-admin modificar-carta">
+        <div class="opcion-admin modificar-carta" @click="hacerScroll('.gestion-carta')">
            MODIFICAR CARTA
         </div>
         
-        <div class="opcion-admin annadir" @click="hacerScroll">
+        <div class="opcion-admin annadir" @click="hacerScroll('.formulario-adicion')">
            AÑADIR A LA CARTA
         </div>
       </div>
@@ -17,10 +17,10 @@
   </div>
 </template>
 <script setup lang="ts">
-function hacerScroll() {
-  const formulario = document.querySelector('.formulario-adicion');
-  if (formulario) {
-    formulario.scrollIntoView({ behavior: 'smooth' });
+function hacerScroll(boton: string) {
+  const elemento = document.querySelector(boton);
+  if (elemento) {
+    elemento.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 </script>

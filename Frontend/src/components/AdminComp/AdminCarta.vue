@@ -20,7 +20,7 @@
 </script>
 <template>
     <div class="gestion-carta">
-        <h1 class="titulo-gestion">GESTIÓN DE LA CARTA</h1>
+        <h1 class="titulo-gestion">CARTA</h1>
         <table class="tabla-carta">
             <thead class="cabecera-carta">
                 <tr>
@@ -49,7 +49,8 @@
                     </td>
                     <td>
                         <div class="celda-acciones">
-
+                            <button class="btn-editar">✏️</button>
+                            <button class="btn-borrar">🗑️</button>
                         </div>
                     </td>
                     
@@ -123,17 +124,11 @@
                 border: 1px solid #333;
                 padding: 8px;
                 border-radius: 8px;
-                cursor: pointer;
                 transition: 0.2s;
 
                 &:hover {
                     transform: scale(1.1);
-                    &.btn-editar { 
-                        border-color: #ffc107; 
-                    }
-                    &.btn-borrar { 
-                        border-color: $color-rojo-panda; 
-                    }
+                    background-color: $color-rojo-panda;
                 }
             }
         }
