@@ -98,7 +98,6 @@
         th {
             padding: 15px 20px;
             text-align: left;
-            font-weight: bold;
             border-bottom: 2px solid $color-rojo-oscuro;
         }
     }
@@ -112,7 +111,6 @@
 
         td {
             padding: 15px 20px;
-            vertical-align: middle;
         }
 
         .celda-acciones {
