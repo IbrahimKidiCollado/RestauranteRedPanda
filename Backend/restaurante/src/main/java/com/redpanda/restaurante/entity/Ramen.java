@@ -63,6 +63,9 @@ public class Ramen {
     public String getDescripcion() {
         return descripcion;
     }
+    public void setId(Long id) {
+         this.id = id;
+    }
     
 
 }

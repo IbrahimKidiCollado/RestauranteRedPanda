@@ -2,6 +2,7 @@ package com.redpanda.restaurante.controller;
 
 //Importa la entidad Carne para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Carne;
+import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Carne para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.CarneRepository;
 
@@ -50,6 +51,17 @@ public class CarneController {
         }else{
             //Si no existe devolvemos un mensaje de error
             return "Error: no existe o no se ha podido eliminar la carne con id: " + id;
+        }
+    }
+
+    //Para actualizar una carne de la carta 
+    @PutMapping("/carne/update/{id}")
+    public Carne actualizarCarne(@PathVariable Long id, @RequestBody Carne carneActualizada) {
+        if (carneRepository.existsById(id)) {
+            carneActualizada.setId(id);
+            return carneRepository.save(carneActualizada);
+        } else {
+            throw new RuntimeException("Carne no encontrada con id: " + id);
         }
     }
 

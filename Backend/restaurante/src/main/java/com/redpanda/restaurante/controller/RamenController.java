@@ -2,7 +2,7 @@ package com.redpanda.restaurante.controller;
 
 //Importa la entidad Ramen para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Ramen;
-
+import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Ramen para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.RamenRepository;
 
@@ -52,6 +52,17 @@ public class RamenController {
         }else{
             //Si no existe devolvemos un mensaje de error
             return "Error: no existe o no se ha podido eliminar el ramen con id: " + id;
+        }
+    }
+
+      //Para actualizar un ramen de la carta 
+    @PutMapping("/ramen/update/{id}")
+    public Ramen actualizarRamen(@PathVariable Long id, @RequestBody Ramen ramenActualizado) {
+        if (ramenRepository.existsById(id)) {
+            ramenActualizado.setId(id);
+            return ramenRepository.save(ramenActualizado);
+        } else {
+            throw new RuntimeException("Ramen no encontrado con id: " + id);
         }
     }
     

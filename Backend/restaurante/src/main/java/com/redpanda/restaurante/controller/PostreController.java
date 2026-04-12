@@ -2,6 +2,7 @@ package com.redpanda.restaurante.controller;
 
 //Importa la entidad Postre para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Postre;
+import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Postre para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.PostreRepository;
 
@@ -50,6 +51,17 @@ public class PostreController {
         }else{
             //Si no existe devolvemos un mensaje de error
             return "Error: no existe o no se ha podido eliminar el postre con id: " + id;
+        }
+    }
+
+      //Para actualizar un postre de la carta 
+    @PutMapping("/postre/update/{id}")
+    public Postre actualizarPostre(@PathVariable Long id, @RequestBody Postre postreActualizado) {
+        if (postreRepository.existsById(id)) {
+            postreActualizado.setId(id);
+            return postreRepository.save(postreActualizado);
+        } else {
+            throw new RuntimeException("Postre no encontrado con id: " + id);
         }
     }
 

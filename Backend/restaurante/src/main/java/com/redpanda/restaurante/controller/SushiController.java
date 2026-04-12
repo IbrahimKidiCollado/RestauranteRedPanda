@@ -54,6 +54,17 @@ public class SushiController {
             return "Error: no existe o no se ha podido eliminar el sushi con id: " + id;
         }
     }
+
+    //Para actualizar un sushi 
+    @PutMapping("/sushi/update/{id}")
+    public Sushi actualizarSushi(@PathVariable Long id, @RequestBody Sushi sushiActualizado) {
+        if (sushiRepository.existsById(id)) {
+            sushiActualizado.setId(id);
+            return sushiRepository.save(sushiActualizado);
+        } else {
+            throw new RuntimeException("Sushi no encontrado con id: " + id);
+        }
+    }
     
     
 }

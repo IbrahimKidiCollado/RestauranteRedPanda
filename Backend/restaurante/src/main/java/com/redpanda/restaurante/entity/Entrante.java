@@ -49,6 +49,9 @@ public class Entrante {
     public Integer getCantidad() {
         return cantidad;
     }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
 }

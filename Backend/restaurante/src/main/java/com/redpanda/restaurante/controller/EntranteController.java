@@ -2,7 +2,7 @@ package com.redpanda.restaurante.controller;
 
 //Importa la entidad Entrante para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Entrante;
-
+import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Entrante para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.EntranteRepository;
 
@@ -52,6 +52,17 @@ public class EntranteController {
         }else{
             //Si no existe devolvemos un mensaje de error
             return "Error: no existe o no se ha podido eliminar el entrante con id: " + id;
+        }
+    }
+
+    //Para actualizar un entrante de la carta 
+    @PutMapping("/entrante/update/{id}")
+    public Entrante actualizarEntrante(@PathVariable Long id, @RequestBody Entrante entranteActualizado) {
+        if (entranteRepository.existsById(id)) {
+            entranteActualizado.setId(id);
+            return entranteRepository.save(entranteActualizado);
+        } else {
+            throw new RuntimeException("Entrante no encontrado con id: " + id);
         }
     }
 

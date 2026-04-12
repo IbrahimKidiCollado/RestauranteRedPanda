@@ -2,6 +2,7 @@ package com.redpanda.restaurante.controller;
 
 //Importa la entidad Bebida para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Bebida;
+import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Bebida para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.BebidaRepository;
 
@@ -50,6 +51,17 @@ public class BebidaController {
         }else{
             //Si no existe devolvemos un mensaje de error
             return "Error: no existe o no se ha podido eliminar la bebida con id: " + id;
+        }
+    }
+
+    //Para actualizar una bebida de la carta 
+    @PutMapping("/bebida/update/{id}")
+    public Bebida actualizarBebida(@PathVariable Long id, @RequestBody Bebida bebidaActualizada) {
+        if (bebidaRepository.existsById(id)) {
+            bebidaActualizada.setId(id);
+            return bebidaRepository.save(bebidaActualizada);
+        } else {
+            throw new RuntimeException("Bebida no encontrada con id: " + id);
         }
     }
 

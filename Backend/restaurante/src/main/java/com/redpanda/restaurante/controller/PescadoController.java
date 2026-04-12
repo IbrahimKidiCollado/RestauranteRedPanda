@@ -2,6 +2,7 @@ package com.redpanda.restaurante.controller;
 
 //Importa la entidad Pescado para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Pescado;
+import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Pescado para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.PescadoRepository;
 
@@ -50,6 +51,17 @@ public class PescadoController {
         }else{
             //Si no existe devolvemos un mensaje de error
             return "Error: no existe o no se ha podido eliminar el pescado con id: " + id;
+        }
+    }
+
+    //Para actualizar un pescado
+    @PutMapping("/pescado/update/{id}")
+    public Pescado actualizarPescado(@PathVariable Long id, @RequestBody Pescado pescadoActualizado) {
+        if (pescadoRepository.existsById(id)) {
+            pescadoActualizado.setId(id);
+            return pescadoRepository.save(pescadoActualizado);
+        } else {
+            throw new RuntimeException("Pescado no encontrado con id: " + id);
         }
     }
 
