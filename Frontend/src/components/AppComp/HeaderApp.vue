@@ -25,7 +25,7 @@
 		</nav>
 		<div class="contenedor-carrito-perfil">
 			<button class="admin" @click="navegar('/admin')"><span>AdmMode</span></button>
-			<button class="carrito"><img src="/assets/carrito.png" alt="icono-carrito"></button>
+			<button @click="navegar('/carrito')" class="carrito"><img src="/assets/carrito.png" alt="icono-carrito"></button>
 			<button class="perfil" @click="navegar('/login')">
 				<img src="/assets/user-icon.png" alt="icono-user">{{ $t("header.botones.iniciar") }}
 			</button>
