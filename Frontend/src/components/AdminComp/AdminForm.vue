@@ -1,3 +1,37 @@
+<script setup lang="ts">
+  import { ref } from 'vue';
+  import { annadirPlato } from '@/services/Tienda/PlatosService';
+
+  //Variables que usamos para recoger los datos del formulario de creacion
+  const categoria = ref("");
+  const nombre = ref("");
+  const descripcion = ref("");
+  const precio = ref<number>(0);
+  const cantidad = ref(1);
+
+  //mensaje 
+  const emit = defineEmits(['actualizar-tabla']);
+  
+  //Para crear 
+  const enviarDatos = async () => {
+    const res = await annadirPlato(nombre.value, descripcion.value, precio.value, cantidad.value, categoria.value);
+
+    if(res) {
+      alert("Elemento añadido correctamente");
+      nombre.value = "";
+      descripcion.value = "";
+      precio.value = 0;
+      cantidad.value = 0;
+
+      //Avisamos al padre que necesita actualizar la carta
+      emit('actualizar-tabla');
+    }else{
+      alert("ERROR");
+    }
+
+    
+  }
+</script>
 <template>
   <div class="contenedor-admin">
     <div class="formulario-adicion">
@@ -5,7 +39,7 @@
       
       <div class="seleccion-elemento">
         <label for="entidad">Seleccione el elemento a introducir: </label>
-        <select id="entidad">
+        <select id="entidad" v-model="categoria">
           <option value="" disabled selected>-- Elige una opción --</option>
           <option value="sushi">Sushi 🍣</option>
           <option value="ramen">Ramen 🍜</option>
@@ -20,25 +54,25 @@
       <div class="introduccion-datos">
         <div class="campo">
           <label for="nombre">Introduzca su nombre: </label>
-          <input id="nombre" type="text" placeholder="nombre.....">
+          <input v-model="nombre" id="nombre" type="text" placeholder="nombre.....">
         </div>
         
         <div class="campo">
           <label for="descripcion">Descripción del elemento: </label>
-          <input id="descripcion" type="text" placeholder="elemento con.....">
+          <input v-model="descripcion" id="descripcion" type="text" placeholder="elemento con.....">
         </div>
 
         <div class="campo">
           <label for="precio">Precio en €: </label>
-          <input id="precio" type="text" placeholder="17€.....">
+          <input v-model.number="precio" id="precio" type="text" placeholder="17€.....">
         </div>
 
         <div class="campo">
           <label for="cantidad">Cantidad: </label>
-          <input id="cantidad" type="number" placeholder="2.....">
+          <input v-model.number="cantidad" id="cantidad" type="number" placeholder="2.....">
         </div>
 
-        <button type="submit" class="boton-enviar">AÑADIR A LA CARTA</button>
+        <button @click="enviarDatos" type="button" class="boton-enviar">AÑADIR A LA CARTA</button>
       </div>
     </div>
   </div>

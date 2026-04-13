@@ -1,21 +1,24 @@
 <script setup lang="ts">
-    import { onMounted, ref } from 'vue';
-    import { obtenerPlatos } from '@/services/Tienda/PlatosService';
+    import { onMounted, ref, toRef } from 'vue';
+    import { eliminarPlato } from '@/services/Tienda/PlatosService';
 
-    interface Plato {
-        id: number;
-        nombre: string;
-        precio: number;
-        imagen: string;
-        descripcion: string;
-        categoria_slug: string;
+    //Recibimos el listado
+    const props = defineProps(['platos']);
+
+    //mensaje 
+    const emit = defineEmits(['actualizar-tabla']);
+
+    //Lo "clonamos"
+    const platos = toRef(props, 'platos');
+
+    //Para borrar y mandar un mensaje al padre para avisar que necesita actualizar
+    const borrarPlato = async(id:number, categoria: string) => {
+        const respuesta = await eliminarPlato(id, categoria);
+        if(respuesta){
+            emit('actualizar-tabla');
+        }
+
     }
-
-    const platos = ref<Plato[]>([]);
-
-    onMounted(async () =>{
-        platos.value = await obtenerPlatos();
-    })
 
 </script>
 <template>
@@ -50,7 +53,7 @@
                     <td>
                         <div class="celda-acciones">
                             <button class="btn-editar">✏️</button>
-                            <button class="btn-borrar">🗑️</button>
+                            <button class="btn-borrar" @click="borrarPlato(plato.id, plato.categoria_slug)">🗑️</button>
                         </div>
                     </td>
                     

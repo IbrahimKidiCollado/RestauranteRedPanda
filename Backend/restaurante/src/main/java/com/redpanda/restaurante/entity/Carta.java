@@ -14,7 +14,6 @@ public class Carta {
     @Id
     //Se autogenera solo (AUTO_GENERATED)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
 
     //Relacion 1 a N

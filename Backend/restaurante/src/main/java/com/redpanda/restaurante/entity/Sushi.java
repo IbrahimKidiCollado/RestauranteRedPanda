@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 //Nombre de la tabla
@@ -28,7 +29,8 @@ public class Sushi {
     //Varios shushis pueden estar en una carta
     @ManyToOne
     @JoinColumn(name = "id_carta")
-    @JsonIgnore
+    //El campo no se manda pero si se puede escribir
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Carta carta;
 
     //Relacion N a M 
@@ -44,6 +46,7 @@ public class Sushi {
     )
     private List<Ingrediente> ingredientes;
 
+    //Getters
     public Long getId() {
         return id;
     }
@@ -65,9 +68,37 @@ public class Sushi {
     public Integer getCantidad() {
         return cantidad;
     }
+    public Carta getCarta() {
+        return carta;
+    }
+
+    //Setters
     public void setId(Long id) {
         this.id = id;
     }
+    public void setCarta(Carta carta) {
+        this.carta = carta;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }       
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public void setNumeroPiezas(int numeroPiezas) {
+        this.numeroPiezas = numeroPiezas;
+    }
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+    
+    
 
 
 }

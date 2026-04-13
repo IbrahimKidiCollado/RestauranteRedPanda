@@ -42,7 +42,7 @@ public class SushiController {
     }
 
     //Para borra un sushi de la carta
-    @DeleteMapping("/sushi/delete{id}")
+    @DeleteMapping("/sushi/delete/{id}")
     public String eliminarSushi(@PathVariable Long id){
         //Comprobamos si existe un sushi con dicho id
         if (sushiRepository.existsById(id)) {
