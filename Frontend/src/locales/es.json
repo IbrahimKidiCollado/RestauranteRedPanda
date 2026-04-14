@@ -110,7 +110,10 @@
 	"carrito": {
 		"continuar": "Continuar comprando",
 		"titulo": "Tu Carrito",
-		"productos-cantidad": "productos en tu carrito"
+		"productos-cantidad": "productos en tu carrito",
+		"carrito-vacio": "Tu carrito está vacío",
+		"propuesta-añadir": "Añade algunos deliciosos platos a tu carrito",
+		"ver-menu": "Ver Menú"
 	},
 	"footer": {
 		"descripcion": "Auténtica comida asiática preparada con ingredientes frescos y recetas tradicionales.",
