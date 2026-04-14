@@ -1,10 +1,10 @@
 package com.redpanda.restaurante.controller;
 
 //Importa la entidad Carne para que el controlador sepa a qué tabla de la base de datos se refiere
-import com.redpanda.restaurante.entity.Carne;
-import com.redpanda.restaurante.entity.Sushi;
+import com.redpanda.restaurante.entity.Categoria;
+
 //Importa el repositorio de Carne para que el controlador pueda acceder a los datos de la tabla correspondiente
-import com.redpanda.restaurante.repository.CarneRepository;
+import com.redpanda.restaurante.repository.CategoriaRepository;
 
 import java.util.List;
 
@@ -20,33 +20,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
-public class CarneController {
+public class CategoriaController {
 
-    private final CarneRepository carneRepository;
+    private final CategoriaRepository categoriaRepository;
 
-    CarneController(CarneRepository carneRepository) {
-        this.carneRepository = carneRepository;
+    CategoriaController(CategoriaRepository categoriaRepository) {
+        this.categoriaRepository = categoriaRepository;
     }
 
-    @GetMapping("/carne")
-    public List<Carne> obtenerCarne(){
-        return carneRepository.findAll();
+    @GetMapping("/categoria")
+    public List<Categoria> obtenerCarne(){
+        return categoriaRepository.findAll();
     }
 
-    //Para crear una nueva bebida y añadirlo a la carta
-    @PostMapping("/carne/create")
-    public Carne addCarne(@RequestBody Carne nuevaCarne) {
+    //Para crear una nueva categoria
+    @PostMapping("/categoria/create")
+    public Categoria addCarne(@RequestBody Categoria nuevaCategoria) {
         // El repositorio guarda la bebida y nos devuelve la bebida guardada con su ID generado.
-        return carneRepository.save(nuevaCarne);
+        return categoriaRepository.save(nuevaCategoria);
     }
 
-    //Para borra una carne de la carta
-    @DeleteMapping("/carne/delete/{id}")
+    //Para borra una categoria de la carta
+    @DeleteMapping("/categoria/delete/{id}")
     public String eliminarCarne(@PathVariable Long id){
-        //Comprobamos si existe una carne con dicho id
-        if (carneRepository.existsById(id)) {
+        //Comprobamos si existe un postre con dicho id
+        if (categoriaRepository.existsById(id)) {
             //Si existe lo eliminamos
-            carneRepository.deleteById(id);
+            categoriaRepository.deleteById(id);
             return "Carne eliminada correctamente: " + id; 
         }else{
             //Si no existe devolvemos un mensaje de error
@@ -54,12 +54,12 @@ public class CarneController {
         }
     }
 
-    //Para actualizar una carne de la carta 
-    @PutMapping("/carne/update/{id}")
-    public Carne actualizarCarne(@PathVariable Long id, @RequestBody Carne carneActualizada) {
-        if (carneRepository.existsById(id)) {
-            carneActualizada.setId(id);
-            return carneRepository.save(carneActualizada);
+    //Para actualizar una categoria
+    @PutMapping("/categoria/update/{id}")
+    public Categoria actualizarCarne(@PathVariable Long id, @RequestBody Categoria categoriaActualizada) {
+        if (categoriaRepository.existsById(id)) {
+            categoriaActualizada.setId(id);
+            return categoriaRepository.save(categoriaActualizada);
         } else {
             throw new RuntimeException("Carne no encontrada con id: " + id);
         }

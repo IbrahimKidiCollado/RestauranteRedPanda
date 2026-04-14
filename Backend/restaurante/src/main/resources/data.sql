@@ -100,3 +100,13 @@ INSERT INTO sushi_ingrediente (id_sushi, id_ingrediente) VALUES
 -- RELACIONES RAMEN
 INSERT INTO ramen_ingrediente (id_ramen, id_ingrediente) VALUES
 (1,5), (1,6), (1,12), (2,5), (2,6), (2,13), (3,5), (3,6), (3,11), (4,5), (4,14), (4,15), (5,5), (5,6), (6,5), (6,14), (7,5), (7,6), (7,14);
+
+-- 2. Insertar los datos exactos de tu JSON
+INSERT INTO categoria (nombre, slug) VALUES 
+('tienda.categorias.todos', 'todos'),
+('tienda.categorias.sushi', 'sushi'),
+('tienda.categorias.ramen', 'ramen'),
+('tienda.categorias.carne', 'carne'),
+('tienda.categorias.pescado', 'pescado'),
+('tienda.categorias.postres', 'postre'),
+('tienda.categorias.bebidas', 'bebida');
