@@ -80,7 +80,10 @@
 			"ramen": "Ramen",
 			"dimsum": "Dim Sum",
 			"principales": "Platos principales",
-			"bebidas": "Bebidas"
+			"bebidas": "Bebidas",
+			"carne": "Carne",
+			"pescado": "Pescado",
+			"postres": "Postres"
 		},
 		"platos": {
 			"sushi_deluxe": {
