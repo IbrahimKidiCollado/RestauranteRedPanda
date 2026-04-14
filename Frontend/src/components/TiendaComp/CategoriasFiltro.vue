@@ -1,5 +1,5 @@
 <template>
-	<button>{{ $t(nombre) }}</button>
+	<button @click="$emit('filtrar', slug)">{{ $t(nombre) }}</button>
 </template>
 
 <style lang="scss" scoped>
@@ -29,4 +29,7 @@ interface Categorias {
 }
 
 defineProps<Categorias>();
+
+//mensaje que mandamos al padre para que sepa que boton se ha usado
+defineEmits(['filtrar']);
 </script>

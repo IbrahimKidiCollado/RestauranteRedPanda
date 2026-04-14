@@ -1,7 +1,10 @@
 //import axios from 'axios';
 
-export const obtenerPlatos = async () => {
-	const res = await fetch("http://localhost:8081/carta");
+export const obtenerPlatos = async (categoria?: string) => {
+	const ruta = categoria 
+        ? `http://localhost:8081/${categoria}` 
+        : `http://localhost:8081/carta`;
+	const res = await fetch(ruta);
 	return await res.json();
 }
 

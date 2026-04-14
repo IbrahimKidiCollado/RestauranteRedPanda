@@ -22,8 +22,12 @@ interface Categoria {
 
 const platos = ref<Plato[]>([]);
 const categorias = ref<Categoria[]>([]);
+const categoriaActiva = ref<string>("");
 
-
+const cargarPlatos = async (cat?: string) => {
+	categoriaActiva.value = cat || "";
+	platos.value = await obtenerPlatos(cat);
+}
 onMounted(async () => {
 	platos.value = await obtenerPlatos();
 	categorias.value = await obtenerCategorias();
@@ -47,10 +51,12 @@ onMounted(async () => {
 		</div>
 		<div class="categorias">
 			<CategoriasFiltro
-			v-for="categoria in categorias"
-			:key="categoria.id"
-			:nombre="categoria.nombre"
-			:slug="categoria.slug"
+				v-for="categoria in categorias"
+				:key="categoria.id"
+				:nombre="categoria.nombre"
+				:slug="categoria.slug"
+				@filtrar="cargarPlatos" 
+				:class="{ 'activo': categoriaActiva === categoria.slug }"
 			/>
 		</div>
 	</div>
