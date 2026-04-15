@@ -77,4 +77,11 @@ public class Postre {
         this.descripcion = descripcion;
     }
 
+    //Dato que posé la entidad pero no se encuentra en bbdd
+    @Transient
+    @JsonProperty("categoria_slug")
+    public String getCategoriaSlug() {
+        return "postre"; 
+    }
+
 }

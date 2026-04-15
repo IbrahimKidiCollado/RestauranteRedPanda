@@ -97,8 +97,12 @@ public class Sushi {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
-    
-    
 
-
+    //Dato que posé la entidad pero no se encuentra en bbdd
+    @Transient
+    @JsonProperty("categoria_slug")
+    public String getCategoriaSlug() {
+        return "sushi"; 
+    }
+    
 }

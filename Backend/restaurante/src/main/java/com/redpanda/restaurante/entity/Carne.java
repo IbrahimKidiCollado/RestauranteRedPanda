@@ -76,4 +76,11 @@ public class Carne {
     public void setCarta(Carta carta) {
         this.carta = carta;
     }
+
+    //Dato que posé la entidad pero no se encuentra en bbdd
+    @Transient
+    @JsonProperty("categoria_slug")
+    public String getCategoriaSlug() {
+        return "carne"; 
+    }
 }
