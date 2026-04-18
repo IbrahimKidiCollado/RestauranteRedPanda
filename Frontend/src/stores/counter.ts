@@ -54,6 +54,26 @@ export const useCarritoStore = defineStore('carrito', () => {
   }
 
   const sumarCantidadProducto = (producto: ProductoCarrito) => {producto.cantidad++}
+  const restarCantidadProducto = (producto: ProductoCarrito) => {
+    if (producto.cantidad === 1) eliminarProducto(producto);
+    else producto.cantidad--;
+  }
 
-  return {subtotal, cantidadProductosCarrito, envio, total, envioRestante};
+  return {
+    // Productos
+    productosCarrito,
+    
+    // Cantidades
+    subtotal,
+    cantidadProductosCarrito,
+    envio,
+    total,
+    envioRestante,
+    
+    // Acciones
+    añadirProducto,
+    eliminarProducto,
+    sumarCantidadProducto,
+    restarCantidadProducto
+  };
 });

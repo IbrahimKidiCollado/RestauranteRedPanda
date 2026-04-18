@@ -4,6 +4,7 @@ import { obtenerPlatos } from '@/services/Tienda/PlatosService'
 import { obtenerCategorias } from '@/services/Tienda/CategoriasService'
 import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
 import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
+import { useCarritoStore } from '@/stores/counter'
 
 interface Plato {
     id: number
@@ -23,12 +24,14 @@ interface Categoria {
 const platos = ref<Plato[]>([])
 const categorias = ref<Categoria[]>([])
 const categoriaActiva = ref<string>('todos')
+const carrito = useCarritoStore()
+const { añadirProducto } = carrito
 
 const cargarPlatos = async (cat?: string) => {
     categoriaActiva.value = cat || 'todos'
 
-    if(cat === 'todos')platos.value = await obtenerPlatos()
-    else platos.value = await obtenerPlatos(cat);
+    if (cat === 'todos') platos.value = await obtenerPlatos()
+    else platos.value = await obtenerPlatos(cat)
 }
 onMounted(async () => {
     platos.value = await obtenerPlatos()
@@ -64,6 +67,7 @@ onMounted(async () => {
     <div class="contenedor-platos">
         <TarjetaPlato
             v-for="plato in platos"
+            @añadir="añadirProducto(plato)"
             :key="plato.id"
             :nombre="$t(plato.nombre)"
             :descripcion="$t(plato.descripcion)"
@@ -153,10 +157,10 @@ p {
         gap: 20px;
         margin-top: 20px;
 
-        .activo{
-            background-color: $color-rojo-panda; 
-            border-color: $color-rojo-panda;    
-            color: white;                        
+        .activo {
+            background-color: $color-rojo-panda;
+            border-color: $color-rojo-panda;
+            color: white;
         }
     }
 }
