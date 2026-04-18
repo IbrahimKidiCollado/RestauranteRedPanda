@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useCarritoStore = defineStore('carrito', () => {
@@ -16,7 +16,19 @@ export const useCarritoStore = defineStore('carrito', () => {
     cantidad: number;
   }
 
-  const productosCarrito = ref<ProductoCarrito[]>([]);
+  const envioMinimoGratis:number = 35;
+  const precioEnvio:number = 4.99;
+
+  const carritoGuardado = localStorage.getItem('carrito-redpanda');
+  const productosCarrito = ref<ProductoCarrito[]>(carritoGuardado ? JSON.parse(carritoGuardado) : []);
+
+  watch (
+    productosCarrito,
+    (carritoNuevo) => {
+      localStorage.setItem('carrito-redpanda', JSON.stringify(carritoNuevo));
+    },
+    { deep: true }
+  )
 
   const cantidadProductosCarrito = computed(() => productosCarrito.value.length);
 
@@ -24,7 +36,10 @@ export const useCarritoStore = defineStore('carrito', () => {
     return productosCarrito.value.reduce((total, productoCarrito) => total + productoCarrito.precio * (productoCarrito.cantidad ?? 1), 0);
   })
 
-  const envio = computed<number>(() => subtotal.value >= 35 ? 0 : 4.99);
+  const envio = computed<number>(() => subtotal.value >= envioMinimoGratis ? 0 : precioEnvio);
+  const envioRestante = computed<number>(() => envioMinimoGratis - subtotal.value);
+
+  const total = computed<number>(() => subtotal.value + envio.value);
 
   const añadirProducto = (producto: Producto) => {
     
@@ -32,7 +47,13 @@ export const useCarritoStore = defineStore('carrito', () => {
     
     if (productoExiste) productoExiste.cantidad++;
     else productosCarrito.value.push({...producto,cantidad: 1});
-    
-    return {subtotal, cantidadProductosCarrito, envio}
   }
+
+  const eliminarProducto = (producto: ProductoCarrito) => {
+    productosCarrito.value = productosCarrito.value.filter(p => p.id !== producto.id);
+  }
+
+  const sumarCantidadProducto = (producto: ProductoCarrito) => {producto.cantidad++}
+
+  return {subtotal, cantidadProductosCarrito, envio, total, envioRestante};
 });
