@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useCarritoStore } from './stores/counter'
+
+const carritoStore = useCarritoStore();
 
 import HeaderApp from './components/AppComp/HeaderApp.vue'
 import FooterApp from './components/AppComp/FooterApp.vue'
@@ -17,6 +20,25 @@ onMounted(() => {
 
 onUnmounted(() => {
     window.removeEventListener('resize', revisarTamaño)
+})
+
+//Para que el carrito se mantenga sincronizado con el backend cada vez que se recarga la página
+onMounted(async () => {
+    try{
+        await fetch('http://localhost:8081/login', {
+            credentials: 'include'
+        })
+        await carritoStore.sincronizarCarrito();
+            
+
+    }catch(error){
+        console.error('Error al iniciar la sesion:', error);
+    }
+})
+
+//Cuando se cierre la ventana se vacia el carrito
+window.addEventListener('pagehide', () => {
+    navigator.sendBeacon('http://localhost:8081/carrito/vaciar');
 })
 </script>
 

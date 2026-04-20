@@ -98,6 +98,10 @@ public class Ramen {
         return "ramen"; 
     }
 
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
+    }
+
 
 
 }

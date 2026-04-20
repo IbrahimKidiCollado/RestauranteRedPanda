@@ -104,5 +104,10 @@ public class Sushi {
     public String getCategoriaSlug() {
         return "sushi"; 
     }
+
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
+    }
+    
     
 }

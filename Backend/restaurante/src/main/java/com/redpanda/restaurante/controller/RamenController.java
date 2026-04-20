@@ -1,5 +1,6 @@
 package com.redpanda.restaurante.controller;
 
+import com.redpanda.restaurante.entity.Ingrediente;
 //Importa la entidad Ramen para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Ramen;
 import com.redpanda.restaurante.entity.Sushi;
@@ -7,6 +8,8 @@ import com.redpanda.restaurante.entity.Sushi;
 import com.redpanda.restaurante.repository.RamenRepository;
 
 import java.util.List;
+
+import javax.management.RuntimeErrorException;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -65,5 +68,17 @@ public class RamenController {
             throw new RuntimeException("Ramen no encontrado con id: " + id);
         }
     }
+
+    //Obtener sus ingredientes
+    @GetMapping("/ramen/ingredientes/{id}")
+    public List<Ingrediente> obtenerIngredientes(@PathVariable Long id) {
+        if (ramenRepository.existsById(id)) {
+            Ramen ramen = ramenRepository.findById(id).orElseThrow(); new RuntimeErrorException( null, "Ramen no encontrado con id: " + id);
+            return ramen.getIngredientes();
+            
+        }
+        return null;
     
+    }
+
 }

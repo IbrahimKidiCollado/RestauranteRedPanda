@@ -1,5 +1,7 @@
 import { ref, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
+//Servicios del backend
+import {obtenerCarrito, annadirCarrito, eliminarDelCarrito, sumarCantidad, restarCantidad, vaciarCarrito } from '@/services/Tienda/CarritoService';
 
 export const useCarritoStore = defineStore('carrito', () => {
 
@@ -20,16 +22,9 @@ export const useCarritoStore = defineStore('carrito', () => {
   const precioEnvio:number = 4.99;
 
   const carritoGuardado = localStorage.getItem('carrito-redpanda');
-  const productosCarrito = ref<ProductoCarrito[]>(carritoGuardado ? JSON.parse(carritoGuardado) : []);
+  const productosCarrito = ref<ProductoCarrito[]>([]);
 
-  watch (
-    productosCarrito,
-    (carritoNuevo) => {
-      localStorage.setItem('carrito-redpanda', JSON.stringify(carritoNuevo));
-    },
-    { deep: true }
-  )
-
+  
   const cantidadProductosCarrito = computed(() => productosCarrito.value.length);
 
   const subtotal = computed(() => {
@@ -41,22 +36,40 @@ export const useCarritoStore = defineStore('carrito', () => {
 
   const total = computed<number>(() => subtotal.value + envio.value);
 
-  const añadirProducto = (producto: Producto) => {
-    
-    const productoExiste: ProductoCarrito | undefined = productosCarrito.value.find(p => p.id === producto.id);
-    
-    if (productoExiste) productoExiste.cantidad++;
-    else productosCarrito.value.push({...producto,cantidad: 1});
+  //Obtenemos el carrito y lo asignamos a la variable que usamos en este archivo
+  const sincronizarCarrito = async () => {
+    const datos = await obtenerCarrito();
+    if(datos) productosCarrito.value = datos;
   }
 
-  const eliminarProducto = (producto: ProductoCarrito) => {
-    productosCarrito.value = productosCarrito.value.filter(p => p.id !== producto.id);
+  //Añadimos productos a la cesta
+  const añadirProducto = async (producto: Producto) => {
+    await annadirCarrito(producto);
+    await sincronizarCarrito();
   }
 
-  const sumarCantidadProducto = (producto: ProductoCarrito) => {producto.cantidad++}
-  const restarCantidadProducto = (producto: ProductoCarrito) => {
-    if (producto.cantidad === 1) eliminarProducto(producto);
-    else producto.cantidad--;
+  //Eliminar un producto del carrito
+  const eliminarProducto =  async (producto: ProductoCarrito) => {
+    await eliminarDelCarrito(producto.id, producto);
+    await sincronizarCarrito();
+  }
+
+  //Añadimos una unidad de un un producto al carrito
+  const sumarCantidadProducto = async (producto: ProductoCarrito) => {
+    const carritoActualizado = await sumarCantidad(producto.id, producto);
+    if(carritoActualizado) productosCarrito.value = carritoActualizado;
+  }
+
+  //Restamos una unidad de un producto del carrito
+  const restarCantidadProducto = async (producto: ProductoCarrito) => {
+    const carritoActualizado = await restarCantidad(producto.id, producto);
+    if(carritoActualizado) productosCarrito.value = carritoActualizado;
+  }
+
+  //Vaciamos el carrito
+  const limpiarTodoElCarrito = async () => {
+    await vaciarCarrito();
+    productosCarrito.value = [];
   }
 
   return {
@@ -74,6 +87,9 @@ export const useCarritoStore = defineStore('carrito', () => {
     añadirProducto,
     eliminarProducto,
     sumarCantidadProducto,
-    restarCantidadProducto
+    restarCantidadProducto,
+    sincronizarCarrito,
+    limpiarTodoElCarrito
+
   };
 });

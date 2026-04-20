@@ -1,6 +1,9 @@
 package com.redpanda.restaurante.controller;
 
 import com.redpanda.restaurante.ElementoCarrito;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +19,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class CarritoController {
-    private List<ElementoCarrito> carrito = new ArrayList<>();
+    //private List<ElementoCarrito> carrito = new ArrayList<>();
 
     //Devuelve el contenido del carrito
     @GetMapping("/carrito")
-    public List<ElementoCarrito> verCarrito() {
+    public List<ElementoCarrito> verCarrito(HttpSession sesion) {
+        List<ElementoCarrito> carrito = obtenerCarritoSesion(sesion);
         return carrito;
+        
+    }
+
+    //Obtenemos el carrito de la sesion
+    private List<ElementoCarrito> obtenerCarritoSesion(HttpSession sesion){
+        List<ElementoCarrito> carrito = (List<ElementoCarrito>) sesion.getAttribute("carrito");
+        if (carrito == null) {
+            carrito = new ArrayList<>();
+            guardarCarritoSesion(sesion, carrito);
+        }
+        return carrito;
+    }
+
+    //Guardamos el carrito en la sesion
+    private void guardarCarritoSesion(HttpSession sesion, List<ElementoCarrito> carrito){
+        sesion.setAttribute("carrito", carrito);
     }
 
     //Agrega un elemento al carrito
     @PostMapping("/carrito/agregar")
-    public String agregarAlCarrito(@RequestBody ElementoCarrito elemento) {
+    public String agregarAlCarrito(@RequestBody ElementoCarrito elemento, HttpSession sesion) {
+        List<ElementoCarrito> carrito = obtenerCarritoSesion(sesion);
+
         boolean encontrado = false;
         for(ElementoCarrito plato : carrito){
             if (plato.getId() == elemento.getId()) {
@@ -44,13 +66,18 @@ public class CarritoController {
             carrito.add(elemento);
             
         }
+
+        guardarCarritoSesion(sesion, carrito);
+
         return "Elemento agregado al carrito: " + elemento.getNombre();
     }
 
     //Eliminar un elemento del carrito
     @DeleteMapping("/carrito/eliminar/{id}")
-    public String eliminarDelCarrito(@PathVariable int id, @RequestBody Map<String, String> body) {
+    public String eliminarDelCarrito(@PathVariable int id, @RequestBody Map<String, String> body, HttpSession sesion) {
         String categoria = body.get("categoria_slug");
+        List<ElementoCarrito> carrito = obtenerCarritoSesion(sesion);
+
         for(ElementoCarrito plato : carrito){
             if (plato.getId() == id) {
                 if (plato.getCategoria_slug().equals(categoria)) {
@@ -60,26 +87,36 @@ public class CarritoController {
                 }
             }
         }
+
+        guardarCarritoSesion(sesion, carrito);
+
         return "Elemento eliminado del carrito ";
     }
 
     //Suma cantidad de un elemento específico en el carrito
     @PutMapping("/carrito/sumar/{id}")
-    public List<ElementoCarrito> sumarCantidad(@PathVariable int id, @RequestBody Map<String, String> body) {
+    public List<ElementoCarrito> sumarCantidad(@PathVariable int id, @RequestBody Map<String, String> body, HttpSession sesion) {
         String categoria = body.get("categoria_slug");
+        List<ElementoCarrito> carrito = obtenerCarritoSesion(sesion);
+
         for (ElementoCarrito plato : carrito) {
             if (plato.getId() == id && plato.getCategoria_slug().equals(categoria) ) {
                 plato.setCantidad(plato.getCantidad() + 1);
                 break;
             }
         }
+
+        guardarCarritoSesion(sesion, carrito);
+
         return carrito;
     }
 
     //Resta cantidad de un elemento específico en el carrito
     @PutMapping("/carrito/restar/{id}")
-    public List<ElementoCarrito> restarCantidad(@PathVariable int id, @RequestBody Map<String, String> body) {
+    public List<ElementoCarrito> restarCantidad(@PathVariable int id, @RequestBody Map<String, String> body, HttpSession sesion) {
         String categoria = body.get("categoria_slug");
+        List<ElementoCarrito> carrito = obtenerCarritoSesion(sesion);
+
         for (ElementoCarrito plato : carrito) {
             if (plato.getId() == id && plato.getCategoria_slug().equals(categoria)) {
                 if (plato.getCantidad() > 1) {
@@ -90,13 +127,18 @@ public class CarritoController {
                 break;
             }
         }
+
+        guardarCarritoSesion(sesion, carrito);
+
         return carrito;
     }
 
     //Vacía el carrito
     @DeleteMapping("/carrito/vaciar")
-    public String vaciarCarrito() {
+    public String vaciarCarrito(HttpSession sesion) {
+        List<ElementoCarrito> carrito = obtenerCarritoSesion(sesion);
         carrito.clear();
+        guardarCarritoSesion(sesion, carrito);
         return "Carrito vaciado.";
     }
 }
