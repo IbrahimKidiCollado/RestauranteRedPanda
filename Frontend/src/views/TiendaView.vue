@@ -5,6 +5,8 @@ import { obtenerCategorias } from '@/services/Tienda/CategoriasService'
 import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
 import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
 import { useCarritoStore } from '@/stores/counter'
+import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
+import {reactive} from 'vue' 
 
 interface Plato {
     id: number
@@ -33,10 +35,37 @@ const cargarPlatos = async (cat?: string) => {
     if (cat === 'todos') platos.value = await obtenerPlatos()
     else platos.value = await obtenerPlatos(cat)
 }
+
+const alerta = reactive({
+    visible: false,
+    titulo: '',
+    mensaje: '',
+    mostrarBoton: false //Esto es para que al añadir salga un carrito que redirija al carrito :)
+})
+
+const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
+    alerta.visible = true;
+
+    if(tipo == 'ANNADIR'){
+        alerta.titulo = '¡AÑADIDO';
+        alerta.mensaje = `${nombreProducto} se ha añadido al carrito.`;
+        alerta.mostrarBoton = true;
+    }
+
+    setTimeout(() => {
+        alerta.visible = false;
+    },2500) // 2 segundos y medio :)
+}
+
+const manejarAnnadir = (plato : Plato) => {
+    añadirProducto(plato);
+    lanzarAlerta('ANNADIR', plato.nombre)
+}
 onMounted(async () => {
     platos.value = await obtenerPlatos()
     categorias.value = await obtenerCategorias()
 })
+
 </script>
 
 <template>
@@ -67,13 +96,21 @@ onMounted(async () => {
     <div class="contenedor-platos">
         <TarjetaPlato
             v-for="plato in platos"
-            @añadir="añadirProducto(plato)"
+            @añadir="manejarAnnadir(plato)"
             :key="plato.id"
             :nombre="$t(plato.nombre)"
             :descripcion="$t(plato.descripcion)"
             :precio="plato.precio"
             :imagen="plato.imagen"
             :categoria_slug="plato.categoria_slug"
+        />
+    </div>
+    <div>
+        <AlertaCarrito
+            :visible="alerta.visible"
+            :titulo="alerta.titulo"
+            :mensaje="alerta.mensaje"
+            :mostrar-boton="alerta.mostrarBoton"
         />
     </div>
 </template>

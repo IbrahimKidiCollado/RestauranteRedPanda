@@ -18,9 +18,9 @@
                 v-for="p in productosCarrito"
                 :key="p.id"
                 :p="p"
-                @eliminar="eliminarProducto(p)"
-                @sumar="sumarCantidadProducto(p)"
-                @restar="restarCantidadProducto(p)"
+                @eliminar="manejarAccion('ELIMINAR', p)"
+                @sumar="manejarAccion('SUMAR', p)"
+                @restar="manejarAccion('RESTAR', p)"
             />
         </div>
         <div class="resumen-container">
@@ -31,7 +31,16 @@
                 :envioRestante="envioRestante"
             />
         </div>
+        <div>
+            <AlertaCarrito
+                :visible="alerta.visible"
+                :titulo="alerta.titulo"
+                :mensaje="alerta.mensaje"
+                :mostrar-boton="alerta.mostrarBoton"
+            />
+        </div>
     </div>
+    
 </template>
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
@@ -39,6 +48,8 @@ import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useCarritoStore } from '@/stores/counter'
 import TarjetaProducto from '@/components/CarritoComp/TarjetaProducto.vue'
+import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
+import {reactive} from 'vue'
 
 const router = useRouter()
 const carrito = useCarritoStore()
@@ -49,6 +60,39 @@ const { eliminarProducto, sumarCantidadProducto, restarCantidadProducto } = carr
 
 const navegar = (path: string) => {
     router.push(path)
+}
+const alerta = reactive({
+    visible: false,
+    titulo: '',
+    mensaje: '',
+    mostrarBoton: false //Esto es para que al añadir salga un carrito que redirija al carrito :)
+})
+
+const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
+    alerta.visible = true;
+
+    if(tipo == 'ELIMINAR'){
+        alerta.titulo = '¡ELIMINADO';
+        alerta.mensaje = `${nombreProducto} ha sido eliminado del carrito`;
+        alerta.mostrarBoton = false;
+    }
+
+    setTimeout(() => {
+        alerta.visible = false;
+    },2500) // 2 segundos y medio :)
+}
+
+const manejarAccion = (accion: String, p :any) => {
+    if(accion == 'ELIMINAR'){
+        eliminarProducto(p);
+        lanzarAlerta(accion, p.nombre);
+    }else if(accion == 'SUMAR'){
+        sumarCantidadProducto(p);
+    }
+    else if(accion == 'RESTAR'){
+        restarCantidadProducto(p);
+    }
+    
 }
 
 const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 ? true : false))
