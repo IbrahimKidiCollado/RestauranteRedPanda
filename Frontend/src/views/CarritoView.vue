@@ -29,6 +29,8 @@
                 :envio="envio"
                 :total="total"
                 :envioRestante="envioRestante"
+                @exito="manejarAccion('EXITO', null)"
+
             />
         </div>
         <div>
@@ -50,13 +52,15 @@ import { useCarritoStore } from '@/stores/counter'
 import TarjetaProducto from '@/components/CarritoComp/TarjetaProducto.vue'
 import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
 import {reactive} from 'vue'
+import ResumenPedido from '@/components/CarritoComp/ResumenPedido.vue'
+import { vaciarCarrito } from '@/services/Tienda/CarritoService'
 
 const router = useRouter()
 const carrito = useCarritoStore()
 const { productosCarrito, subtotal, cantidadProductosCarrito, envio, total, envioRestante } =
     storeToRefs(carrito)
 
-const { eliminarProducto, sumarCantidadProducto, restarCantidadProducto } = carrito
+const { eliminarProducto, sumarCantidadProducto, restarCantidadProducto,  } = carrito
 
 const navegar = (path: string) => {
     router.push(path)
@@ -75,6 +79,10 @@ const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
         alerta.titulo = '¡ELIMINADO';
         alerta.mensaje = `${nombreProducto} ha sido eliminado del carrito`;
         alerta.mostrarBoton = false;
+    }else if(tipo == 'EXITO'){
+        alerta.titulo = '¡PAGO EXITOSO!';
+        alerta.mensaje = 'Se ha realizado el pago exitosamente';
+        alerta.mostrarBoton = false;
     }
 
     setTimeout(() => {
@@ -91,6 +99,10 @@ const manejarAccion = (accion: String, p :any) => {
     }
     else if(accion == 'RESTAR'){
         restarCantidadProducto(p);
+    }else if(accion == 'EXITO'){
+        lanzarAlerta(accion, '');
+        vaciarCarrito();
+        router.push('/tienda');
     }
     
 }
@@ -100,6 +112,7 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
 <style lang="scss" scoped>
 .carrito-container {
     display: flex;
+    flex-direction: column;
     margin: 30px 50px 0px 50px;
 
     .productos-container {

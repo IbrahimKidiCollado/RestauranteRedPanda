@@ -133,7 +133,7 @@ export const restarCantidad = async (id: number, producto: any) => {
 export const vaciarCarrito = async () => {
 
     try{
-        const res = await fetch("/carrito/vaciar", {
+        const res = await fetch("http://localhost:8081/carrito/vaciar", {
             method : 'DELETE',
             credentials: 'include',
         });
