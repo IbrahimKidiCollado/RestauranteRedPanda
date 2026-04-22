@@ -87,6 +87,7 @@ const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
 
     setTimeout(() => {
         alerta.visible = false;
+        router.push('/tienda');
     },2500) // 2 segundos y medio :)
 }
 
@@ -100,9 +101,8 @@ const manejarAccion = (accion: String, p :any) => {
     else if(accion == 'RESTAR'){
         restarCantidadProducto(p);
     }else if(accion == 'EXITO'){
-        lanzarAlerta(accion, '');
-        vaciarCarrito();
-        router.push('/tienda');
+        vaciarCarrito();  
+        lanzarAlerta(accion);  
     }
     
 }

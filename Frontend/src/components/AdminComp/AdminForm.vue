@@ -17,7 +17,6 @@
     const res = await annadirPlato(nombre.value, descripcion.value, precio.value, cantidad.value, categoria.value);
 
     if(res) {
-      alert("Elemento añadido correctamente");
       nombre.value = "";
       descripcion.value = "";
       precio.value = 0;

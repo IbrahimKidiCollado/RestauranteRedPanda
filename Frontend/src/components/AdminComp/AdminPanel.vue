@@ -17,6 +17,7 @@
   </div>
 </template>
 <script setup lang="ts">
+
 function hacerScroll(boton: string) {
   const elemento = document.querySelector(boton);
   if (elemento) {
