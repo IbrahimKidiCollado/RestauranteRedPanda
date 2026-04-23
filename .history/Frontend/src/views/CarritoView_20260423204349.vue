@@ -29,7 +29,7 @@
                 :envio="envio"
                 :total="total"
                 :envioRestante="envioRestante"
-                @exito="manejarAccion('EXITO')"
+                @exito="manejarAccion('EXITO', null)"
             />
         </div>
         <div>
@@ -63,7 +63,6 @@ const { eliminarProducto, sumarCantidadProducto, restarCantidadProducto } = carr
 const navegar = (path: string) => {
     router.push(path)
 }
-
 const alerta = reactive({
     visible: false,
     titulo: '',
@@ -90,24 +89,17 @@ const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
     }, 2500) // 2 segundos y medio :)
 }
 
-const manejarAccion = (accion: string, p?: ProductoCarrito) => {
-    if (!p) return
-
-    switch (accion) {
-        case 'ELIMINAR':
-            eliminarProducto(p!)
-            lanzarAlerta(accion, p!.nombre)
-            break
-        case 'SUMAR':
-            sumarCantidadProducto(p!)
-            break
-        case 'RESTAR':
-            restarCantidadProducto(p!)
-            break
-        case 'EXITO':
-            vaciarCarrito()
-            lanzarAlerta(accion)
-            break
+const manejarAccion = (accion: String, p: ProductoCarrito) => {
+    if (accion == 'ELIMINAR') {
+        eliminarProducto(p)
+        lanzarAlerta(accion, p.nombre)
+    } else if (accion == 'SUMAR') {
+        sumarCantidadProducto(p)
+    } else if (accion == 'RESTAR') {
+        restarCantidadProducto(p)
+    } else if (accion == 'EXITO') {
+        vaciarCarrito()
+        lanzarAlerta(accion)
     }
 }
 

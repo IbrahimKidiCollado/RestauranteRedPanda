@@ -42,10 +42,8 @@
 			"noInicio": "¿No tienes cuenta? Regístrate"
 		},
 		"formRegistrar": {
-			"nombre": "Nombre completo",
 			"inicio": "Crear Cuenta",
-			"noInicio": "¿Ya tienes cuenta?",
-			"terminos": "Al registrarte, aceptas nuestros Términos y Condiciones y Política de Privacidad"
+			"noInicio": "¿Ya tienes cuenta?"
 		}
 	}
 	,

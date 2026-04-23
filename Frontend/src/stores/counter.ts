@@ -3,8 +3,6 @@ import { defineStore } from 'pinia'
 //Servicios del backend
 import {obtenerCarrito, annadirCarrito, eliminarDelCarrito, sumarCantidad, restarCantidad, vaciarCarrito } from '@/services/Tienda/CarritoService';
 
-export const useCarritoStore = defineStore('carrito', () => {
-
   interface Producto{
     id: number;
     nombre: string;
@@ -14,9 +12,13 @@ export const useCarritoStore = defineStore('carrito', () => {
     categoria_slug: string;
   };
 
-  interface ProductoCarrito extends Producto {
+  export interface ProductoCarrito extends Producto {
     cantidad: number;
   }
+
+export const useCarritoStore = defineStore('carrito', () => {
+
+
 
   const envioMinimoGratis:number = 35;
   const precioEnvio:number = 4.99;

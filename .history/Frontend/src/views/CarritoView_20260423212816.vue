@@ -29,7 +29,7 @@
                 :envio="envio"
                 :total="total"
                 :envioRestante="envioRestante"
-                @exito="manejarAccion('EXITO')"
+                @exito="manejarAccion('EXITO', null)"
             />
         </div>
         <div>

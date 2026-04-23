@@ -10,45 +10,6 @@
 			"iniciar": "Iniciar Sesión"
 		}
 	},
-	"login": {
-		"email": "Email",
-		"pwd": "Contraseña",
-		"placeHolderEmail": "tu@email.com",
-		"placeHolderPwd": "......",
-		"info": {
-			"infoInicio": {
-				"bienvenido": "Bienvenido de nuevo",
-				"ingresa": "Ingresa a tu cuenta y disfruta de tus planes favoritos"
-			},
-			"infoRegistro": {
-				"bienvenido": "Unete a nosotros",
-				"ingresa": "Crea una cuenta y descubre los mejores sabores asiáticos"
-			},
-			"pedido": {
-				"titulo": "Pedidos rápidos",
-				"descrip": "Guarda tus direcciones y paga mas rápido"
-			},
-			"historial": {
-				"titulo": "Historial de pedidos",
-				"descrip": "Vuelve a pedir tus favoritos fácilmente"
-			},
-			"ofertas": {
-				"titulo": "Ofertas exclusivas",
-				"descrip": "Recibe descuentos y promociones especiales"
-			}
-		},
-		"formIniciar": {
-			"inicio": "Iniciar Sesión",
-			"noInicio": "¿No tienes cuenta? Regístrate"
-		},
-		"formRegistrar": {
-			"nombre": "Nombre completo",
-			"inicio": "Crear Cuenta",
-			"noInicio": "¿Ya tienes cuenta?",
-			"terminos": "Al registrarte, aceptas nuestros Términos y Condiciones y Política de Privacidad"
-		}
-	}
-	,
 	"inicio": {
 		"descripcion": "Sabores Auténticos",
 		"descripcionSpan": " de Asia",
