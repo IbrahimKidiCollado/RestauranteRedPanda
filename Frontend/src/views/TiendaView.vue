@@ -1,73 +1,3 @@
-<script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { obtenerPlatos } from '@/services/Tienda/PlatosService'
-import { obtenerCategorias } from '@/services/Tienda/CategoriasService'
-import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
-import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
-import { useCarritoStore } from '@/stores/counter'
-import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
-import {reactive} from 'vue' 
-
-interface Plato {
-    id: number
-    nombre: string
-    precio: number
-    imagen: string
-    descripcion: string
-    categoria_slug: string
-}
-
-interface Categoria {
-    id: number
-    nombre: string
-    slug: string
-}
-
-const platos = ref<Plato[]>([])
-const categorias = ref<Categoria[]>([])
-const categoriaActiva = ref<string>('todos')
-const carrito = useCarritoStore()
-const { añadirProducto } = carrito
-
-const cargarPlatos = async (cat?: string) => {
-    categoriaActiva.value = cat || 'todos'
-
-    if (cat === 'todos') platos.value = await obtenerPlatos()
-    else platos.value = await obtenerPlatos(cat)
-}
-
-const alerta = reactive({
-    visible: false,
-    titulo: '',
-    mensaje: '',
-    mostrarBoton: false //Esto es para que al añadir salga un carrito que redirija al carrito :)
-})
-
-const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
-    alerta.visible = true;
-
-    if(tipo == 'ANNADIR'){
-        alerta.titulo = '¡AÑADIDO';
-        alerta.mensaje = `${nombreProducto} se ha añadido al carrito.`;
-        alerta.mostrarBoton = true;
-    }
-
-    setTimeout(() => {
-        alerta.visible = false;
-    },2500) // 2 segundos y medio :)
-}
-
-const manejarAnnadir = (plato : Plato) => {
-    añadirProducto(plato);
-    lanzarAlerta('ANNADIR', plato.nombre)
-}
-onMounted(async () => {
-    platos.value = await obtenerPlatos()
-    categorias.value = await obtenerCategorias()
-})
-
-</script>
-
 <template>
     <div class="contenedor-titulos">
         <h1>{{ $t('tienda.titulo') }}</h1>
@@ -114,7 +44,74 @@ onMounted(async () => {
         />
     </div>
 </template>
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { obtenerPlatos } from '@/services/Tienda/PlatosService'
+import { obtenerCategorias } from '@/services/Tienda/CategoriasService'
+import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
+import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
+import { useCarritoStore } from '@/stores/counter'
+import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
+import { reactive } from 'vue'
 
+interface Plato {
+    id: number
+    nombre: string
+    precio: number
+    imagen: string
+    descripcion: string
+    categoria_slug: string
+}
+
+interface Categoria {
+    id: number
+    nombre: string
+    slug: string
+}
+
+const platos = ref<Plato[]>([])
+const categorias = ref<Categoria[]>([])
+const categoriaActiva = ref<string>('todos')
+const carrito = useCarritoStore()
+const { añadirProducto } = carrito
+
+const cargarPlatos = async (cat?: string) => {
+    categoriaActiva.value = cat || 'todos'
+
+    if (cat === 'todos') platos.value = await obtenerPlatos()
+    else platos.value = await obtenerPlatos(cat)
+}
+
+const alerta = reactive({
+    visible: false,
+    titulo: '',
+    mensaje: '',
+    mostrarBoton: false, //Esto es para que al añadir salga un carrito que redirija al carrito :)
+})
+
+const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
+    alerta.visible = true
+
+    if (tipo == 'ANNADIR') {
+        alerta.titulo = '¡AÑADIDO'
+        alerta.mensaje = `${nombreProducto} se ha añadido al carrito.`
+        alerta.mostrarBoton = true
+    }
+
+    setTimeout(() => {
+        alerta.visible = false
+    }, 2500) // 2 segundos y medio :)
+}
+
+const manejarAnnadir = (plato: Plato) => {
+    añadirProducto(plato)
+    lanzarAlerta('ANNADIR', plato.nombre)
+}
+onMounted(async () => {
+    platos.value = await obtenerPlatos()
+    categorias.value = await obtenerCategorias()
+})
+</script>
 <style lang="scss" scoped>
 .contenedor-titulos {
     text-align: center;

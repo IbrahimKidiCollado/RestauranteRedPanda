@@ -17,3 +17,9 @@ html, body {
 h1 {
 	color: $color-texto-blanco;
 }
+
+img[alt="Logo Profesional"] {
+	background: radial-gradient(circle, #ec0808 0%, #d40606 10%);
+	border-radius: 15px;
+	margin-right: 20px;
+}

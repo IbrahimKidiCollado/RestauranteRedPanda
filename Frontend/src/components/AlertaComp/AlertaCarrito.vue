@@ -4,10 +4,10 @@
             <div class="icono-circulo">
                 <span class="tick">✓</span>
             </div>
-        
+
             <h2 class="titulo">{{ titulo }}</h2>
             <p class="mensaje">{{ mensaje }}</p>
-        
+
             <button v-if="mostrarBoton" @click="irACarrito" class="btn-carrito">
                 Ver mi carrito
             </button>
@@ -16,28 +16,25 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
 defineProps({
     visible: Boolean,
     titulo: String,
     mensaje: String,
-    mostrarBoton: Boolean
-});
+    mostrarBoton: Boolean,
+})
 
-const emit = defineEmits(['cerrar']);
-const router = useRouter();
-
+const emit = defineEmits(['cerrar'])
+const router = useRouter()
 
 const irACarrito = () => {
-    emit('cerrar');
-    router.push('/carrito');
+    emit('cerrar')
+    router.push('/carrito')
 }
 </script>
 
 <style lang="scss" scoped>
-
-
 .contenedor-alerta {
     position: fixed; // Para que se quede fijo en la pantalla
     top: 0;
@@ -48,7 +45,7 @@ const irACarrito = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;//Para que aparezca por encima de todo
+    z-index: 9999; //Para que aparezca por encima de todo
     backdrop-filter: blur(4px); //Para que este difuminado el fondo
 
     .alerta {
@@ -57,7 +54,7 @@ const irACarrito = () => {
         padding: 40px;
         border-radius: 20px;
         text-align: center;
-        border: 2px solid $color-rojo-panda; 
+        border: 2px solid $color-rojo-panda;
         box-shadow: 0 0 30px rgba($color-rojo-panda, 0.3);
         max-width: 350px;
         width: 90%;
@@ -65,7 +62,7 @@ const irACarrito = () => {
         .icono-circulo {
             width: 70px;
             height: 70px;
-            background: $color-verde-exito; 
+            background: $color-verde-exito;
             border-radius: 50%; // Para que sea un círculo
             display: flex;
             justify-content: center;
@@ -106,15 +103,13 @@ const irACarrito = () => {
 
             &:hover {
                 transform: scale(1.05);
-                background-color: darken($color-rojo-panda, 10%);
+                background-color: hsl(0, 100%, 40%);
             }
-            
+
             &:active {
                 transform: scale(0.95);
             }
         }
     }
 }
-
-
 </style>
