@@ -30,7 +30,7 @@ export const eliminarPlato = async (id: number, categoria: string): Promise<bool
 
 }
 
-export const annadirPlato = async(nombre: string, descripcion: string, precio: number, cantidad: number, categoria : string ) =>{
+export const annadirPlato = async(nombre: string, descripcion: string, precio: number, cantidad: number, categoria : string, imagen  : string) =>{
 	try {
 		const res = await fetch(`http://localhost:8081/${categoria}/create`,{
 			method: 'POST',
@@ -42,6 +42,7 @@ export const annadirPlato = async(nombre: string, descripcion: string, precio: n
 				descripcion: descripcion,
 				precio: precio,
 				cantidad: cantidad,
+				imagen: "/assets/carta/"+ categoria + "/" + imagen,
 				carta: {id: 1}
 			})
 		})
@@ -58,7 +59,7 @@ export const annadirPlato = async(nombre: string, descripcion: string, precio: n
 	}
 }
 
-export const actualizarPlato = async(nombre: string, id: number, descripcion: string, precio: number, cantidad: number, categoria : string ) =>{
+export const actualizarPlato = async(nombre: string, id: number, descripcion: string, precio: number, cantidad: number, categoria : string, imagen : string ) =>{
 	try {
 		const res = await fetch(`http://localhost:8081/${categoria}/update/${id}`,{
 			method: 'PUT',
@@ -69,7 +70,9 @@ export const actualizarPlato = async(nombre: string, id: number, descripcion: st
 				nombre: nombre,
 				descripcion: descripcion,
 				precio: precio,
-				cantidad: cantidad
+				cantidad: cantidad,
+				imagen: "/assets/carta/"+ categoria + "/" + imagen
+
 			})
 		})
 		

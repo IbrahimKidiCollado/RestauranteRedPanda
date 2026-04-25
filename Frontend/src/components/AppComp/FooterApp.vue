@@ -3,7 +3,7 @@
 		<div class="contenedor-1-footer">
 			<div class="contenedor-1">
 				<div class="contenedor-1-imagenNombre">
-					<img src="/assets/logo.png" alt="Logo Profesional">
+					<img src="/assets/logo.webp" alt="Logo Profesional">
 					<h2>{{ $t("header.titulo") }}</h2>
 				</div>
 				<p>{{ $t("footer.descripcion") }}</p>
@@ -16,15 +16,15 @@
 			<div class="contenedor-3">
 				<span>{{ $t("footer.titulos.contacto") }}</span>
 				<div>
-					<img src="/assets/marcador.png" alt="ubicacion">
+					<img src="/assets/marcador.webp" alt="ubicacion">
 					<p>{{ $t("footer.contacto.calle") }}</p>
 				</div>
 				<div>
-					<img src="/assets/llamada-telefonica.png" alt="telefono">
+					<img src="/assets/llamada-telefonica.webp" alt="telefono">
 					<p>{{ $t("footer.contacto.tlf")}}</p>
 				</div>
 				<div>
-					<img src="/assets/sobre.png" alt="email">
+					<img src="/assets/sobre.webp" alt="email">
 					<p>{{ $t("footer.contacto.email") }}</p>
 				</div>
 			</div>
@@ -33,9 +33,9 @@
 				<p>{{ $t("footer.horario.diario") }}</p>
 				<p>{{ $t("footer.horario.findes") }}</p>
 				<div class="contenedor-social">
-					<button><img src="/assets/facebook.png" alt="logoFacebook"></button>
-					<button><img src="/assets/instagram.png" alt="logoInstagram"></button>
-					<button><img src="/assets/gorjeo.png" alt="logoGorjeo"></button>
+					<button><img src="/assets/facebook.webp" alt="logoFacebook"></button>
+					<button><img src="/assets/instagram.webp" alt="logoInstagram"></button>
+					<button><img src="/assets/gorjeo.webp" alt="logoGorjeo"></button>
 				</div>
 			</div>
 		</div>

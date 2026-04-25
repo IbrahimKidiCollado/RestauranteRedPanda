@@ -160,6 +160,20 @@
 		"propuesta-añadir": "Añade algunos deliciosos platos a tu carrito",
 		"ver-menu": "Ver Menú"
 	},
+	"alertas": {
+        "annadir": {
+            "titulo": "¡AÑADIDO!",
+            "mensaje": "se ha añadido al carrito."
+        },
+        "eliminar": {
+            "titulo": "¡ELIMINADO!",
+            "mensaje": "ha sido eliminado del carrito."
+        },
+        "exito": {
+            "titulo": "¡PAGO EXITOSO!",
+            "mensaje": "Se ha realizado el pago exitosamente."
+        }
+    },
 	"footer": {
 		"descripcion": "Auténtica comida asiática preparada con ingredientes frescos y recetas tradicionales.",
 		"titulos": {

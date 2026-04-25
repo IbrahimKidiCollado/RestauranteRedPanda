@@ -109,4 +109,5 @@ INSERT INTO categoria (nombre, slug) VALUES
 ('tienda.categorias.carne', 'carne'),
 ('tienda.categorias.pescado', 'pescado'),
 ('tienda.categorias.postres', 'postre'),
-('tienda.categorias.bebidas', 'bebida');
+('tienda.categorias.bebidas', 'bebida'),
+('tienda.categorias.entrantes', 'entrante');

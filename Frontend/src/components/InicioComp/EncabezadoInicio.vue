@@ -2,8 +2,8 @@
 	<div class="contenedor-encabezado-inicio">
 		<h1>{{ $t("inicio.descripcion") }}<br><span>{{ $t("inicio.descripcionSpan") }}</span></h1>
 		<p>{{ $t("inicio.descripcionLarga") }}</p>
-		<button>{{ $t("inicio.botones.pedir") }}<img src="/assets/envio-rapido.png" alt="Envio"></button>
-		<p><img src="/assets/reloj-tres.png" alt="tiempo">{{ $t("inicio.tiempoEntrega") }}</p>
+		<button>{{ $t("inicio.botones.pedir") }}<img src="/assets/envio-rapido.webp" alt="Envio"></button>
+		<p><img src="/assets/reloj-tres.webp" alt="tiempo">{{ $t("inicio.tiempoEntrega") }}</p>
 	</div>
 </template>
 
@@ -16,7 +16,7 @@
 .contenedor-encabezado-inicio {
 	width: 100%;
 	height: 95vh;
-	background-image: url("/assets/EncabezadoInicio.png");
+	background-image: url("/assets/EncabezadoInicio.webp");
 	background-color: rgba(0, 0, 0, 0.7);
 	background-repeat: no-repeat;
 	background-size: cover;

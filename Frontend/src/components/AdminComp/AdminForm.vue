@@ -8,19 +8,21 @@
   const descripcion = ref("");
   const precio = ref<number>(0);
   const cantidad = ref(1);
+  const img = ref("");
 
   //mensaje 
   const emit = defineEmits(['actualizar-tabla']);
   
   //Para crear 
   const enviarDatos = async () => {
-    const res = await annadirPlato(nombre.value, descripcion.value, precio.value, cantidad.value, categoria.value);
+    const res = await annadirPlato(nombre.value, descripcion.value, precio.value, cantidad.value, categoria.value, img.value);
 
     if(res) {
       nombre.value = "";
       descripcion.value = "";
       precio.value = 0;
       cantidad.value = 0;
+      img.value = "";
 
       //Avisamos al padre que necesita actualizar la carta
       emit('actualizar-tabla');
@@ -69,6 +71,11 @@
         <div class="campo">
           <label for="cantidad">Cantidad: </label>
           <input v-model.number="cantidad" id="cantidad" type="number" placeholder="2.....">
+        </div>
+
+        <div class="img">
+          <label for="img">Imagen: </label>
+          <input v-model="img" id="img" type="text" placeholder="URL de la imagen.....">
         </div>
 
         <button @click="enviarDatos" type="button" class="boton-enviar">AÑADIR A LA CARTA</button>

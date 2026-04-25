@@ -38,22 +38,22 @@ import TarjetaInicio from '@/components/InicioComp/TarjetaInicio.vue'
 
 const infoVentaja = {
     1: {
-        imagen: '/assets/sombrero-de-cocinero.png',
+        imagen: '/assets/sombrero-de-cocinero.webp',
         titulo: t('inicio.razonesOpciones.titulos.chef'),
         descripcion: t('inicio.razonesOpciones.detalle.chef'),
     },
     2: {
-        imagen: '/assets/fuego.png',
+        imagen: '/assets/fuego.webp',
         titulo: t('inicio.razonesOpciones.titulos.ingredientes'),
         descripcion: t('inicio.razonesOpciones.detalle.ingredientes'),
     },
     3: {
-        imagen: '/assets/despertador.png',
+        imagen: '/assets/despertador.webp',
         titulo: t('inicio.razonesOpciones.titulos.entrega'),
         descripcion: t('inicio.razonesOpciones.detalle.entrega'),
     },
     4: {
-        imagen: '/assets/medalla.png',
+        imagen: '/assets/medalla.webp',
         titulo: t('inicio.razonesOpciones.titulos.calidad'),
         descripcion: t('inicio.razonesOpciones.detalle.calidad'),
     },
@@ -61,22 +61,22 @@ const infoVentaja = {
 
 const infoEspecialidades = {
     1: {
-        imagen: '/assets/nigiri.png',
+        imagen: '/assets/nigiri.webp',
         titulo: t('inicio.especialidadesOpciones.titulos.sushi'),
         descripcion: t('inicio.especialidadesOpciones.detalle.sushi'),
     },
     2: {
-        imagen: '/assets/ramen.png',
+        imagen: '/assets/ramen.webp',
         titulo: t('inicio.especialidadesOpciones.titulos.ramen'),
         descripcion: t('inicio.especialidadesOpciones.detalle.ramen'),
     },
     3: {
-        imagen: '/assets/gyoza.png',
+        imagen: '/assets/gyoza.webp',
         titulo: t('inicio.especialidadesOpciones.titulos.gyozas'),
         descripcion: t('inicio.especialidadesOpciones.detalle.gyozas'),
     },
     4: {
-        imagen: '/assets/cafe-frio.png',
+        imagen: '/assets/cafe-frio.webp',
         titulo: t('inicio.especialidadesOpciones.titulos.bebidas'),
         descripcion: t('inicio.especialidadesOpciones.detalle.bebidas'),
     },

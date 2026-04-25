@@ -1,6 +1,6 @@
 <template>
     <div class="contenedor-info">
-        <img src="/assets/logo.png" alt="Logo Profesional" class="logo" />
+        <img src="/assets/logo.webp" alt="Logo Profesional" class="logo" />
         <h2 class="info-titulo">
             {{
                 !logueado

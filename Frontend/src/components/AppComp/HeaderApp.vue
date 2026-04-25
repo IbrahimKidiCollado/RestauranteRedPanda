@@ -2,7 +2,7 @@
 	<header>
 		<div class="contenedor-1-header">
 			<div class="contenedor-imagen-nombre" @click="navegar('/')" style="cursor: pointer;">
-				<img fetchpriority="high" src="/assets/logo.png" alt="Logo Profesional">
+				<img fetchpriority="high" src="/assets/logo.webp" alt="Logo Profesional">
 				<div class="contenedor-titulo">
 					<h1>{{ $t("header.titulo") }}</h1>
 					<h2>{{ $t("header.descripcion") }}</h2>
@@ -25,9 +25,9 @@
 		</nav>
 		<div class="contenedor-carrito-perfil">
 			<button class="admin" @click="navegar('/admin')"><span>AdmMode</span></button>
-			<button @click="navegar('/carrito')" class="carrito"><img src="/assets/carrito.png" alt="icono-carrito"></button>
+			<button @click="navegar('/carrito')" class="carrito"><img src="/assets/carrito.webp" alt="icono-carrito"></button>
 			<button class="perfil" @click="navegar('/login')">
-				<img src="/assets/user-icon.png" alt="icono-user">{{ $t("header.botones.iniciar") }}
+				<img src="/assets/user-icon.webp" alt="icono-user">{{ $t("header.botones.iniciar") }}
 			</button>
 			<button
 			class="menu-hamburguesa"
@@ -153,7 +153,9 @@ header {
 	
 	.contenedor-1-header {
 		display: flex;
-		justify-content: space-around;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 40px;
 		
 		.contenedor-imagen-nombre {
 			display: flex;
@@ -171,6 +173,7 @@ header {
 				@include mobile-down {
 					width: 60px;
 					height: auto;
+					padding: 0 20px;
 				}
 			}
 			

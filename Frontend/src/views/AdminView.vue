@@ -20,6 +20,7 @@ import AdminCarta from "@/components/AdminComp/AdminCarta.vue";
 import { obtenerPlatos } from '@/services/Tienda/PlatosService';
 import { reactive } from 'vue';
 import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
+import { useI18n } from 'vue-i18n'
 
 const alerta = reactive({
     visible: false,
@@ -39,15 +40,16 @@ const manejarAcciones = (accion: string) => {
 
 }
 
+const { t } = useI18n()
 const lanzarAlerta =(accion: string) =>{
     if(accion === 'CREADO'){ 
         alerta.visible = true;
-        alerta.titulo = 'PLATO CREADO';
-        alerta.mensaje = 'El plato ha sido creado correctamente.';
+        alerta.titulo = t('alertas.creado.titulo');
+        alerta.mensaje = t('alertas.creado.mensaje');
     } else if(accion === 'ELIMINADO') {
         alerta.visible = true;
-        alerta.titulo = 'PLATO ELIMINADO';
-        alerta.mensaje = 'El plato ha sido eliminado correctamente.';
+        alerta.titulo = t('alertas.eliminado.titulo');
+        alerta.mensaje = t('alertas.eliminado.mensaje');
     }
 
     setTimeout(() => {

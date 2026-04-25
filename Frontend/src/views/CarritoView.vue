@@ -7,7 +7,7 @@
         <p>{{ cantidadProductosCarrito }} {{ $t('carrito.productos-cantidad') }}</p>
     </div>
     <div class="info-container" v-if="!hayProductos">
-        <div class="imagen"><img src="/assets/bolsa-de-la-compra.png" alt="Pedido" /></div>
+        <div class="imagen"><img src="/assets/bolsa-de-la-compra.webp" alt="Pedido" /></div>
         <h1>{{ $t('carrito.carrito-vacio') }}</h1>
         <p>{{ $t('carrito.propuesta-añadir') }}</p>
         <button @click="navegar('/tienda')">{{ $t('carrito.ver-menu') }}</button>
@@ -52,6 +52,7 @@ import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
 import { reactive } from 'vue'
 import ResumenPedido from '@/components/CarritoComp/ResumenPedido.vue'
 import { vaciarCarrito } from '@/services/Tienda/CarritoService'
+import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
 const carrito = useCarritoStore()
@@ -71,22 +72,24 @@ const alerta = reactive({
     mostrarBoton: false, //Esto es para que al añadir salga un carrito que redirija al carrito :)
 })
 
+const { t } = useI18n()
+
 const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
     alerta.visible = true
 
     if (tipo == 'ELIMINAR') {
-        alerta.titulo = '¡ELIMINADO'
-        alerta.mensaje = `${nombreProducto} ha sido eliminado del carrito`
+        alerta.titulo = t('alertas.eliminar.titulo')
+        alerta.mensaje = `${nombreProducto} ${t('alertas.eliminar.mensaje')}`
         alerta.mostrarBoton = false
     } else if (tipo == 'EXITO') {
-        alerta.titulo = '¡PAGO EXITOSO!'
-        alerta.mensaje = 'Se ha realizado el pago exitosamente'
+        alerta.titulo = t('alertas.exito.titulo')
+        alerta.mensaje = t('alertas.exito.mensaje')
         alerta.mostrarBoton = false
     }
 
     setTimeout(() => {
         alerta.visible = false
-        router.push('/tienda')
+        if (tipo == 'EXITO') navegar('/tienda')
     }, 2500) // 2 segundos y medio :)
 }
 

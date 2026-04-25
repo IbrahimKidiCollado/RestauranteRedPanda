@@ -65,10 +65,9 @@
     </div>
 </template>
 <style lang="scss" scoped>
-.gestion-carta{
-    background-color: #050505;
-}
+
 .gestion-carta {
+    background-color: #050505;
     padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -90,7 +89,7 @@
 .tabla-carta {
     width: 100%;
     border-collapse: collapse; 
-    border: $color-rojo-panda 1px solid;
+    border: $color-rojo-oscuro 1px solid;
     border-radius: 20%;
 
     
