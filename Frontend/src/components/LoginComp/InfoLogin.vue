@@ -30,7 +30,7 @@
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
-const props = defineProps<{
+defineProps<{
     logueado: boolean
 }>()
 
@@ -48,8 +48,6 @@ const razones = {
         descrip: t('login.info.ofertas.descrip'),
     },
 }
-
-console.log(props.logueado)
 </script>
 
 <style scoped lang="scss">
@@ -57,10 +55,13 @@ console.log(props.logueado)
     background: linear-gradient(135deg, #2b1113 0%, #0f0808 100%);
     border-radius: 16px;
     padding: 40px;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: $color-texto-blanco;
     max-width: 480px;
     border: 1px solid $color-rojo-oscuro-claro;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     .logo {
         width: 100px;
@@ -83,7 +84,7 @@ console.log(props.logueado)
 
     .contenedor-razones {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 16px;
         margin-bottom: 28px;
 

@@ -1,33 +1,31 @@
 <template>
-  <div class="contenedor-admin">
-    <div class="panel-administracion">
-      <h2 class="titulo-panel">GESTIÓN DE LA CARTA</h2>
-      
-      <div class="opciones-admin">
-        <div class="opcion-admin modificar-carta" @click="hacerScroll('.gestion-carta')">
-           MODIFICAR CARTA
-        </div>
-        
-        <div class="opcion-admin annadir" @click="hacerScroll('.formulario-adicion')">
-           AÑADIR A LA CARTA
-        </div>
-      </div>
+    <div class="contenedor-admin">
+        <div class="panel-administracion">
+            <h2 class="titulo-panel">GESTIÓN DE LA CARTA</h2>
 
+            <div class="opciones-admin">
+                <div class="opcion-admin modificar-carta" @click="hacerScroll('.gestion-carta')">
+                    MODIFICAR CARTA
+                </div>
+
+                <div class="opcion-admin annadir" @click="hacerScroll('.formulario-adicion')">
+                    AÑADIR A LA CARTA
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 <script setup lang="ts">
-
 function hacerScroll(boton: string) {
-  const elemento = document.querySelector(boton);
-  if (elemento) {
-    elemento.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+    const elemento = document.querySelector(boton)
+    if (elemento) {
+        elemento.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-    .contenedor-admin {
+.contenedor-admin {
     background-color: #000000;
     min-height: 50vh;
     display: flex;
@@ -41,7 +39,7 @@ function hacerScroll(boton: string) {
         text-align: center;
 
         .titulo-panel {
-            color: $color-rojo-panda; 
+            color: $color-rojo-panda;
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 40px;
@@ -63,7 +61,7 @@ function hacerScroll(boton: string) {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: $color-rojo-panda; 
+                color: $color-rojo-panda;
                 font-size: 18px;
                 font-weight: 500;
                 cursor: pointer;

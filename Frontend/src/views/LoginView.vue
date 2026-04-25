@@ -1,9 +1,11 @@
 <template>
-    <div>
-        <InfoLogin :logueado="logueado" />
-    </div>
-    <div>
-        <FormLogin :logueado="logueado" />
+    <div class="container">
+        <div class="contatiner-1">
+            <InfoLogin :logueado="logueado" />
+        </div>
+        <div>
+            <FormLogin :logueado="logueado" />
+        </div>
     </div>
 </template>
 
@@ -14,4 +16,13 @@ import FormLogin from '@/components/LoginComp/FormLogin.vue'
 const logueado = false
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+    display: flex;
+    align-items: stretch;
+    gap: 30px;
+    margin: 40px 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+</style>

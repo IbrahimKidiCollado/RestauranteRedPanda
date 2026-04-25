@@ -14,7 +14,11 @@
 		"email": "Email",
 		"pwd": "Contraseña",
 		"placeHolderEmail": "tu@email.com",
+		"placeHolderName": "Tu nombre",
 		"placeHolderPwd": "......",
+		"errorNombre": "El nombre es requerido",
+		"errorEmail": "El email es requerido",
+		"errorPwd": "La contraseña es requerida",
 		"info": {
 			"infoInicio": {
 				"bienvenido": "Bienvenido de nuevo",
@@ -39,12 +43,14 @@
 		},
 		"formIniciar": {
 			"inicio": "Iniciar Sesión",
-			"noInicio": "¿No tienes cuenta? Regístrate"
+			"noInicio": "¿No tienes cuenta?",
+			"regist": "Regístrate"
 		},
 		"formRegistrar": {
 			"nombre": "Nombre completo",
 			"inicio": "Crear Cuenta",
 			"noInicio": "¿Ya tienes cuenta?",
+			"regist": "Inicia Sesión",
 			"terminos": "Al registrarte, aceptas nuestros Términos y Condiciones y Política de Privacidad"
 		}
 	}
