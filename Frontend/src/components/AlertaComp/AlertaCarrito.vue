@@ -3,7 +3,7 @@
         <div v-if="visible" class="contenedor-alerta">
             <div class="alerta">
                 <div class="icono-circulo">
-                    {{ eleccionIcono }}
+                    <div v-html="eleccionIcono"></div>
                 </div>
 
                 <div class="contenido">
@@ -64,10 +64,35 @@ const irACarrito = () => {
         opacity: 0;
         transform: translateY(-50px);
     }
-
-    // Llamada al mixin
     .alerta {
         @include alerta-base;
+    }
+
+    .icono-circulo {
+        width: 24px;
+        height: 24px;
+        background-color: #ffffff;
+        color: #1a1a1a;
+        border-radius: 50%;
+        flex-shrink: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+
+            :deep(.material-symbols-outlined) {
+                font-size: 16px;
+                font-weight: 700; /* Para que el icono se vea un poco más grueso */
+                line-height: 1;
+            }
+        }
     }
 }
 </style>
