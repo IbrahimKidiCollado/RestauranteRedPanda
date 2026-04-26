@@ -39,8 +39,8 @@
         <Paginacion
             :offset="offset"
             :limite="noHayMasPlatos"
-            @cargarMasPlatos="cargarPlatos(categoriaActiva, offset + 10)"
-            @cargarMenosPlatos="cargarPlatos(categoriaActiva, offset - 10)"
+            @cargarMasPlatos="cargarPlatos(categoriaActiva, offset + 8)"
+            @cargarMenosPlatos="cargarPlatos(categoriaActiva, offset - 8)"
         />
     </div>
     <div>
@@ -127,7 +127,7 @@ const cargarPlatos = async (cat?: string, nuevoOffset?: number) => {
 
     if (cat === 'todos') {
         const carta = await obtenerPlatos(undefined, offset.value)
-        if (carta.length < 10) {
+        if (carta.length < 8) {
             noHayMasPlatos.value = true
         } else {
             noHayMasPlatos.value = false
@@ -135,7 +135,7 @@ const cargarPlatos = async (cat?: string, nuevoOffset?: number) => {
         platos.value = carta
     } else {
         const carta = await obtenerPlatos(cat, offset.value)
-        if (carta.length < 10) {
+        if (carta.length < 8) {
             noHayMasPlatos.value = true
         } else {
             noHayMasPlatos.value = false
