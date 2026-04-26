@@ -128,7 +128,8 @@
 			"bebidas": "Bebidas",
 			"carne": "Carne",
 			"pescado": "Pescado",
-			"postres": "Postres"
+			"postres": "Postres",
+			"entrantes": "Entrantes"
 		},
 		"platos": {
 			"sushi_deluxe": {

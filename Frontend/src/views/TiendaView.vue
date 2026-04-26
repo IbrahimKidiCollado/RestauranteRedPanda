@@ -1,3 +1,74 @@
+<script setup lang="ts">
+import { onMounted, ref, reactive } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { obtenerPlatos } from '@/services/Tienda/PlatosService'
+import { obtenerCategorias } from '@/services/Tienda/CategoriasService'
+import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
+import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
+import { useCarritoStore } from '@/stores/counter'
+import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
+
+interface Plato {
+    id: number
+    nombre: string
+    precio: number
+    imagen: string
+    descripcion: string
+    categoria_slug: string
+}
+
+interface Categoria {
+    id: number
+    nombre: string
+    slug: string
+}
+
+const platos = ref<Plato[]>([])
+const categorias = ref<Categoria[]>([])
+const categoriaActiva = ref<string>('todos')
+const carrito = useCarritoStore()
+const { añadirProducto } = carrito
+const { t } = useI18n()
+
+const cargarPlatos = async (cat?: string) => {
+    categoriaActiva.value = cat || 'todos'
+    if (cat === 'todos') platos.value = await obtenerPlatos()
+    else platos.value = await obtenerPlatos(cat)
+}
+
+const alerta = reactive({
+    visible: false,
+    titulo: '',
+    mensaje: '',
+    mostrarBoton: false,
+})
+
+const lanzarAlerta = (tipo: string, nombreProducto: string = '') => {
+    alerta.visible = true
+
+    if (tipo === 'ANNADIR') {
+        // Usando las traducciones del JSON
+        alerta.titulo = t('alertas.annadir.titulo')
+        alerta.mensaje = `${nombreProducto} ${t('alertas.annadir.mensaje')}`
+        alerta.mostrarBoton = true
+    }
+
+    setTimeout(() => {
+        alerta.visible = false
+    }, 2500)
+}
+
+const manejarAnnadir = (plato: Plato) => {
+    añadirProducto(plato)
+    lanzarAlerta('ANNADIR', plato.nombre)
+}
+
+onMounted(async () => {
+    platos.value = await obtenerPlatos()
+    categorias.value = await obtenerCategorias()
+})
+</script>
+
 <template>
     <div class="contenedor-titulos">
         <h1>{{ $t('tienda.titulo') }}</h1>
@@ -27,12 +98,20 @@
         <TarjetaPlato
             v-for="plato in platos"
             @añadir="manejarAnnadir(plato)"
-            :key="plato.id"
+            :key="`${plato.categoria_slug}-${plato.id}`"
             :nombre="$t(plato.nombre)"
             :descripcion="$t(plato.descripcion)"
             :precio="plato.precio"
             :imagen="plato.imagen"
             :categoria_slug="plato.categoria_slug"
+        />
+    </div>
+    <div>
+        <Paginacion
+            :offset="offset"
+            :limite="noHayMasPlatos"
+            @cargarMasPlatos="cargarPlatos(categoriaActiva, offset + 10)"
+            @cargarMenosPlatos="cargarPlatos(categoriaActiva, offset - 10)"
         />
     </div>
     <div>

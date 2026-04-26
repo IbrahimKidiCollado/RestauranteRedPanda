@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.redpanda.restaurante.ElementoCarta;
@@ -24,7 +25,7 @@ public class CartaController {
     }
 
     @GetMapping("/carta")
-    public List<ElementoCarta> obteneCarta(){
+    public List<ElementoCarta> obteneCarta(@RequestParam(defaultValue = "0") int offset) {
         Carta carta = cartaRepository.findAll().get(0);
         List<ElementoCarta> cartaPlana = new ArrayList<>();
 
@@ -56,7 +57,18 @@ public class CartaController {
             cartaPlana.add(new ElementoCarta(pescado.getId(), pescado.getNombre(), pescado.getDescripcion(), pescado.getPrecio(), pescado.getImagen(), "pescado", 1, 1))
         );
 
-        return cartaPlana;
+        //Cada carga es de 10 en 10
+        int numPlatos = 10;
+        int totalPlatos = cartaPlana.size();
+
+        //Para saber si hemos llegado al final y no pasarnos de numero
+        if (offset >= totalPlatos) {
+            return new ArrayList<>();  
+        }
+
+        int fin = Math.min(offset + numPlatos, totalPlatos);
+
+        return cartaPlana.subList(offset, fin);
     }
 
     
