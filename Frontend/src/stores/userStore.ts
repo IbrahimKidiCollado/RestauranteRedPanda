@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', () => {
     const nombreUsuario = ref('');
     const emailUsuario = ref('');
     const passwordUsuario = ref('');
+    const sesionActiva = ref(false);
 
     async function login(nombre: string, email: string, pwd: string) {
         logueado.value = true;
@@ -20,16 +21,13 @@ export const useUserStore = defineStore('user', () => {
         const resultado = await loguearse( email, pwd);
         if (resultado) {
             logueado.value = true;
+            sesionActiva.value = true;
             if (resultado.nombre === 'admin') {
                 esAdmin.value = true;
-                console.log('Usuario admin logueado:', {
-                    nombre: nombreUsuario.value,
-                    email: emailUsuario.value,
-                    password: passwordUsuario.value
-                });
+                console.log(resultado);
             }
             console.log('Usuario logueado:', {
-                nombre: nombreUsuario.value,
+                nombre: resultado.nombre,
                 email: emailUsuario.value,
                 password: passwordUsuario.value
             });
@@ -53,6 +51,7 @@ export const useUserStore = defineStore('user', () => {
                 email: emailUsuario.value,
                 password: passwordUsuario.value
             });
+            sesionActiva.value = true;
             return true;
         }
         return false;
@@ -62,6 +61,9 @@ export const useUserStore = defineStore('user', () => {
         logueado.value = false;
         emailUsuario.value = '';
         nombreUsuario.value = '';
+        passwordUsuario.value = '';
+        esAdmin.value = false;
+        sesionActiva.value = false;
         return true;
     }
 
@@ -73,7 +75,8 @@ export const useUserStore = defineStore('user', () => {
         registrarse,
         login,
         logout,
-        esAdmin
+        esAdmin,
+        sesionActiva
     }
 
 });

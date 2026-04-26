@@ -34,8 +34,14 @@
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { loadScript } from '@paypal/paypal-js'
+import { useUserStore } from '@/stores/userStore';
+import {useRouter} from 'vue-router';
+
+const userStore = useUserStore();
+const sesionActiva = computed(() => userStore.sesionActiva);
+const router = useRouter();
 
 const props = defineProps<{
     subtotal: number
@@ -62,6 +68,13 @@ onMounted(async () => {
             //Aquí definimos las acciones a realizar en cada etapa del proceso de pago
             await paypal
                 .Buttons({
+                    onClick: (data, actions) => {
+                        if (!userStore.sesionActiva) {
+                            router.push('/login')
+                            return actions.reject()
+                        }
+                        return actions.resolve()
+                    },
                     //Esta función se ejecuta cuando el usuario hace clic en el botón de PayPal para iniciar el proceso de pago
                     createOrder: (data, actions) => {
                         //Esto es lo que se envía a PayPal, en este caso se le indica el total a pagar que se muestra en el resumen del pedido
