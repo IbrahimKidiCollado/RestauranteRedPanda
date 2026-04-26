@@ -1,22 +1,31 @@
 <template>
     <div class="contenedor-resumen">
         <div class="resumen">
+            <h2>{{ $t('carrito.resumen') }}</h2>
             <div>
-                <p>SUBTOTAL</p>
+                <p>{{ $t('carrito.subtotal') }}</p>
                 <p>{{ subtotal.toFixed(2) }}€</p>
             </div>
             <div>
-                <p>ENVIO:</p>
+                <p>{{ $t('carrito.envio') }}</p>
                 <p :class="{ 'envio-gratuito': envio === 0 }">
-                    {{ envio === 0 ? 'GRATIS' : envio.toFixed(2) + '€' }}
+                    {{ envio === 0 ? $t('carrito.envioGratis') : envio.toFixed(2) + '€' }}
                 </p>
             </div>
             <div>
-                <p>TOTAL A PAGAR:</p>
+                <p>{{ $t('carrito.total') }}</p>
                 <p>{{ total.toFixed(2) }}€</p>
             </div>
             <div class="texto-aviso" v-if="envioRestante > 0">
-                <p>¡¡SOLO TE QUEDAN {{ envioRestante }}€ PARA EL ENVIO GRATIS!!</p>
+                <p>
+                    {{
+                        $t('carrito.envioGratisAlerta1') +
+                        ' ' +
+                        envioRestante +
+                        '€ ' +
+                        $t('carrito.envioGratisAlerta2')
+                    }}
+                </p>
             </div>
         </div>
         <div class="contenedor-boton-pago">
@@ -37,8 +46,6 @@ const props = defineProps<{
 
 const emit = defineEmits(['exito'])
 
-const idCorreo = 'correoPruebaPago@prueba.pago.com'
-const pwd = 'contraPruebaPago'
 const clienteID = 'Ae7XmE263sT54nNN7yXEvSmXkK0zmMFhh8wMiB0b8d1WZRXlIIIm27QdmaazmhcXGVVuJnggDTYd0DsB'
 
 onMounted(async () => {
@@ -74,7 +81,6 @@ onMounted(async () => {
                     //Si el pago se ha realizado con éxito, se ejecuta
                     onApprove: async (data, actions) => {
                         if (actions.order) {
-                            const detalles = await actions.order.capture()
                             emit('exito') // Lanzamos un mensaje para avisar que se ha dado con exito
                         }
                     },
@@ -93,49 +99,109 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .contenedor-resumen {
-    display: flex;
-    flex-direction: column;
-    background-color: $color-fondo-tarjeta;
-    border: 1px solid $color-rojo-oscuro;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 50px;
-    gap: 5px;
-    width: 80%;
-
-    p {
-        color: $color-texto-blanco;
-    }
+    background-color: #0a0505;
+    border: 1px solid rgba(255, 0, 0, 0.15);
+    border-radius: 16px;
+    padding: 24px;
+    color: #ffffff;
+    font-family:
+        system-ui,
+        -apple-system,
+        sans-serif;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 10px 30px rgba(200, 0, 0, 0.05);
 
     .resumen {
-        div {
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            order: 1;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 0 24px 0;
+            letter-spacing: 0.5px;
+        }
+
+        > div:nth-of-type(1),
+        > div:nth-of-type(2) {
+            order: 2;
             display: flex;
-            flex-direction: row;
             justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: #cccccc;
+
+            p {
+                margin: 0;
+            }
         }
-        .envio-gratuito {
-            color: $color-verde-exito;
+
+        > div:nth-of-type(2) {
+            order: 3;
         }
+
         .texto-aviso {
-            text-align: center;
-            color: $color-rojo-panda;
-            font-weight: 500;
-            margin-bottom: 15px;
+            order: 4;
+            background-color: #1a1600;
+            border: 1px solid #4d3d00;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin: 8px 0 0 0;
+
+            p {
+                margin: 0;
+                color: #ffcc00;
+                font-size: 14px;
+                font-weight: 500;
+            }
+        }
+
+        > div:nth-of-type(3) {
+            order: 5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 0, 0, 0.2);
+
+            p {
+                margin: 0;
+                font-size: 22px;
+                font-weight: 800;
+
+                &:first-child {
+                    color: #ffffff;
+                }
+
+                &:last-child {
+                    color: #ff1a1a;
+                }
+            }
         }
     }
+
     .contenedor-boton-pago {
-        display: flex;
-        margin: 0;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        .btn-pago {
-            @include boton-rojo();
-            background-color: $color-rojo-panda;
-            border-radius: 10px;
-            padding: 7px;
+        margin-top: 24px;
+
+        button {
+            background-color: #cc0000;
+            color: #ffffff;
+            width: 100%;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
-            width: 30%;
+            box-shadow: 0 4px 15px rgba(204, 0, 0, 0.3);
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background-color: #ff0000;
+            }
         }
     }
 }

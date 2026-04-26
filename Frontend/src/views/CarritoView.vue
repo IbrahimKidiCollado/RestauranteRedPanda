@@ -32,14 +32,14 @@
                 @exito="manejarAccion('EXITO')"
             />
         </div>
-        <div>
-            <AlertaCarrito
-                :visible="alerta.visible"
-                :titulo="alerta.titulo"
-                :mensaje="alerta.mensaje"
-                :mostrar-boton="alerta.mostrarBoton"
-            />
-        </div>
+    </div>
+    <div>
+        <AlertaCarrito
+            :visible="alerta.visible"
+            :titulo="alerta.titulo"
+            :mensaje="alerta.mensaje"
+            :mostrar-boton="alerta.mostrarBoton"
+        />
     </div>
 </template>
 <script setup lang="ts">
@@ -119,11 +119,19 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
 <style lang="scss" scoped>
 .carrito-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: inline;
+    gap: 30px;
     margin: 30px 50px 0px 50px;
 
     .productos-container {
         width: 80%;
+    }
+
+    .resumen-container {
+        width: 20%;
+        position: sticky;
+        top: 120px;
+        align-self: flex-start;
     }
 }
 
