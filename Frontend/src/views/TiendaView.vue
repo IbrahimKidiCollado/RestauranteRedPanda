@@ -1,74 +1,3 @@
-<script setup lang="ts">
-import { onMounted, ref, reactive } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { obtenerPlatos } from '@/services/Tienda/PlatosService'
-import { obtenerCategorias } from '@/services/Tienda/CategoriasService'
-import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
-import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
-import { useCarritoStore } from '@/stores/counter'
-import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
-
-interface Plato {
-    id: number
-    nombre: string
-    precio: number
-    imagen: string
-    descripcion: string
-    categoria_slug: string
-}
-
-interface Categoria {
-    id: number
-    nombre: string
-    slug: string
-}
-
-const platos = ref<Plato[]>([])
-const categorias = ref<Categoria[]>([])
-const categoriaActiva = ref<string>('todos')
-const carrito = useCarritoStore()
-const { añadirProducto } = carrito
-const { t } = useI18n()
-
-const cargarPlatos = async (cat?: string) => {
-    categoriaActiva.value = cat || 'todos'
-    if (cat === 'todos') platos.value = await obtenerPlatos()
-    else platos.value = await obtenerPlatos(cat)
-}
-
-const alerta = reactive({
-    visible: false,
-    titulo: '',
-    mensaje: '',
-    mostrarBoton: false 
-})
-
-const lanzarAlerta = (tipo: string, nombreProducto: string = '') => {
-    alerta.visible = true;
-
-    if(tipo === 'ANNADIR'){
-        // Usando las traducciones del JSON
-        alerta.titulo = t('alertas.annadir.titulo');
-        alerta.mensaje = `${nombreProducto} ${t('alertas.annadir.mensaje')}`;
-        alerta.mostrarBoton = true;
-    }
-
-    setTimeout(() => {
-        alerta.visible = false;
-    }, 2500)
-}
-
-const manejarAnnadir = (plato: Plato) => {
-    añadirProducto(plato);
-    lanzarAlerta('ANNADIR', plato.nombre)
-}
-
-onMounted(async () => {
-    platos.value = await obtenerPlatos()
-    categorias.value = await obtenerCategorias()
-})
-</script>
-
 <template>
     <div class="contenedor-titulos">
         <h1>{{ $t('tienda.titulo') }}</h1>
@@ -112,9 +41,81 @@ onMounted(async () => {
             :titulo="alerta.titulo"
             :mensaje="alerta.mensaje"
             :mostrar-boton="alerta.mostrarBoton"
+            :tipo="alerta.tipo"
         />
     </div>
 </template>
+
+<script setup lang="ts">
+import { onMounted, ref, reactive } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { obtenerPlatos } from '@/services/Tienda/PlatosService'
+import { obtenerCategorias } from '@/services/Tienda/CategoriasService'
+import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
+import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
+import { useCarritoStore } from '@/stores/counter'
+import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
+
+interface Plato {
+    id: number
+    nombre: string
+    precio: number
+    imagen: string
+    descripcion: string
+    categoria_slug: string
+}
+
+interface Categoria {
+    id: number
+    nombre: string
+    slug: string
+}
+
+const platos = ref<Plato[]>([])
+const categorias = ref<Categoria[]>([])
+const categoriaActiva = ref<string>('todos')
+const carrito = useCarritoStore()
+const { añadirProducto } = carrito
+const { t } = useI18n()
+
+const cargarPlatos = async (cat?: string) => {
+    categoriaActiva.value = cat || 'todos'
+    if (cat === 'todos') platos.value = await obtenerPlatos()
+    else platos.value = await obtenerPlatos(cat)
+}
+
+const alerta = reactive({
+    visible: false,
+    titulo: '',
+    mensaje: '',
+    mostrarBoton: false,
+    tipo: 1,
+})
+
+const lanzarAlerta = (nombreProducto: String, tipo: Number) => {
+    alerta.visible = true
+
+    tipo === 1 ? (alerta.tipo = 1) : 0
+
+    alerta.titulo = t('alertas.annadir.titulo')
+    alerta.mensaje = `${nombreProducto} ${t('alertas.annadir.mensaje')}`
+    alerta.mostrarBoton = true
+
+    setTimeout(() => {
+        alerta.visible = false
+    }, 5000)
+}
+
+const manejarAnnadir = (plato: Plato) => {
+    añadirProducto(plato)
+    lanzarAlerta(plato.nombre, 1)
+}
+
+onMounted(async () => {
+    platos.value = await obtenerPlatos()
+    categorias.value = await obtenerCategorias()
+})
+</script>
 
 <style lang="scss" scoped>
 .contenedor-titulos {
@@ -150,13 +151,21 @@ onMounted(async () => {
         height: 100%;
         color: $color-texto-blanco;
         padding: 18px 18px 18px 0px;
-        &:focus { outline: none; }
+        &:focus {
+            outline: none;
+        }
     }
-    img { padding-left: 18px; }
-    &:focus-within { border: 1px solid $color-rojo-panda; }
+    img {
+        padding-left: 18px;
+    }
+    &:focus-within {
+        border: 1px solid $color-rojo-panda;
+    }
 }
 
-p { color: $color-texto-blanco; }
+p {
+    color: $color-texto-blanco;
+}
 
 .contenedor-categorias {
     display: flex;
@@ -166,7 +175,10 @@ p { color: $color-texto-blanco; }
     gap: 8px;
     font-size: 13px;
     font-weight: 600;
-    .nombre-categoria { display: flex; gap: 10px; }
+    .nombre-categoria {
+        display: flex;
+        gap: 10px;
+    }
     .categorias {
         max-width: 1600px;
         display: flex;
