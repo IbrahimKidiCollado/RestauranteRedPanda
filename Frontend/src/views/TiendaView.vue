@@ -7,6 +7,7 @@ import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
 import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
 import { useCarritoStore } from '@/stores/counter'
 import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
+import Paginacion from '@/components/TiendaComp/Paginacion.vue'
 
 interface Plato {
     id: number
@@ -30,10 +31,43 @@ const carrito = useCarritoStore()
 const { añadirProducto } = carrito
 const { t } = useI18n()
 
-const cargarPlatos = async (cat?: string) => {
-    categoriaActiva.value = cat || 'todos'
-    if (cat === 'todos') platos.value = await obtenerPlatos()
-    else platos.value = await obtenerPlatos(cat)
+//Para la paginacion
+const offset = ref(0) // Este es el inicio
+//Para controlar que hemos llegado al final de la lista
+const noHayMasPlatos = ref(false)
+
+const cargarPlatos = async (cat?: string, nuevoOffset?: number) => {
+
+    //Si cambiamos de categoria, reseteamos el offset 
+    if (cat && cat !== categoriaActiva.value) {
+        offset.value = 0
+        noHayMasPlatos.value = false
+    }else if (nuevoOffset !== undefined) {
+        offset.value = nuevoOffset
+    }
+     
+
+    categoriaActiva.value = cat || 'todos';
+
+
+    if (cat === 'todos') {
+        const carta = await obtenerPlatos(undefined, offset.value)
+        if (carta.length < 10) {
+            noHayMasPlatos.value = true
+        } else {
+            noHayMasPlatos.value = false
+        }
+        platos.value = carta
+    }
+    else{ 
+        const carta = await obtenerPlatos(cat, offset.value)
+        if (carta.length < 10) {
+            noHayMasPlatos.value = true
+        } else {
+            noHayMasPlatos.value = false
+        }
+        platos.value = carta
+    }
 }
 
 const alerta = reactive({
@@ -67,6 +101,9 @@ onMounted(async () => {
     platos.value = await obtenerPlatos()
     categorias.value = await obtenerCategorias()
 })
+
+
+
 </script>
 
 <template>
@@ -98,12 +135,20 @@ onMounted(async () => {
         <TarjetaPlato
             v-for="plato in platos"
             @añadir="manejarAnnadir(plato)"
-            :key="plato.id"
+            :key="`${plato.categoria_slug}-${plato.id}`"
             :nombre="$t(plato.nombre)"
             :descripcion="$t(plato.descripcion)"
             :precio="plato.precio"
             :imagen="plato.imagen"
             :categoria_slug="plato.categoria_slug"
+        />
+    </div>
+    <div>
+        <Paginacion  
+            :offset="offset"
+            :limite="noHayMasPlatos"
+            @cargarMasPlatos="cargarPlatos(categoriaActiva, offset + 10)"
+            @cargarMenosPlatos="cargarPlatos(categoriaActiva, offset - 10)"
         />
     </div>
     <div>

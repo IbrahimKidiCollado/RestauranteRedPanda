@@ -1,9 +1,10 @@
 //import axios from 'axios';
 
-export const obtenerPlatos = async (categoria?: string) => {
+export const obtenerPlatos = async (categoria?: string, offset?: number) => {
+	console.log("Obteniendo platos de la categoria: ", categoria, " con offset: ", offset);
 	const ruta = categoria 
-        ? `http://localhost:8081/${categoria}` 
-        : `http://localhost:8081/carta`;
+        ? `http://localhost:8081/${categoria}?offset=${offset || 0}` 
+        : `http://localhost:8081/carta?offset=${offset || 0}`;
 	const res = await fetch(ruta);
 	return await res.json();
 }
