@@ -63,6 +63,7 @@ import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
 import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
 import { useCarritoStore } from '@/stores/counter'
 import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
+import Paginacion from '@/components/TiendaComp/Paginacion.vue'
 
 interface Plato {
     id: number
@@ -85,6 +86,28 @@ const categoriaActiva = ref<string>('todos')
 const carrito = useCarritoStore()
 const { añadirProducto } = carrito
 const { t } = useI18n()
+
+const alerta = reactive({
+    visible: false,
+    titulo: '',
+    mensaje: '',
+    mostrarBoton: false,
+    tipo: 1,
+})
+
+const lanzarAlerta = (nombreProducto: String, tipo: Number) => {
+    alerta.visible = true
+
+    tipo === 1 ? (alerta.tipo = 1) : 0
+
+    alerta.titulo = t('alertas.annadir.titulo')
+    alerta.mensaje = `${nombreProducto} ${t('alertas.annadir.mensaje')}`
+    alerta.mostrarBoton = true
+
+    setTimeout(() => {
+        alerta.visible = false
+    }, 5000)
+}
 
 //Para la paginacion
 const offset = ref(0) // Este es el inicio
@@ -119,28 +142,6 @@ const cargarPlatos = async (cat?: string, nuevoOffset?: number) => {
         }
         platos.value = carta
     }
-}
-
-const alerta = reactive({
-    visible: false,
-    titulo: '',
-    mensaje: '',
-    mostrarBoton: false,
-    tipo: 1,
-})
-
-const lanzarAlerta = (nombreProducto: String, tipo: Number) => {
-    alerta.visible = true
-
-    tipo === 1 ? (alerta.tipo = 1) : 0
-
-    alerta.titulo = t('alertas.annadir.titulo')
-    alerta.mensaje = `${nombreProducto} ${t('alertas.annadir.mensaje')}`
-    alerta.mostrarBoton = true
-
-    setTimeout(() => {
-        alerta.visible = false
-    }, 5000)
 }
 
 const manejarAnnadir = (plato: Plato) => {
