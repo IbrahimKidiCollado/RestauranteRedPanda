@@ -70,7 +70,7 @@ import { useUserStore } from '@/stores/userStore';
 
 const userStore = useUserStore();
 //Traemos la variable que indica si el usuario es admin o no para mostrar el botón de admin
-const esAdmin = userStore.esAdmin;
+const esAdmin = computed(() => userStore.esAdmin);
 
 const route = useRoute()
 const router = useRouter()

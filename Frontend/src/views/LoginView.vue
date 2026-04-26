@@ -13,9 +13,10 @@
 import InfoLogin from '@/components/LoginComp/InfoLogin.vue'
 import FormLogin from '@/components/LoginComp/FormLogin.vue'
 import { useUserStore } from '@/stores/userStore';
+import { computed } from 'vue';
 
 const userStore = useUserStore();
-const logueado = userStore.logueado;
+const logueado = computed(() => userStore.logueado);
 
 </script>
 
