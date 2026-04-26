@@ -57,8 +57,8 @@ public class CartaController {
             cartaPlana.add(new ElementoCarta(pescado.getId(), pescado.getNombre(), pescado.getDescripcion(), pescado.getPrecio(), pescado.getImagen(), "pescado", 1, 1))
         );
 
-        //Cada carga es de 10 en 10
-        int numPlatos = 10;
+        //Cada carga es de 8 en 8
+        int numPlatos = 8;
         int totalPlatos = cartaPlana.size();
 
         //Para saber si hemos llegado al final y no pasarnos de numero
