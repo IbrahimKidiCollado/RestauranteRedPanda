@@ -7,6 +7,7 @@ import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
 import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
 import { useCarritoStore } from '@/stores/counter'
 import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
+import { AlertTriangle } from 'lucide-react'
 
 interface Plato {
     id: number
@@ -163,7 +164,7 @@ const cargarPlatos = async (cat?: string) => {
     else platos.value = await obtenerPlatos(cat)
 }
 
-const alerta = reactive({
+const alerta = reactive<Alerta>({
     visible: false,
     titulo: '',
     mensaje: '',
