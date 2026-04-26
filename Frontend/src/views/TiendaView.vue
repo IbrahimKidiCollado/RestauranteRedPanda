@@ -26,13 +26,14 @@
     <div class="contenedor-platos">
         <TarjetaPlato
             v-for="plato in platos"
-            @añadir="manejarAnnadir(plato)"
             :key="`${plato.categoria_slug}-${plato.id}`"
             :nombre="$t(plato.nombre)"
             :descripcion="$t(plato.descripcion)"
             :precio="plato.precio"
             :imagen="plato.imagen"
             :categoria_slug="plato.categoria_slug"
+            @configIngre="platoConfigurando = plato"
+            @añadir="manejarAnnadir(plato)"
         />
     </div>
     <div>
@@ -51,6 +52,13 @@
             :mostrar-boton="alerta.mostrarBoton"
             :tipo="alerta.tipo"
         />
+        <TarjetaIngredientes
+            v-if="platoConfigurando !== null"
+            :nombre="platoConfigurando.nombre"
+            :precio="platoConfigurando.precio"
+            :ingredientes="ingredientes"
+            @cerrar="platoConfigurando = null"
+        />
     </div>
 </template>
 
@@ -64,6 +72,8 @@ import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
 import { useCarritoStore } from '@/stores/counter'
 import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
 import Paginacion from '@/components/TiendaComp/Paginacion.vue'
+import TarjetaIngredientes from '@/components/TiendaComp/TarjetaIngredientes.vue'
+import { obtenerIngredientes } from '@/services/Tienda/IngredientesService'
 
 interface Plato {
     id: number
@@ -82,10 +92,12 @@ interface Categoria {
 
 const platos = ref<Plato[]>([])
 const categorias = ref<Categoria[]>([])
+const ingredientes = ref([])
 const categoriaActiva = ref<string>('todos')
 const carrito = useCarritoStore()
 const { añadirProducto } = carrito
 const { t } = useI18n()
+const platoConfigurando = ref<Plato | null>(null)
 
 const alerta = reactive({
     visible: false,
@@ -152,6 +164,8 @@ const manejarAnnadir = (plato: Plato) => {
 onMounted(async () => {
     platos.value = await obtenerPlatos()
     categorias.value = await obtenerCategorias()
+    ingredientes.value = await obtenerIngredientes()
+    console.log(ingredientes.value)
 })
 </script>
 

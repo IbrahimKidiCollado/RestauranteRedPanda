@@ -9,9 +9,14 @@
             <p>{{ descripcion }}</p>
             <div class="precio-añadir">
                 <p class="precio">{{ precio }}€</p>
-                <button class="añadir" @click="$emit('añadir')">
-                    {{ $t('tienda.tarjeta-plato.añadir') }}
-                </button>
+                <div class="container-addEdit">
+                    <span class="material-symbols-outlined settings" @click="$emit('configIngre')">
+                        settings
+                    </span>
+                    <button class="añadir" @click="$emit('añadir')">
+                        {{ $t('tienda.tarjeta-plato.añadir') }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -87,6 +92,30 @@
             justify-content: space-between;
             margin-top: 20px;
             align-items: center;
+
+            .container-addEdit {
+                display: flex;
+                gap: 20px;
+
+                .settings {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: linear-gradient(135deg, #ff9f43 0%, #e65100 100%);
+                    color: #ffffff;
+                    font-size: 20px;
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
 
             button {
                 @include boton-rojo();

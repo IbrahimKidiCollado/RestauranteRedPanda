@@ -5,7 +5,7 @@
             <div class="container-datos">
                 <h3>{{ p.nombre }}</h3>
                 <p>{{ p.descripcion }}</p>
-                <p>{{ p.precio }}</p>
+                <p>{{ p.precio }}€</p>
             </div>
         </div>
         <div class="container-acciones">
