@@ -159,7 +159,16 @@
 		"productos-cantidad": "productos en tu carrito",
 		"carrito-vacio": "Tu carrito está vacío",
 		"propuesta-añadir": "Añade algunos deliciosos platos a tu carrito",
-		"ver-menu": "Ver Menú"
+		"ver-menu": "Ver Menú",
+		"resumen": "Resumen del Pedido",
+		"subtotal": "Subtotal",
+		"envio": "Envío",
+		"total":"Total",
+		"pago": "Proceder al Pago",
+		"estimo": "Entrega estimada: 30-45 min",
+		"envioGratis":"GRATIS",
+		"envioGratisAlerta1": "Añade",
+		"envioGratisAlerta2": "más para envío gratis"
 	},
 	"alertas": {
         "annadir": {
@@ -173,7 +182,8 @@
         "exito": {
             "titulo": "¡PAGO EXITOSO!",
             "mensaje": "Se ha realizado el pago exitosamente."
-        }
+        },
+		"verCarrito": "Ver carrito"
     },
 	"footer": {
 		"descripcion": "Auténtica comida asiática preparada con ingredientes frescos y recetas tradicionales.",

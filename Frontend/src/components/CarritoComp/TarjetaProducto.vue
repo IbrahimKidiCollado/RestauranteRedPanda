@@ -33,6 +33,10 @@
     margin-bottom: 15px;
     transition: 200ms;
 
+    @include mobile-down {
+        flex-direction: column;
+    }
+
     &:hover {
         border: 1px solid $color-rojo-titulo;
     }
@@ -40,6 +44,7 @@
     .container-info {
         display: flex;
         align-items: center;
+        text-align: center;
         gap: 20px;
 
         > div:first-child {
@@ -89,6 +94,7 @@
         display: flex;
         align-items: center;
         gap: 20px;
+        margin-top: 20px;
 
         .container-eliminar-añadir {
             display: flex;

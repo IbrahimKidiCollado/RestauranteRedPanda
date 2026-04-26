@@ -162,6 +162,10 @@ header {
         display: flex;
         justify-content: space-around;
 
+        @include mobile-down {
+            justify-content: center;
+        }
+
         .contenedor-imagen-nombre {
             display: flex;
             align-items: center;
@@ -183,6 +187,10 @@ header {
 
             .contenedor-titulo {
                 margin: 20px 0px;
+
+                @include mobile-down {
+                    display: none;
+                }
 
                 h1 {
                     color: $color-texto-blanco;
