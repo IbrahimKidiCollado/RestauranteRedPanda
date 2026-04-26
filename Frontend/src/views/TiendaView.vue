@@ -1,75 +1,3 @@
-<script setup lang="ts">
-import { onMounted, ref, reactive } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { obtenerPlatos } from '@/services/Tienda/PlatosService'
-import { obtenerCategorias } from '@/services/Tienda/CategoriasService'
-import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
-import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
-import { useCarritoStore } from '@/stores/counter'
-import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
-import { AlertTriangle } from 'lucide-react'
-
-interface Plato {
-    id: number
-    nombre: string
-    precio: number
-    imagen: string
-    descripcion: string
-    categoria_slug: string
-}
-
-interface Categoria {
-    id: number
-    nombre: string
-    slug: string
-}
-
-const platos = ref<Plato[]>([])
-const categorias = ref<Categoria[]>([])
-const categoriaActiva = ref<string>('todos')
-const carrito = useCarritoStore()
-const { añadirProducto } = carrito
-const { t } = useI18n()
-
-const cargarPlatos = async (cat?: string) => {
-    categoriaActiva.value = cat || 'todos'
-    if (cat === 'todos') platos.value = await obtenerPlatos()
-    else platos.value = await obtenerPlatos(cat)
-}
-
-const alerta = reactive({
-    visible: false,
-    titulo: '',
-    mensaje: '',
-    mostrarBoton: false,
-})
-
-const lanzarAlerta = (tipo: string, nombreProducto: string = '') => {
-    alerta.visible = true
-
-    if (tipo === 'ANNADIR') {
-        // Usando las traducciones del JSON
-        alerta.titulo = t('alertas.annadir.titulo')
-        alerta.mensaje = `${nombreProducto} ${t('alertas.annadir.mensaje')}`
-        alerta.mostrarBoton = true
-    }
-
-    setTimeout(() => {
-        alerta.visible = false
-    }, 2500)
-}
-
-const manejarAnnadir = (plato: Plato) => {
-    añadirProducto(plato)
-    lanzarAlerta('ANNADIR', plato.nombre)
-}
-
-onMounted(async () => {
-    platos.value = await obtenerPlatos()
-    categorias.value = await obtenerCategorias()
-})
-</script>
-
 <template>
     <div class="contenedor-titulos">
         <h1>{{ $t('tienda.titulo') }}</h1>
@@ -158,13 +86,42 @@ const carrito = useCarritoStore()
 const { añadirProducto } = carrito
 const { t } = useI18n()
 
-const cargarPlatos = async (cat?: string) => {
+//Para la paginacion
+const offset = ref(0) // Este es el inicio
+//Para controlar que hemos llegado al final de la lista
+const noHayMasPlatos = ref(false)
+
+const cargarPlatos = async (cat?: string, nuevoOffset?: number) => {
+    //Si cambiamos de categoria, reseteamos el offset
+    if (cat && cat !== categoriaActiva.value) {
+        offset.value = 0
+        noHayMasPlatos.value = false
+    } else if (nuevoOffset !== undefined) {
+        offset.value = nuevoOffset
+    }
+
     categoriaActiva.value = cat || 'todos'
-    if (cat === 'todos') platos.value = await obtenerPlatos()
-    else platos.value = await obtenerPlatos(cat)
+
+    if (cat === 'todos') {
+        const carta = await obtenerPlatos(undefined, offset.value)
+        if (carta.length < 10) {
+            noHayMasPlatos.value = true
+        } else {
+            noHayMasPlatos.value = false
+        }
+        platos.value = carta
+    } else {
+        const carta = await obtenerPlatos(cat, offset.value)
+        if (carta.length < 10) {
+            noHayMasPlatos.value = true
+        } else {
+            noHayMasPlatos.value = false
+        }
+        platos.value = carta
+    }
 }
 
-const alerta = reactive<Alerta>({
+const alerta = reactive({
     visible: false,
     titulo: '',
     mensaje: '',
