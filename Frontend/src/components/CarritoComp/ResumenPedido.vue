@@ -99,18 +99,15 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .contenedor-resumen {
-    background-color: #0a0505;
+    background-color: $color-fondo-tarjeta;
     border: 1px solid rgba(255, 0, 0, 0.15);
     border-radius: 16px;
     padding: 24px;
-    color: #ffffff;
-    font-family:
-        system-ui,
-        -apple-system,
-        sans-serif;
+    color: $color-texto-blanco;
     width: 100%;
     max-width: 380px;
     box-shadow: 0 10px 30px rgba(200, 0, 0, 0.05);
+    margin-bottom: 30px;
 
     .resumen {
         display: flex;
@@ -131,7 +128,7 @@ onMounted(async () => {
             justify-content: space-between;
             margin-bottom: 16px;
             font-size: 16px;
-            color: #cccccc;
+            color: $color-blanco-sucio;
 
             p {
                 margin: 0;
@@ -144,15 +141,15 @@ onMounted(async () => {
 
         .texto-aviso {
             order: 4;
-            background-color: #1a1600;
-            border: 1px solid #4d3d00;
+            background-color: $color-caca-oscuro;
+            border: 1px solid $color-caca;
             border-radius: 8px;
             padding: 14px 16px;
             margin: 8px 0 0 0;
 
             p {
                 margin: 0;
-                color: #ffcc00;
+                color: $color-amarillo;
                 font-size: 14px;
                 font-weight: 500;
             }
@@ -173,11 +170,11 @@ onMounted(async () => {
                 font-weight: 800;
 
                 &:first-child {
-                    color: #ffffff;
+                    color: $color-texto-blanco;
                 }
 
                 &:last-child {
-                    color: #ff1a1a;
+                    color: $color-rojo-panda;
                 }
             }
         }
@@ -185,24 +182,6 @@ onMounted(async () => {
 
     .contenedor-boton-pago {
         margin-top: 24px;
-
-        button {
-            background-color: #cc0000;
-            color: #ffffff;
-            width: 100%;
-            border: none;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(204, 0, 0, 0.3);
-            transition: background-color 0.2s ease;
-
-            &:hover {
-                background-color: #ff0000;
-            }
-        }
     }
 }
 </style>
