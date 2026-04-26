@@ -71,5 +71,34 @@ public class CartaController {
         return cartaPlana.subList(offset, fin);
     }
 
-    
+    //Para obtener la carta entera sin paginar, se usa para el admin
+    @GetMapping("/cartaCompleta")
+    public List<ElementoCarta> obteneCartaCompleta() {
+        Carta carta = cartaRepository.findAll().get(0);
+        List<ElementoCarta> cartaPlana = new ArrayList<>();
+
+        carta.getSushi().forEach(sushi -> 
+            cartaPlana.add(new ElementoCarta(sushi.getId(), sushi.getNombre(), sushi.getDescripcion(), sushi.getPrecio(), sushi.getImagen(), "sushi", 1, sushi.getCantidad()))
+        );
+
+        carta.getRamen().forEach(ramen -> 
+            cartaPlana.add(new ElementoCarta(ramen.getId(), ramen.getNombre(), ramen.getDescripcion(), ramen.getPrecio(), ramen.getImagen(), "ramen", 1, 1))
+        );
+        carta.getBebidas().forEach(bebida -> 
+            cartaPlana.add(new ElementoCarta(bebida.getId(), bebida.getNombre(), bebida.getDescripcion(), bebida.getPrecio(), bebida.getImagen(), "bebida", 1, 1))
+        );
+        carta.getEntrantes().forEach(entrante -> 
+            cartaPlana.add(new ElementoCarta(entrante.getId(), entrante.getNombre(), entrante.getDescripcion(), entrante.getPrecio(), entrante.getImagen(), "entrante", 1, entrante.getCantidad()))
+        );
+        carta.getPostres().forEach(postre -> 
+            cartaPlana.add(new ElementoCarta(postre.getId(), postre.getNombre(), postre.getDescripcion(), postre.getPrecio(), postre.getImagen(), "postre", 1, 1))
+        );
+        carta.getCarne().forEach(carne -> 
+            cartaPlana.add(new ElementoCarta(carne.getId(), carne.getNombre(), carne.getDescripcion(), carne.getPrecio(), carne.getImagen(), "carne", 1, 1))
+        );
+        carta.getPescado().forEach(pescado -> 
+            cartaPlana.add(new ElementoCarta(pescado.getId(), pescado.getNombre(), pescado.getDescripcion(), pescado.getPrecio(), pescado.getImagen(), "pescado", 1, 1))
+        );
+        return cartaPlana;
+    }
 }

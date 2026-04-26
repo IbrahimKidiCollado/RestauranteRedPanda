@@ -27,27 +27,49 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class UsuarioController {
 
-    //private final UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
-   // UsuarioController(UsuarioRepository usuarioRepository) {
-    //    this.usuarioRepository = usuarioRepository;
-    //}
+    UsuarioController(UsuarioRepository usuarioRepository) {
+            this.usuarioRepository = usuarioRepository;
+    }
 
     //Para iniciar Sesion nada mas entrar en la web
-    @GetMapping("/login")
-    public String iniciarSesion(HttpSession sesion) {
-        if (sesion.isNew()) {
-            sesion.setAttribute("inicio", System.currentTimeMillis());
-            return "Nueva sesion iniciada";
+    //En el body se enviará un JSON con el email y la contraseña del usuario
+    @PostMapping("/login")
+    public ResponseEntity<?> iniciarSesion(@RequestBody Usuario datosLogin, HttpSession sesion) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(datosLogin.getEmail());
+        if (usuarioOpt.isPresent()) {
+            Usuario usuario = usuarioOpt.get();
+            if (usuario.getPwd().equals(datosLogin.getPwd())) {
+                sesion.setAttribute("usuario", usuario);
+                //devolvemos el usuario para mostrar su nombre en la interfaz
+                return ResponseEntity.ok(usuario);
+            } else {
+                return ResponseEntity.status(401).body("Contraseña incorrecta");
+            }
+        } else {
+            return ResponseEntity.status(404).body("Usuario no encontrado");
         }
-        return "Ya existente";
+        
     }
+
+    //Registrar un nuevo usuario
+    @PostMapping("/register")
+    public ResponseEntity<Usuario> registrarUsuario(@RequestBody Usuario nuevoUsuario) {
+       if (usuarioRepository.findByEmail(nuevoUsuario.getEmail()).isPresent()) {
+            return ResponseEntity.status(400).build(); // Usuario ya existe
+        }
+        Usuario usuarioGuardado = usuarioRepository.save(nuevoUsuario);
+        return ResponseEntity.ok(usuarioGuardado);
+        
+    }
+
 
     //Cierra sesion
     @PostMapping("/logout")
-    public String cerrarSesion(HttpSession sesion) {
+    public ResponseEntity<String> cerrarSesion(HttpSession sesion) {
         sesion.invalidate();
-        return "Sesion Cerrada";
+        return ResponseEntity.ok("Sesión cerrada");
     }
     
     

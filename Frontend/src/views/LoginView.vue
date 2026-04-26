@@ -12,8 +12,11 @@
 <script setup lang="ts">
 import InfoLogin from '@/components/LoginComp/InfoLogin.vue'
 import FormLogin from '@/components/LoginComp/FormLogin.vue'
+import { useUserStore } from '@/stores/userStore';
 
-const logueado = false
+const userStore = useUserStore();
+const logueado = userStore.logueado;
+
 </script>
 
 <style lang="scss" scoped>

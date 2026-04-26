@@ -13,7 +13,7 @@
 	"login": {
 		"email": "Email",
 		"pwd": "Contraseña",
-		"placeHolderEmail": "tu@email.com",
+		"placeHolderEmail": "tu{'@'}email.com",
 		"placeHolderName": "Tu nombre",
 		"placeHolderPwd": "......",
 		"errorNombre": "El nombre es requerido",

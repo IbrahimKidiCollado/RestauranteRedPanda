@@ -22,19 +22,6 @@ onUnmounted(() => {
     window.removeEventListener('resize', revisarTamaño)
 })
 
-//Para que el carrito se mantenga sincronizado con el backend cada vez que se recarga la página
-onMounted(async () => {
-    try{
-        await fetch('http://localhost:8081/login', {
-            credentials: 'include'
-        })
-        await carritoStore.sincronizarCarrito();
-            
-
-    }catch(error){
-        console.error('Error al iniciar la sesion:', error);
-    }
-})
 
 //Cuando se cierre la ventana se vacia el carrito
 window.addEventListener('pagehide', () => {

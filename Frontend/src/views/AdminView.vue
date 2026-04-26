@@ -17,7 +17,7 @@ import { ref, onMounted } from 'vue';
 import AdminPanel from "@/components/AdminComp/AdminPanel.vue";
 import AdminForm from "@/components/AdminComp/AdminForm.vue";
 import AdminCarta from "@/components/AdminComp/AdminCarta.vue";
-import { obtenerPlatos } from '@/services/Tienda/PlatosService';
+import { obtenerCartaCompleta, obtenerPlatos } from '@/services/Tienda/PlatosService';
 import { reactive } from 'vue';
 import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
 import { useI18n } from 'vue-i18n'
@@ -31,7 +31,7 @@ const alerta = reactive({
 
 const Platos = ref([]);
 const cargarPlatos = async () => { 
-    Platos.value = await obtenerPlatos();
+    Platos.value = await obtenerCartaCompleta();
 }
 
 const manejarAcciones = (accion: string) => {

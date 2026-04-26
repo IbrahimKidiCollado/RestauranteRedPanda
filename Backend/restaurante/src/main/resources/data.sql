@@ -1,7 +1,7 @@
 -- USUARIOS
-INSERT INTO usuarios (id, nombre, pwd, preferencia_idioma) VALUES
-(1, 'admin', '1234', 'es'),
-(2, 'cliente1', 'abcd', 'es');
+INSERT INTO usuarios (id, nombre, email, pwd, preferencia_idioma) VALUES
+(1, 'admin', 'admin@example.com', '1234', 'es'),
+(2, 'cliente1', 'cliente1@example.com', 'abcd', 'es');
 
 -- CARTA
 INSERT INTO carta (id) VALUES (1);

@@ -9,6 +9,13 @@ export const obtenerPlatos = async (categoria?: string, offset?: number) => {
 	return await res.json();
 }
 
+//obtener toda la carta sin paginar
+export const obtenerCartaCompleta = async () => {
+	const ruta = `http://localhost:8081/cartaCompleta`;
+	const res = await fetch(ruta);
+	return await res.json();
+}
+
 export const eliminarPlato = async (id: number, categoria: string): Promise<boolean> => {
 	try {
 		const res = await fetch(`http://localhost:8081/${categoria}/delete/${id}`,{

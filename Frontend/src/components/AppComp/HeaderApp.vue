@@ -26,7 +26,7 @@
                 ></div>
             </nav>
             <div class="contenedor-carrito-perfil">
-                <button class="admin" @click="navegar('/admin')"><span>AdmMode</span></button>
+                <button v-if="esAdmin" class="admin" @click="navegar('/admin')"><span>AdmMode</span></button>
                 <button @click="navegar('/carrito')" class="carrito">
                     <img src="/assets/carrito.webp" alt="icono-carrito" />
                 </button>
@@ -66,6 +66,11 @@
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/userStore';
+
+const userStore = useUserStore();
+//Traemos la variable que indica si el usuario es admin o no para mostrar el botón de admin
+const esAdmin = userStore.esAdmin;
 
 const route = useRoute()
 const router = useRouter()

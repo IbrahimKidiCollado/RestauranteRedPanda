@@ -22,6 +22,7 @@
                         name="nombre"
                         :placeholder="$t('login.placeHolderName')"
                         class="inputNombre"
+                        v-model="datosFormulario.nombre"
                     />
                     <span :style="{ display: 'none' }" class="error-nombre">{{
                         $t('login.errorNombre')
@@ -36,6 +37,7 @@
                     type="text"
                     name="email"
                     :placeholder="$t('login.placeHolderEmail')"
+                    v-model="datosFormulario.email"
                 />
                 <span class="error-email" :style="{ display: 'none' }">{{
                     $t('login.errorEmail')
@@ -44,12 +46,12 @@
             <label for="pwd" class="error-pwd">{{ $t('login.pwd') }}</label>
             <div class="container-pwd">
                 <span class="material-symbols-outlined lock"> lock </span>
-                <input class="input-pwd" type="password" name="pwd" placeholder="••••••••" />
+                <input class="input-pwd" type="password" name="pwd" placeholder="••••••••" v-model="datosFormulario.password" />
                 <span class="error-pwd" :style="{ display: 'none' }">{{
                     $t('login.errorPwd')
                 }}</span>
             </div>
-            <button class="botonEnvio">
+            <button type="button" class="botonEnvio" @click="envio">
                 {{ !logueado ? $t('login.formRegistrar.inicio') : $t('login.formIniciar.inicio') }}
             </button>
         </form>
@@ -58,9 +60,42 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+import { useUserStore } from '@/stores/userStore';
+import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
+
+const props = defineProps<{
     logueado: boolean
 }>()
+
+const userStore = useUserStore();
+const router = useRouter();
+
+//Obtenemos los datos del formulario
+const datosFormulario = reactive({
+    nombre: '',
+    email: '',
+    password: ''
+});
+
+const envio = async () => {
+    if(props.logueado){
+        const resultado = await userStore.login(datosFormulario.nombre,datosFormulario.email, datosFormulario.password);
+        if(resultado){
+            //router.push('/tienda');
+        } else {
+            alert(resultado);
+        }
+    }else{
+        const resultado = await userStore.registrarse(datosFormulario.nombre,datosFormulario.email, datosFormulario.password);
+        if(resultado){
+            //router.push('/tienda');
+        } else {
+            alert(resultado);
+        }
+    }
+}
+
 </script>
 
 <style scoped lang="scss">
