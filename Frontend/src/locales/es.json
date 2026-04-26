@@ -173,7 +173,8 @@
         "exito": {
             "titulo": "¡PAGO EXITOSO!",
             "mensaje": "Se ha realizado el pago exitosamente."
-        }
+        },
+		"verCarrito": "Ver carrito"
     },
 	"footer": {
 		"descripcion": "Auténtica comida asiática preparada con ingredientes frescos y recetas tradicionales.",

@@ -11,7 +11,7 @@
                     <p class="mensaje">{{ mensaje }}</p>
 
                     <button v-if="mostrarBoton" @click="irACarrito" class="btn-carrito">
-                        Ver mi carrito
+                        {{ $t('alertas.verCarrito') }}
                     </button>
                 </div>
             </div>
