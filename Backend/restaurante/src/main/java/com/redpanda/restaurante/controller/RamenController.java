@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 public class RamenController {
 
     private final RamenRepository ramenRepository;
@@ -73,12 +72,11 @@ public class RamenController {
     @GetMapping("/ramen/ingredientes/{id}")
     public List<Ingrediente> obtenerIngredientes(@PathVariable Long id) {
         if (ramenRepository.existsById(id)) {
-            Ramen ramen = ramenRepository.findById(id).orElseThrow(); new RuntimeErrorException( null, "Ramen no encontrado con id: " + id);
+            Ramen ramen = ramenRepository.findById(id).orElseThrow(() -> new RuntimeException("Ramen no encontrado con id: " + id));
             return ramen.getIngredientes();
             
         }
         return null;
-    
     }
 
 }

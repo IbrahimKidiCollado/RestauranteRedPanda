@@ -1,5 +1,13 @@
-export const obtenerIngredientes = async () => {
-	const ruta = `ingredientes.json`;
-	const res = await fetch(ruta);
-	return await res.json();
+export const obtenerIngredientes = async (Id: number, categoria: string) => {
+	try {		
+		const response = await fetch(`http://localhost:8081/${categoria}/ingredientes/${Id}`);
+		if (!response.ok) {
+			throw new Error(`Error al obtener los ingredientes: ${response.statusText}`);
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error(error);
+		return [];
+	}
 }

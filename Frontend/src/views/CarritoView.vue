@@ -54,6 +54,12 @@ import { reactive } from 'vue'
 import ResumenPedido from '@/components/CarritoComp/ResumenPedido.vue'
 import { vaciarCarrito } from '@/services/Tienda/CarritoService'
 import { useI18n } from 'vue-i18n'
+import { usePedidoStore } from '@/stores/pedidoStore'
+import { useUserStore } from '@/stores/userStore'
+
+const pedidoStore = usePedidoStore()
+const userStore = useUserStore()
+
 
 const router = useRouter()
 const carrito = useCarritoStore()
@@ -86,6 +92,7 @@ const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
         alerta.titulo = t('alertas.exito.titulo')
         alerta.mensaje = t('alertas.exito.mensaje')
         alerta.mostrarBoton = false
+
     }
 
     setTimeout(() => {
@@ -93,9 +100,22 @@ const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
         if (tipo == 'EXITO') navegar('/tienda')
     }, 2500) // 2 segundos y medio :)
 }
+const mandarPedido = () => {
+    //mandamos el pedido al backend, con los productos del carrito, el total y el id del usuario (si está logueado)
+    const productos = productosCarrito.value.map((p) => ({
+        id: p.id,
+        cantidad: p.cantidad,
+        ingredientesQuitados: p.listaIngredientesQuitados,
+        ingredientesIDs: p.listaIngredientesIDs
+    }))
+    const idUsuario = userStore.id;
+    const totalPedido = total.value
+
+    pedidoStore.realizarPedido(idUsuario, totalPedido, productos)
+}
 
 const manejarAccion = (accion: string, p?: ProductoCarrito) => {
-    if (!p) return
+    //if (!p) return
 
     switch (accion) {
         case 'ELIMINAR':
@@ -109,6 +129,7 @@ const manejarAccion = (accion: string, p?: ProductoCarrito) => {
             restarCantidadProducto(p!)
             break
         case 'EXITO':
+            mandarPedido();
             vaciarCarrito()
             lanzarAlerta(accion)
             break

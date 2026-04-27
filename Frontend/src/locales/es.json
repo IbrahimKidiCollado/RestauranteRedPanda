@@ -174,7 +174,8 @@
 		"estimo": "Entrega estimada: 30-45 min",
 		"envioGratis":"GRATIS",
 		"envioGratisAlerta1": "Añade",
-		"envioGratisAlerta2": "más para envío gratis"
+		"envioGratisAlerta2": "más para envío gratis",
+		"ingredientes" : "Ingredientes eliminados: "
 	},
 	"alertas": {
 		"annadir": {

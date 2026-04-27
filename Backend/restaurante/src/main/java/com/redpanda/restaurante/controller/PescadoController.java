@@ -1,5 +1,6 @@
 package com.redpanda.restaurante.controller;
 
+import com.redpanda.restaurante.entity.Ingrediente;
 //Importa la entidad Pescado para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Pescado;
 import com.redpanda.restaurante.entity.Sushi;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 public class PescadoController {
 
     private final PescadoRepository pescadoRepository;
@@ -63,6 +63,16 @@ public class PescadoController {
         } else {
             throw new RuntimeException("Pescado no encontrado con id: " + id);
         }
+    }
+
+    //obtener sus ingredientes
+    @GetMapping("/pescado/ingredientes/{id}")
+    public List<Ingrediente> obtenerIngredientesPescado(@PathVariable Long id) {
+        if (pescadoRepository.existsById(id)) {
+            Pescado pescado = pescadoRepository.findById(id).orElseThrow(() -> new RuntimeException("Pescado no encontrado con id: " + id));
+            return pescado.getIngredientes();
+        }
+        return null;
     }
 
     

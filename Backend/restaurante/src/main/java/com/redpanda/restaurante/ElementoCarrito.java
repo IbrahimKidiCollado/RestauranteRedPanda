@@ -7,14 +7,18 @@ public class ElementoCarrito {
     private int cantidad;
     private String categoria_slug;
     private String imagen;
+    private String listaIngredientesQuitados;
+    private int[] listaIngredientesIDs;
 
-    public ElementoCarrito(int id, String nombre, double precio, int cantidad, String categoria, String imagen) {
+    public ElementoCarrito(int id, String nombre, double precio, int cantidad, String categoria, String imagen, String listaIngredientesQuitados, int[] listaIngredientesIDs) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
         this.categoria_slug = categoria;
         this.imagen = imagen;
+        this.listaIngredientesQuitados = listaIngredientesQuitados;
+        this.listaIngredientesIDs = listaIngredientesIDs;
     }
     
     public int getId() {
@@ -40,6 +44,13 @@ public class ElementoCarrito {
     public String getImagen() {
         return imagen;
     }
+    public String getListaIngredientesQuitados() {
+        return listaIngredientesQuitados;
+    }
+
+    public int[] getListaIngredientesIDs() {
+        return listaIngredientesIDs;
+    }
 
     public void setPrecio(double precio) {
         this.precio = precio;
@@ -64,8 +75,13 @@ public class ElementoCarrito {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+    public void setListaIngredientesQuitados(String listaIngredientesQuitados) {
+        this.listaIngredientesQuitados = listaIngredientesQuitados;
+    }
 
-
+    public void setListaIngredientesIDs(int[] listaIngredientesIDs) {
+        this.listaIngredientesIDs = listaIngredientesIDs;
+    }
 
     
 }

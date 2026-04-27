@@ -22,10 +22,12 @@ onUnmounted(() => {
     window.removeEventListener('resize', revisarTamaño)
 })
 
-
-//Cuando se cierre la ventana se vacia el carrito
-window.addEventListener('pagehide', () => {
-    navigator.sendBeacon('http://localhost:8081/carrito/vaciar');
+onMounted( async() => {
+    try {
+        await carritoStore.sincronizarCarrito()
+    } catch (error) {
+        console.error('Error al sincronizar el carrito:', error)  
+    }
 })
 </script>
 

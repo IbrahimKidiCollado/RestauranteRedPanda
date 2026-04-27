@@ -1,5 +1,7 @@
 package com.redpanda.restaurante.entity;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -31,6 +33,16 @@ public class Postre {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Carta carta;
 
+    //Relacion N a N
+    //Un postre puede tener varios ingredientes y un ingrediente puede estar en varios postres
+    @ManyToMany
+    @JoinTable(
+        name = "postre_ingrediente",
+        joinColumns = @JoinColumn(name = "id_postre"),
+        inverseJoinColumns = @JoinColumn(name = "id_ingrediente")
+    )
+    private List<Ingrediente> ingredientes;
+
     //Getters
     public Long getId() {
         return id;
@@ -52,6 +64,9 @@ public class Postre {
     }
     public Carta getCarta() {
         return carta;
+    }
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
     }
 
     //Setters
@@ -75,6 +90,9 @@ public class Postre {
     }
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
     }
 
     //Dato que posé la entidad pero no se encuentra en bbdd

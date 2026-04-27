@@ -18,7 +18,7 @@ export const obtenerCarrito = async () => {
     }
 }
 
-export const annadirCarrito = async (producto : any) => {
+export const annadirCarrito = async (producto: any, ingredientesQuitados: String | undefined, ingredientesIDs: number[] | undefined) => {
     try{
         const res = await fetch('http://localhost:8081/carrito/agregar', {
             method: 'POST',
@@ -32,7 +32,9 @@ export const annadirCarrito = async (producto : any) => {
                 precio: producto.precio,
                 cantidad: producto.cantidad,
                 categoria_slug: producto.categoria_slug,
-                imagen: producto.imagen
+                imagen: producto.imagen,
+                listaIngredientesQuitados: ingredientesQuitados,
+                listaIngredientesIDs: ingredientesIDs
             })
         });
 

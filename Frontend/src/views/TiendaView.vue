@@ -32,8 +32,8 @@
             :precio="plato.precio"
             :imagen="plato.imagen"
             :categoria_slug="plato.categoria_slug"
-            @configIngre="platoConfigurando = plato"
-            @añadir="manejarAnnadir(plato)"
+            @configIngre="abrirConfigurador(plato)"
+            @añadir="manejarAnnadir(plato, '', [])"
         />
     </div>
     <div>
@@ -58,6 +58,7 @@
             :precio="platoConfigurando.precio"
             :ingredientes="ingredientes"
             @cerrar="platoConfigurando = null"
+            @añadir="manejarAnnadir(platoConfigurando, $event.listaIngredientesQuitados, $event.ingredientesSeleccionados)"
         />
     </div>
 </template>
@@ -156,15 +157,22 @@ const cargarPlatos = async (cat?: string, nuevoOffset?: number) => {
     }
 }
 
-const manejarAnnadir = (plato: Plato) => {
-    añadirProducto(plato)
+//Añade plato recibe plato y los ingredientes quitados, y los manda al store para añadirlos al carrito
+const manejarAnnadir = (plato: Plato, ingredientesQuitados: string, ingredientesId: number[]) => {
+    platoConfigurando.value = null
+    añadirProducto(plato, ingredientesQuitados, ingredientesId)
     lanzarAlerta(plato.nombre, 1)
+}
+
+//Para abrir el configurador de ingredientes
+const abrirConfigurador = async (plato: Plato) => {
+    platoConfigurando.value = plato;
+    ingredientes.value = await obtenerIngredientes(plato.id, plato.categoria_slug)
 }
 
 onMounted(async () => {
     platos.value = await obtenerPlatos()
     categorias.value = await obtenerCategorias()
-    ingredientes.value = await obtenerIngredientes()
     console.log(ingredientes.value)
 })
 </script>

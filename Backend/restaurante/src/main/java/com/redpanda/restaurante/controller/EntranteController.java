@@ -2,6 +2,7 @@ package com.redpanda.restaurante.controller;
 
 //Importa la entidad Entrante para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Entrante;
+import com.redpanda.restaurante.entity.Ingrediente;
 import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Entrante para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.EntranteRepository;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 public class EntranteController {
 
     private final EntranteRepository entranteRepository;
@@ -61,9 +61,18 @@ public class EntranteController {
         if (entranteRepository.existsById(id)) {
             entranteActualizado.setId(id);
             return entranteRepository.save(entranteActualizado);
-        } else {
-            throw new RuntimeException("Entrante no encontrado con id: " + id);
+        } 
+        return null;
+    }
+
+    //obtener sus ingredientes
+    @GetMapping("/entrante/ingredientes/{id}")
+    public List<Ingrediente> obtenerIngredientesEntrante(@PathVariable Long id) {
+        if (entranteRepository.existsById(id)) {
+            Entrante entrante = entranteRepository.findById(id).orElseThrow(() -> new RuntimeException("Entrante no encontrado con id: " + id));
+            return entrante.getIngredientes();
         }
+        return null;
     }
 
     

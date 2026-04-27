@@ -1,5 +1,7 @@
 package com.redpanda.restaurante.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,10 +16,7 @@ public class Pedido {
     private Long id;
 
     //Campos de la tabla
-    private String nombre;
-    private String descripcion;
-    private double precio;
-    private int cantidad;
+    private String precio;
 
     //Relacion 1 a N 
     //Varios pedidos pertenecen a UN usuario
@@ -26,21 +25,38 @@ public class Pedido {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
+    //Relacion 1 a N
+    //Un pedido tiene varias lineas de pedido
+    //mappedBy indica que la relacion esta mapeada por el atributo "pedido" en la clase LineaPedido
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @com.fasterxml.jackson.annotation.JsonManagedReference // Para que no entre en un bucle infinito
+    private List<LineaPedido> lineasPedido;
+
+
     //Getters
     public Long getId() {
         return id;
     }
-    public String getNombre() {
-        return nombre;
-    }
-    public String getDescripcion() {
-        return descripcion;
-    }
-    public double getPrecio() {
+    public String getPrecio() {
         return precio;
     }
-    public int getCantidad() {
-        return cantidad;
+    public Usuario getUsuario() {
+        return usuario;
     }
+    public List<LineaPedido> getLineasPedido() {
+        return lineasPedido;
+    }
+
+    //Setters
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    public void setLineasPedido(List<LineaPedido> lineasPedido) {
+        this.lineasPedido = lineasPedido;
+    }
+
 
 }

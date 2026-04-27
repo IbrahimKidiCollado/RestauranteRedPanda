@@ -82,7 +82,7 @@ const envio = async () => {
     if(props.logueado){
         const resultado = await userStore.login(datosFormulario.nombre,datosFormulario.email, datosFormulario.password);
         if(resultado){
-            //router.push('/tienda');
+            router.push('/tienda');
         } else {
             alert(resultado);
         }

@@ -15,7 +15,6 @@ import com.redpanda.restaurante.repository.CartaRepository;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 public class CartaController {
 
     private final CartaRepository cartaRepository;

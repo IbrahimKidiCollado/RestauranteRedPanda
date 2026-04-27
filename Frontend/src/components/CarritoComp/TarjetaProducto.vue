@@ -7,6 +7,9 @@
                 <p>{{ p.descripcion }}</p>
                 <p>{{ p.precio }}€</p>
             </div>
+            <div v-if="p.listaIngredientesQuitados" class="container-ingredientes">
+                <p>{{ $t('carrito.ingredientes') }}: {{ p.listaIngredientesQuitados }}</p>
+            </div>
         </div>
         <div class="container-acciones">
             <div class="container-eliminar-añadir">
@@ -59,6 +62,19 @@
                 border-radius: 12px;
             }
         }
+        .container-ingredientes {
+            margin-top: 6px;
+            color: $color-blanco-sucio;
+            font-size: 0.9rem;
+            background-color: $color-rojo-panda;
+            border: 2px solid $color-rojo-oscuro;
+            border-radius: 7px;
+            padding: 6px 10px;
+            //difuminado el background 
+            background: rgba($color-rojo-panda, 0.7);
+            cursor: pointer;
+        }
+
 
         .container-datos {
             display: flex;
@@ -153,6 +169,9 @@ interface ProductoCarrito {
     categoria_slug: string
     imagen: string
     cantidad: number
+    listaIngredientesQuitados: string | undefined
+    listaIngredientesIDs: number[] | undefined
+
 }
 
 defineProps<{

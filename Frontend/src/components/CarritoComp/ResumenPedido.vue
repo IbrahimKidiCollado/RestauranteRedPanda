@@ -38,10 +38,13 @@ import { computed, onMounted } from 'vue'
 import { loadScript } from '@paypal/paypal-js'
 import { useUserStore } from '@/stores/userStore';
 import {useRouter} from 'vue-router';
+//importamos store de pedido para enviar el pedido al backend
+import { usePedidoStore } from '@/stores/pedidoStore';
 
 const userStore = useUserStore();
 const sesionActiva = computed(() => userStore.sesionActiva);
 const router = useRouter();
+const pedidoStore = usePedidoStore();
 
 const props = defineProps<{
     subtotal: number

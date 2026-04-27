@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 public class SushiController {
 
     private final SushiRepository sushiRepository;

@@ -23,6 +23,7 @@ export const registrar = async (nombre: string, email: string, pwd: string) => {
     try{
         const res = await fetch('http://localhost:8081/register', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

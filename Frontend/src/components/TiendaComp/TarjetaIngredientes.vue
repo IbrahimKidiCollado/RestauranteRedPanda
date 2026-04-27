@@ -30,6 +30,7 @@
                         :id="'ingrediente-' + ingrediente.id"
                         v-model="ingredientesSeleccionados"
                         :value="ingrediente.id"
+                        @click="seleccionar(ingrediente.id, ingrediente.nombre)"
                     />
                 </label>
             </div>
@@ -43,7 +44,7 @@
                     <button class="btn-cancel" @click="$emit('cerrar')">
                         {{ $t('ingredientes.cancel') }}
                     </button>
-                    <button class="btn-add">{{ $t('ingredientes.añadir') }}</button>
+                    <button @click="añadirAlCarrito()" class="btn-add">{{ $t('ingredientes.añadir') }}</button>
                 </div>
             </div>
         </div>
@@ -52,6 +53,22 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+
+
+const router = useRouter()
+
+//Seleccionamos los ingredientes que vamos a quitar
+const seleccionar = (id: number, nombre: string) => {
+    ingredientesSeleccionados.value.push(id);
+    listaIngredientesQuitados.value += nombre + ', ';
+}
+
+const añadirAlCarrito = () => {
+    //Lanzo un emit para decir que añada al carrito el plato con los ingredientes quitados
+    emit('añadir', { ingredientesSeleccionados: ingredientesSeleccionados.value, listaIngredientesQuitados: listaIngredientesQuitados.value })
+}
 
 interface Ingrediente {
     id: number
@@ -59,6 +76,7 @@ interface Ingrediente {
 }
 
 const ingredientesSeleccionados = ref<number[]>([])
+const listaIngredientesQuitados = ref<string>('')
 
 defineProps<{
     nombre: string
@@ -66,7 +84,7 @@ defineProps<{
     ingredientes: Ingrediente[]
 }>()
 
-defineEmits(['cerrar'])
+const emit = defineEmits(['cerrar', 'añadir'])
 </script>
 
 <style scoped lang="scss">

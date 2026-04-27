@@ -14,6 +14,8 @@ import {obtenerCarrito, annadirCarrito, eliminarDelCarrito, sumarCantidad, resta
 
   export interface ProductoCarrito extends Producto {
     cantidad: number;
+    listaIngredientesQuitados: string;
+    listaIngredientesIDs: number[];
   }
 
 export const useCarritoStore = defineStore('carrito', () => {
@@ -41,12 +43,15 @@ export const useCarritoStore = defineStore('carrito', () => {
   //Obtenemos el carrito y lo asignamos a la variable que usamos en este archivo
   const sincronizarCarrito = async () => {
     const datos = await obtenerCarrito();
-    if(datos) productosCarrito.value = datos;
+    if(datos && datos.length > 0) productosCarrito.value = datos;
   }
 
   //Añadimos productos a la cesta
-  const añadirProducto = async (producto: Producto) => {
-    await annadirCarrito(producto);
+  const añadirProducto = async (producto: Producto, ingredientesQuitados?: String, ingredientesIDs?: number[]) => {
+    console.log('Añadiendo producto al carrito:', producto);
+    console.log('Ingredientes quitados:', ingredientesQuitados);
+    console.log('Ingredientes IDs:', ingredientesIDs);
+    await annadirCarrito(producto, ingredientesQuitados, ingredientesIDs);
     await sincronizarCarrito();
   }
 

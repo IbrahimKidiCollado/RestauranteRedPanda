@@ -3,6 +3,8 @@ package com.redpanda.restaurante.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 //Especificar el nombre de la tabla
 @Table(name = "usuarios")
@@ -23,6 +25,7 @@ public class Usuario {
     //Relacion 1 a N
     //Un usuario puede tener varios pedidos
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private List<Pedido> pedidos;
 
 

@@ -67,6 +67,9 @@ public class Ramen {
     public Carta getCarta() {
         return carta;
     }
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
+    }
 
     //Setters
     public void setId(Long id) {
@@ -90,6 +93,9 @@ public class Ramen {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
 
     //Dato que posé la entidad pero no se encuentra en bbdd
     @Transient
@@ -97,11 +103,5 @@ public class Ramen {
     public String getCategoriaSlug() {
         return "ramen"; 
     }
-
-    public List<Ingrediente> getIngredientes() {
-        return ingredientes;
-    }
-
-
 
 }

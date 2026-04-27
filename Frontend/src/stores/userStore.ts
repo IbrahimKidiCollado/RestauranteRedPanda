@@ -10,6 +10,8 @@ export const useUserStore = defineStore('user', () => {
     const emailUsuario = ref('');
     const passwordUsuario = ref('');
     const sesionActiva = ref(false);
+    const id = ref(0);
+
 
     async function login(nombre: string, email: string, pwd: string) {
         logueado.value = true;
@@ -22,6 +24,7 @@ export const useUserStore = defineStore('user', () => {
         if (resultado) {
             logueado.value = true;
             sesionActiva.value = true;
+            id.value = resultado.id;
             if (resultado.nombre === 'admin') {
                 esAdmin.value = true;
                 console.log(resultado);
@@ -72,6 +75,7 @@ export const useUserStore = defineStore('user', () => {
         nombreUsuario,
         emailUsuario,
         passwordUsuario,
+        id,
         registrarse,
         login,
         logout,

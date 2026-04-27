@@ -71,7 +71,9 @@ public class Sushi {
     public Carta getCarta() {
         return carta;
     }
-
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
+    }
     //Setters
     public void setId(Long id) {
         this.id = id;
@@ -97,16 +99,16 @@ public class Sushi {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
 
     //Dato que posé la entidad pero no se encuentra en bbdd
     @Transient
     @JsonProperty("categoria_slug")
     public String getCategoriaSlug() {
         return "sushi"; 
-    }
-
-    public List<Ingrediente> getIngredientes() {
-        return ingredientes;
     }
     
     

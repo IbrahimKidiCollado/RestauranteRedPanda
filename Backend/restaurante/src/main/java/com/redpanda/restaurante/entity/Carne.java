@@ -1,5 +1,7 @@
 package com.redpanda.restaurante.entity;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -31,6 +33,16 @@ public class Carne {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Carta carta;
 
+    //Relacion N a M
+    //Una carne puede tener varios ingredientes y un ingrediente puede estar en varias carnes
+    @ManyToMany
+    @JoinTable(
+        name = "carne_ingrediente",
+        joinColumns = @JoinColumn(name = "id_carne"),
+        inverseJoinColumns = @JoinColumn(name = "id_ingrediente")
+    )
+    private List<Ingrediente> ingredientes;
+
     //Getters
     public Long getId() {
         return id;
@@ -52,6 +64,9 @@ public class Carne {
     }
     public Carta getCarta() {
         return carta;
+    }
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
     }
 
     //Setters
@@ -76,6 +91,10 @@ public class Carne {
     public void setCarta(Carta carta) {
         this.carta = carta;
     }
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
 
     //Dato que posé la entidad pero no se encuentra en bbdd
     @Transient
@@ -83,4 +102,5 @@ public class Carne {
     public String getCategoriaSlug() {
         return "carne"; 
     }
+
 }
