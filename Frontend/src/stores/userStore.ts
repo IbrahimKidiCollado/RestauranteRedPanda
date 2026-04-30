@@ -25,6 +25,7 @@ export const useUserStore = defineStore('user', () => {
             logueado.value = true;
             sesionActiva.value = true;
             id.value = resultado.id;
+            nombreUsuario.value = resultado.nombre;
             if (resultado.nombre === 'admin') {
                 esAdmin.value = true;
                 console.log(resultado);

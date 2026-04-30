@@ -54,6 +54,10 @@
 			"terminos": "Al registrarte, aceptas nuestros Términos y Condiciones y Política de Privacidad"
 		}
 	},
+	"usuario": {
+		"bienvenido": "Bienvenido, ",
+		"cerrar": "Cerrar Sesión"
+	},
 	"ingredientes": {
 		"pers": "Personaliza tu plato",
 		"select": "Selecciona los ingredientes que deseas eliminar",

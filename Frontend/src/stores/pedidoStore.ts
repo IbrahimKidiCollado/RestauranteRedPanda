@@ -10,8 +10,16 @@ export const usePedidoStore = defineStore('pedido', () => {
         const res = await annadirPedido(idUsuario, total, productos);
          console.log('Respuesta del servidor:', res);
     }
+    async function obtenerPedidos(idUsuario: number) {
+            console.log('Obteniendo pedidos para el usuario con ID:', idUsuario);
+            const res = await fetch(`http://localhost:8081/pedidos/${idUsuario}`);
+            const data = await res.json();
+            console.log('Pedidos obtenidos:', data);
+            return data;
+    }
 
     return{
-        realizarPedido
+        realizarPedido,
+        obtenerPedidos
     }
 });

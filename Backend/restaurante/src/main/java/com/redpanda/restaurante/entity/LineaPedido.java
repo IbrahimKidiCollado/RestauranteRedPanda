@@ -21,6 +21,8 @@ public class LineaPedido {
     private String ingredientesQuitados; ;
     private String ingredientesIDs;
 
+    //Relación con Pedido
+    //Una linea de pedido pertenece a un pedido
     @ManyToOne
     @JoinColumn(name = "id_pedido")
     @com.fasterxml.jackson.annotation.JsonBackReference // Para que no entre en un bucle infinito

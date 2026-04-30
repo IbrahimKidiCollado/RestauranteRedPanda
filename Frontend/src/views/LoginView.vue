@@ -1,10 +1,16 @@
 <template>
     <div class="container">
-        <div class="contatiner-1">
+        <div v-if="!activo" class="contatiner-1">
             <InfoLogin :logueado="logueado" />
         </div>
-        <div>
+        <div v-if="!activo">
             <FormLogin :logueado="logueado" />
+        </div>
+        <div>
+            <UserInfo v-if="activo" />
+        </div>
+        <div v-if="activo">
+            <HistorialPedidos />
         </div>
     </div>
 </template>
@@ -14,9 +20,12 @@ import InfoLogin from '@/components/LoginComp/InfoLogin.vue'
 import FormLogin from '@/components/LoginComp/FormLogin.vue'
 import { useUserStore } from '@/stores/userStore';
 import { computed } from 'vue';
+import UserInfo from '@/components/LoginComp/UserInfo.vue';
+import HistorialPedidos from '@/components/LoginComp/HistorialPedidos.vue';
 
 const userStore = useUserStore();
 const logueado = computed(() => userStore.logueado);
+const activo = computed(() => userStore.sesionActiva);
 
 </script>
 

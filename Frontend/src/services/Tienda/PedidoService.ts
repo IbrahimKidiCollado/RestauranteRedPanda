@@ -30,4 +30,8 @@ export const annadirPedido = async (idUsuario: number, total: number, productos:
         console.error('Error al realizar el pedido:', error);
         throw error;
     }
+}
+
+export const obtenerPedidos = async(){
+
 };
