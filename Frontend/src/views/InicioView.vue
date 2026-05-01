@@ -94,12 +94,34 @@ const infoEspecialidades = {
     }
 }
 
+@keyframes slideFromLeftScroll {
+    0% {
+        opacity: 0;
+        transform: translateX(-150px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideFromRightScroll {
+    0% {
+        opacity: 0;
+        transform: translateX(150px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 h2 {
     text-align: center;
     font-size: clamp(1.8rem, 3vw + 1rem, 2.8rem);
     color: $color-texto-blanco;
     padding-top: 140px;
-    animation: aparecerYSubir ease-out both;
+    animation: slideFromLeftScroll ease-out both;
     animation-timeline: view();
     animation-range: entry 5% cover 25%;
 }
@@ -109,7 +131,7 @@ h3 {
     color: $color-blanco-sucio;
     font-weight: 400;
     padding-top: 15px;
-    animation: aparecerYSubir ease-out both;
+    animation: slideFromRightScroll ease-out both;
     animation-timeline: view();
     animation-range: entry 5% cover 25%;
 }
@@ -130,7 +152,12 @@ h3 {
     :deep(> *) {
         animation: aparecerYSubir ease-out both;
         animation-timeline: view();
-        animation-range: entry 10% cover 30%;
+    }
+
+    @for $i from 1 through 10 {
+        :deep(> *:nth-child(#{$i})) {
+            animation-range: unquote('entry #{5 + ($i * 5)}% cover #{20 + ($i * 5)}%');
+        }
     }
 }
 
