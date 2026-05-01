@@ -31,7 +31,3 @@ export const annadirPedido = async (idUsuario: number, total: number, productos:
         throw error;
     }
 }
-
-export const obtenerPedidos = async(){
-
-};
