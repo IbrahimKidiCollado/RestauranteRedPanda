@@ -31,6 +31,9 @@
                 </button>
                 <button @click="navegar('/carrito')" class="carrito">
                     <img src="/assets/carrito.webp" alt="icono-carrito" />
+                    <span v-if="cantidadProductosCarrito > 0" class="badge-carrito">
+                        {{ cantidadProductosCarrito }}
+                    </span>
                 </button>
                 <button class="perfil" @click="navegar('/login')">
                     <img src="/assets/user-icon.webp" alt="icono-user" />{{
@@ -69,9 +72,10 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
+import { storeToRefs } from 'pinia'
+import { useCarritoStore } from '@/stores/counter'
 
 const userStore = useUserStore()
-//Traemos la variable que indica si el usuario es admin o no para mostrar el botón de admin
 const esAdmin = computed(() => userStore.esAdmin)
 
 const route = useRoute()
@@ -79,6 +83,8 @@ const router = useRouter()
 const menuAbierto = ref(false)
 const { t } = useI18n()
 const tabletMovil = ref(false)
+const carrito = useCarritoStore()
+const { cantidadProductosCarrito } = storeToRefs(carrito)
 
 const enlaces = [
     { id: 0, t: 'header.nav.inicio', path: '/' },
@@ -330,16 +336,41 @@ header {
             .carrito {
                 background: none;
                 border: none;
+                position: relative;
+                display: flex;
+                cursor: pointer;
+                transition: transform 0.2s ease;
+
+                &:hover {
+                    transform: scale(1.15);
+
+                    img {
+                        filter: brightness(1.8);
+                    }
+                }
 
                 img {
                     width: 25px;
                     height: 25px;
                     filter: brightness(1);
+                    transition: filter 0.2s ease;
+                }
 
-                    &:hover {
-                        transform: scale(1.1);
-                        filter: brightness(1.8);
-                    }
+                .badge-carrito {
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    background-color: $color-rojo-panda;
+                    color: white;
+                    font-size: 13px;
+                    font-weight: bold;
+                    width: 22px;
+                    height: 22px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    pointer-events: none;
                 }
             }
 
