@@ -25,13 +25,22 @@
         <h2>{{ $t('inicio.listo') }}</h2>
         <h3>{{ $t('inicio.listoDescripcion') }}</h3>
         <div>
-            <button>{{ $t('inicio.botones.verMenu') }}</button>
+            <button @click="navegar('/tienda')">{{ $t('inicio.botones.verMenu') }}</button>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+
+const router = useRouter()
+const menuAbierto = ref(false)
 const { t } = useI18n()
+const navegar = (path: string) => {
+    router.push(path)
+    menuAbierto.value = false
+}
 
 import EncabezadoInicio from '@/components/InicioComp/EncabezadoInicio.vue'
 import TarjetaInicio from '@/components/InicioComp/TarjetaInicio.vue'

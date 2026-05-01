@@ -4,14 +4,24 @@
             {{ $t('inicio.descripcion') }}<br /><span>{{ $t('inicio.descripcionSpan') }}</span>
         </h1>
         <p>{{ $t('inicio.descripcionLarga') }}</p>
-        <button>
+        <button @click="navegar('/tienda')">
             {{ $t('inicio.botones.pedir') }}<img src="/assets/envio-rapido.webp" alt="Envio" />
         </button>
         <p><img src="/assets/reloj-tres.webp" alt="tiempo" />{{ $t('inicio.tiempoEntrega') }}</p>
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+
+const router = useRouter()
+const menuAbierto = ref(false)
+const navegar = (path: string) => {
+    router.push(path)
+    menuAbierto.value = false
+}
+</script>
 
 <style lang="scss" scoped>
 @keyframes subirOpacidad {
