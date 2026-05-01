@@ -60,7 +60,6 @@ import { useUserStore } from '@/stores/userStore'
 const pedidoStore = usePedidoStore()
 const userStore = useUserStore()
 
-
 const router = useRouter()
 const carrito = useCarritoStore()
 const { productosCarrito, subtotal, cantidadProductosCarrito, envio, total, envioRestante } =
@@ -92,7 +91,6 @@ const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
         alerta.titulo = t('alertas.exito.titulo')
         alerta.mensaje = t('alertas.exito.mensaje')
         alerta.mostrarBoton = false
-
     }
 
     setTimeout(() => {
@@ -106,9 +104,9 @@ const mandarPedido = () => {
         id: p.id,
         cantidad: p.cantidad,
         ingredientesQuitados: p.listaIngredientesQuitados,
-        ingredientesIDs: p.listaIngredientesIDs
+        ingredientesIDs: p.listaIngredientesIDs,
     }))
-    const idUsuario = userStore.id;
+    const idUsuario = userStore.id
     const totalPedido = total.value
 
     pedidoStore.realizarPedido(idUsuario, totalPedido, productos)
@@ -129,7 +127,7 @@ const manejarAccion = (accion: string, p?: ProductoCarrito) => {
             restarCantidadProducto(p!)
             break
         case 'EXITO':
-            mandarPedido();
+            mandarPedido()
             vaciarCarrito()
             lanzarAlerta(accion)
             break
@@ -139,6 +137,39 @@ const manejarAccion = (accion: string, p?: ProductoCarrito) => {
 const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 ? true : false))
 </script>
 <style lang="scss" scoped>
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideFromTop {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .carrito-container {
     display: flex;
     flex-direction: inline;
@@ -158,6 +189,12 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
     .productos-container {
         width: 80%;
         min-width: 30px;
+
+        :deep(> *) {
+            animation: slideFromLeft linear both;
+            animation-timeline: view();
+            animation-range: entry 5% cover 20%;
+        }
     }
 
     .resumen-container {
@@ -166,6 +203,7 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
         top: 120px;
         align-self: flex-start;
         min-width: 300px;
+        animation: slideFromRight 0.8s ease-out both;
     }
 }
 
@@ -176,6 +214,16 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
     @include mobile-down {
         margin: 30 auto;
         margin-bottom: 30px;
+    }
+
+    > * {
+        animation: slideFromTop 0.6s ease-out both;
+    }
+
+    @for $i from 1 through 3 {
+        > *:nth-child(#{$i}) {
+            animation-delay: #{$i * 0.2s};
+        }
     }
 
     .enlace-volver {

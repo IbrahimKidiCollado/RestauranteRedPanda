@@ -83,11 +83,25 @@ const infoEspecialidades = {
 }
 </script>
 <style lang="scss" scoped>
+@keyframes aparecerYSubir {
+    0% {
+        opacity: 0;
+        transform: translateY(150px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 h2 {
     text-align: center;
     font-size: clamp(1.8rem, 3vw + 1rem, 2.8rem);
     color: $color-texto-blanco;
     padding-top: 140px;
+    animation: aparecerYSubir ease-out both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 25%;
 }
 
 h3 {
@@ -95,6 +109,9 @@ h3 {
     color: $color-blanco-sucio;
     font-weight: 400;
     padding-top: 15px;
+    animation: aparecerYSubir ease-out both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 25%;
 }
 
 .h2primero {
@@ -109,6 +126,12 @@ h3 {
     margin: 0 auto;
     gap: 40px;
     padding-top: 60px;
+
+    :deep(> *) {
+        animation: aparecerYSubir ease-out both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 30%;
+    }
 }
 
 .contenedor-tarjetas-2 {
@@ -136,6 +159,9 @@ h3 {
     height: 400px;
     margin-top: 70px;
     border-top: 1px solid $color-rojo-oscuro-claro;
+    animation: aparecerYSubir ease-out both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 30%;
 
     h2 {
         padding-top: 0 !important;

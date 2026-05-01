@@ -58,7 +58,13 @@
             :precio="platoConfigurando.precio"
             :ingredientes="ingredientes"
             @cerrar="platoConfigurando = null"
-            @añadir="manejarAnnadir(platoConfigurando, $event.listaIngredientesQuitados, $event.ingredientesSeleccionados)"
+            @añadir="
+                manejarAnnadir(
+                    platoConfigurando,
+                    $event.listaIngredientesQuitados,
+                    $event.ingredientesSeleccionados,
+                )
+            "
         />
     </div>
 </template>
@@ -166,7 +172,7 @@ const manejarAnnadir = (plato: Plato, ingredientesQuitados: string, ingredientes
 
 //Para abrir el configurador de ingredientes
 const abrirConfigurador = async (plato: Plato) => {
-    platoConfigurando.value = plato;
+    platoConfigurando.value = plato
     ingredientes.value = await obtenerIngredientes(plato.id, plato.categoria_slug)
 }
 
@@ -178,9 +184,54 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
+@keyframes slideFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes inflateScroll {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .contenedor-titulos {
     text-align: center;
     margin-top: 40px;
+    animation: slideFromRight 0.8s ease-out both;
     h2 {
         color: $color-blanco-sucio;
         font-size: clamp(16px, 2vw + 10px, 30px);
@@ -203,6 +254,7 @@ onMounted(async () => {
     margin: 40px auto;
     gap: 10px;
     background-color: $color-fondo-header;
+    animation: slideFromLeft 0.8s ease-out both;
     input {
         border: none;
         background: none;
@@ -238,6 +290,7 @@ p {
     .nombre-categoria {
         display: flex;
         gap: 10px;
+        animation: slideFromLeft 0.8s ease-out both;
     }
     .categorias {
         max-width: 1600px;
@@ -246,6 +299,21 @@ p {
         justify-content: center;
         gap: 20px;
         margin-top: 20px;
+
+        :deep(> *) {
+            animation: slideFromBottom 0.6s ease-out both;
+        }
+
+        :deep(> *) {
+            scale: 1.02;
+        }
+
+        @for $i from 1 through 20 {
+            :deep(> *:nth-child(#{$i})) {
+                animation-delay: #{$i * 0.1s};
+            }
+        }
+
         .activo {
             background-color: $color-rojo-panda;
             border-color: $color-rojo-panda;
@@ -261,5 +329,11 @@ p {
     flex-wrap: wrap;
     max-width: 1600px;
     margin: 50px auto;
+    :deep(> *) {
+        transform-origin: center;
+        animation: inflateScroll linear both;
+        animation-timeline: view();
+        animation-range: entry 5% cover 25%;
+    }
 }
 </style>

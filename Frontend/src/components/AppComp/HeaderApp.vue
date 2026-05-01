@@ -26,7 +26,9 @@
                 ></div>
             </nav>
             <div class="contenedor-carrito-perfil">
-                <button v-if="esAdmin" class="admin" @click="navegar('/admin')"><span>AdmMode</span></button>
+                <button v-if="esAdmin" class="admin" @click="navegar('/admin')">
+                    <span>AdmMode</span>
+                </button>
                 <button @click="navegar('/carrito')" class="carrito">
                     <img src="/assets/carrito.webp" alt="icono-carrito" />
                 </button>
@@ -66,11 +68,11 @@
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/stores/userStore'
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 //Traemos la variable que indica si el usuario es admin o no para mostrar el botón de admin
-const esAdmin = computed(() => userStore.esAdmin);
+const esAdmin = computed(() => userStore.esAdmin)
 
 const route = useRoute()
 const router = useRouter()
@@ -101,6 +103,50 @@ const navegar = (path: string) => {
 </script>
 
 <style lang="scss" scoped>
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideFromTopLinks {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes expandFromCenter {
+    0% {
+        clip-path: inset(0 50% 0 50%);
+        opacity: 0;
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+    }
+}
+
 header {
     background-color: $color-fondo-header;
     display: flex;
@@ -170,9 +216,10 @@ header {
             display: flex;
             align-items: center;
             transition: transform 0.2s ease;
+            animation: slideFromLeft 0.8s ease-out both;
 
             &:hover {
-                transform: scale(1.05);
+                transform: scale(1.05) !important;
             }
 
             img {
@@ -232,6 +279,7 @@ header {
                 cursor: pointer;
                 transition: color 0.3s ease;
                 color: $color-blanco-sucio;
+                animation: slideFromTopLinks 0.6s ease-out both;
 
                 &:hover {
                     color: $color-texto-blanco;
@@ -239,6 +287,12 @@ header {
 
                 &.active {
                     color: $color-rojo-panda !important;
+                }
+            }
+
+            @for $i from 1 through 10 {
+                li:nth-of-type(#{$i}) {
+                    animation-delay: #{$i * 0.15s};
                 }
             }
 
@@ -251,6 +305,7 @@ header {
                 background-color: $color-rojo-panda;
                 transition: transform 0.3s ease-in-out;
                 pointer-events: none;
+                animation: expandFromCenter 0.4s ease-out 0.8s both;
             }
         }
 
@@ -270,6 +325,8 @@ header {
             align-items: center;
             gap: 25px;
             transition: transform 0.3s ease;
+            animation: slideFromRight 0.8s ease-out both;
+
             .carrito {
                 background: none;
                 border: none;

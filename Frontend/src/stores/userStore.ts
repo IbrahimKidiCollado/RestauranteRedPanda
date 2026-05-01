@@ -9,7 +9,7 @@ export const useUserStore = defineStore('user', () => {
     const nombreUsuario = ref('');
     const emailUsuario = ref('');
     const passwordUsuario = ref('');
-    const sesionActiva = ref(true); /* CAMBIADO */
+    const sesionActiva = ref(false);
     const id = ref(0);
 
 
