@@ -213,5 +213,21 @@
 			"findes": "Sábado - Domingo: 12:00 - 00:00"
 		},
 		"derechos": "© 2026 Red Panda. Todos los derechos reservados."
+	},
+	"usuario": {
+		"perfil": "Mi Perfil",
+		"nombre": "Nombre",
+		"email": "Email",
+		"prefer": "Preferencia de idioma",
+		"idiomas": {
+			"frances": "Frances",
+			"ingles": "Ingles",
+			"chino": "Chino",
+			"catalan": "Catalan",
+			"italiano": "Italiano",
+			"japones": "Japones"
+		},
+		"cerrar": "Cerrar Sesión",
+		"historial": "Historial de Pedidos"
 	}
 }
