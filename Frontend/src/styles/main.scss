@@ -19,7 +19,9 @@ h1 {
 }
 
 img[alt="Logo Profesional"] {
-	background: radial-gradient(circle, #ec0808 0%, #d40606 10%);
+	background: none;
+	background-color: $color-rojo-oscuro;
 	border-radius: 15px;
 	margin-right: 20px;
+	border: 1px solid $color-rojo-oscuro-claro;
 }
