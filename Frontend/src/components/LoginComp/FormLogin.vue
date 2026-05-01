@@ -1,5 +1,5 @@
 <template>
-    <a class="enlace-back"><span class="material-symbols-outlined"> arrow_back </span> Volver</a>
+    <a class="enlace-back" @click="volver()"><span class="material-symbols-outlined"> arrow_back </span> Volver</a>
     <div class="contenedor">
         <h2 class="titulo">
             {{ !logueado ? $t('login.formRegistrar.inicio') : $t('login.formIniciar.inicio') }}
@@ -82,7 +82,7 @@ const envio = async () => {
     if(props.logueado){
         const resultado = await userStore.login(datosFormulario.nombre,datosFormulario.email, datosFormulario.password);
         if(resultado){
-            router.push('/tienda');
+            //router.push('/tienda');
         } else {
             alert(resultado);
         }
@@ -94,6 +94,10 @@ const envio = async () => {
             alert(resultado);
         }
     }
+}
+
+const volver = () => {
+    router.push('/tienda');
 }
 
 </script>

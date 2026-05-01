@@ -1,24 +1,33 @@
-import {defineStore} from 'pinia'
+import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { annadirPedido } from '@/services/Tienda/PedidoService';
+import { annadirPedido, obtenerPedidosUsuario } from '@/services/Tienda/PedidoService';
 
 export const usePedidoStore = defineStore('pedido', () => {
+    
+    const pedidos = ref<any[]>([]);
 
     async function realizarPedido(idUsuario: number, total: number, productos: any[]) {
-        //mostrar por consola como si fuese un json
-        console.log('Realizando pedido con los siguientes datos:');
-        const res = await annadirPedido(idUsuario, total, productos);
-         console.log('Respuesta del servidor:', res);
-    }
-    async function obtenerPedidos(idUsuario: number) {
-            console.log('Obteniendo pedidos para el usuario con ID:', idUsuario);
-            const res = await fetch(`http://localhost:8081/pedidos/${idUsuario}`);
-            const data = await res.json();
-            console.log('Pedidos obtenidos:', data);
-            return data;
+        try {
+            const res = await annadirPedido(idUsuario, total, productos);
+            return res;
+        } catch (error) {
+            console.error("Error al realizar pedido:", error);
+        }
     }
 
-    return{
+    async function obtenerPedidos(idUsuario: number) {
+        try {
+            const res = await obtenerPedidosUsuario(idUsuario);
+            pedidos.value = res; 
+            return res;
+        } catch (error) {
+            console.error("Error al obtener pedidos:", error);
+            pedidos.value = []; 
+        }
+    }
+
+    return {
+        pedidos, 
         realizarPedido,
         obtenerPedidos
     }

@@ -10,6 +10,7 @@ export const useUserStore = defineStore('user', () => {
     const emailUsuario = ref('');
     const passwordUsuario = ref('');
     const sesionActiva = ref(false);
+    const prefenciaIdioma = ref('');
     const id = ref(0);
 
 
@@ -26,6 +27,9 @@ export const useUserStore = defineStore('user', () => {
             sesionActiva.value = true;
             id.value = resultado.id;
             nombreUsuario.value = resultado.nombre;
+            emailUsuario.value = resultado.email;
+            prefenciaIdioma.value = resultado.preferencia_idioma;
+
             if (resultado.nombre === 'admin') {
                 esAdmin.value = true;
                 console.log(resultado);
@@ -81,7 +85,8 @@ export const useUserStore = defineStore('user', () => {
         login,
         logout,
         esAdmin,
-        sesionActiva
+        sesionActiva,
+        prefenciaIdioma
     }
 
 });

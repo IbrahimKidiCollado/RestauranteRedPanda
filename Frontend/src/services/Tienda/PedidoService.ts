@@ -31,3 +31,26 @@ export const annadirPedido = async (idUsuario: number, total: number, productos:
         throw error;
     }
 }
+
+export const obtenerPedidosUsuario = async (idUsuario: number) => {
+    try {
+        const res = await fetch(`http://localhost:8081/pedidos/${idUsuario}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        });
+        
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message || 'Error al cargar los pedidos');
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error('Error al cargar los pedidos:', error);
+        throw error;
+    }
+}
+

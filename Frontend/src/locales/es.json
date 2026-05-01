@@ -54,10 +54,6 @@
 			"terminos": "Al registrarte, aceptas nuestros Términos y Condiciones y Política de Privacidad"
 		}
 	},
-	"usuario": {
-		"bienvenido": "Bienvenido, ",
-		"cerrar": "Cerrar Sesión"
-	},
 	"ingredientes": {
 		"pers": "Personaliza tu plato",
 		"select": "Selecciona los ingredientes que deseas eliminar",
@@ -229,5 +225,17 @@
 		},
 		"cerrar": "Cerrar Sesión",
 		"historial": "Historial de Pedidos"
-	}
+	},
+	"historialPedidos": {
+        "titulo": "Mis Pedidos",
+        "tabla": {
+            "id": "ID Pedido",
+            "info": "Estado / Info",
+            "total": "Total"
+        },
+        "detalles": {
+            "vacio": "No se han encontrado pedidos en tu historial."
+        }
+    }
+
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.redpanda.restaurante.entity.Pedido;
 import com.redpanda.restaurante.repository.PedidoRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class PedidoController {
     //Obtener pedidos por id de usuario
     //Se usa Optional para manejar el caso en el que el usuario no tenga pedidos o no exista
     @GetMapping("/pedidos/{userId}")
-    public List<Pedido> getPedidosByUsuarioId(@RequestParam Long userId) {
+    public List<Pedido> getPedidosByUsuarioId(@PathVariable Long userId) {
         List<Pedido> pedidos = pedidoRepository.findByUsuarioId(userId);
         //Añadimos las lineas de pedido a cada pedido para que se devuelvan en la respuesta
         return pedidos;
