@@ -52,13 +52,13 @@ import TarjetaProducto from '@/components/CarritoComp/TarjetaProducto.vue'
 import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
 import { reactive } from 'vue'
 import ResumenPedido from '@/components/CarritoComp/ResumenPedido.vue'
-import { vaciarCarrito } from '@/services/Tienda/CarritoService'
 import { useI18n } from 'vue-i18n'
 import { usePedidoStore } from '@/stores/pedidoStore'
 import { useUserStore } from '@/stores/userStore'
 
 const pedidoStore = usePedidoStore()
 const userStore = useUserStore()
+const carritoStore = useCarritoStore();
 
 const router = useRouter()
 const carrito = useCarritoStore()
@@ -103,6 +103,9 @@ const mandarPedido = () => {
     const productos = productosCarrito.value.map((p) => ({
         id: p.id,
         cantidad: p.cantidad,
+        nombre: p.nombre,
+        precio : p.precio,
+        categoria_slug: p.categoria_slug,
         ingredientesQuitados: p.listaIngredientesQuitados,
         ingredientesIDs: p.listaIngredientesIDs,
     }))
@@ -128,7 +131,7 @@ const manejarAccion = (accion: string, p?: ProductoCarrito) => {
             break
         case 'EXITO':
             mandarPedido()
-            vaciarCarrito()
+            carritoStore.limpiarTodoElCarrito();
             lanzarAlerta(accion)
             break
     }

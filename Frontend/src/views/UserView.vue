@@ -1,30 +1,20 @@
 <template>
-    <div class="container">
-        <div class="contatiner-1">
-            <InfoLogin :logueado="logueado" />
+    <div class="contenedor">
+        <div>
+            <userInfo />
         </div>
-        <div >
-            <FormLogin :logueado="logueado" @cambiar="cambiarForm()"/>
+        <p>hola</p>
+        <div>
+            <HistorialPedidos />
         </div>
     </div>
+
 </template>
+<script lang="ts" setup>
+import UserInfo from '@/components/UserComp/UserInfo.vue'
+import HistorialPedidos from '@/components/UserComp/HistorialPedidos.vue'
 
-<script setup lang="ts">
-import InfoLogin from '@/components/LoginComp/InfoLogin.vue'
-import FormLogin from '@/components/LoginComp/FormLogin.vue'
-import { useUserStore } from '@/stores/userStore'
-import { computed } from 'vue'
-
-
-const userStore = useUserStore()
-const logueado = computed(() => userStore.logueado)
-
-const cambiarForm = ()  => {
-    userStore.logueado = !userStore.logueado
-
-}
 </script>
-
 <style lang="scss" scoped>
 @keyframes slideFromLeft {
     0% {
@@ -48,7 +38,7 @@ const cambiarForm = ()  => {
     }
 }
 
-.container {
+.contenedor {
     display: flex;
     align-items: stretch;
     gap: 30px;
@@ -64,4 +54,5 @@ const cambiarForm = ()  => {
         animation: slideFromRight 0.8s ease-out both;
     }
 }
+
 </style>
