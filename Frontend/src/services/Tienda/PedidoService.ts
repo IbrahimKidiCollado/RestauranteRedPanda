@@ -6,11 +6,11 @@ export const annadirPedido = async (idUsuario: number, total: number, productos:
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                precio: total.toString(), 
+                precio: Number(total), 
                 usuario: { id: idUsuario },
                 lineasPedido: productos.map(p => ({
-                    cantidad: p.cantidad,
-                    precio: p.precio,
+                    cantidad: Number(p.cantidad),
+                    precio: Number(p.precio),
                     nombrePlato: p.nombre, 
                     categoriaPlato: p.categoria_slug, 
                     ingredientesQuitados: p.listaIngredientesQuitados ,

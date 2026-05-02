@@ -71,7 +71,10 @@ export const useUserStore = defineStore('user', () => {
         nombreUsuario.value = '';
         passwordUsuario.value = '';
         esAdmin.value = false;
+        id.value = 0;
         sesionActiva.value = false;
+        console.log("cierras sesion");
+        prefenciaIdioma.value = '';
         return true;
     }
 

@@ -13,9 +13,13 @@
             <p class="texto-plantilla">{{ $t('usuario.prefer') }}</p>
             <p>{{ preferenciaIdioma }}</p>
         </div>
+        <button class="btn-cerrar" @click="cerrarSesion()">
+            {{ $t('usuario.cerrar') }}
+        </button>
     </div>
 </template>
 <script setup lang="ts">
+import router from '@/router';
 import { useUserStore } from '@/stores/userStore';
 import { computed } from 'vue';
 
@@ -23,6 +27,11 @@ const userStore = useUserStore();
 const nombreUsuario = computed(() => userStore.nombreUsuario);
 const emailUsuario = computed(() => userStore.emailUsuario);
 const preferenciaIdioma = computed(() => userStore.prefenciaIdioma)
+
+const cerrarSesion =async () => {
+    const res = await userStore.logout();
+    router.push('/tienda');
+}
 
 
 </script>
@@ -55,6 +64,12 @@ const preferenciaIdioma = computed(() => userStore.prefenciaIdioma)
         font-size: 18px;
         color: $color-texto-blanco;
         margin: 0;
+    }
+
+    .btn-cerrar{
+        @include boton-rojo();
+        margin-top: 20px;
+        cursor: pointer;
     }
 }
 

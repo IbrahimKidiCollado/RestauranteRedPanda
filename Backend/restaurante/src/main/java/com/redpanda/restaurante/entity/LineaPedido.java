@@ -54,6 +54,9 @@ public class LineaPedido {
     public String getIngredientesIDs() {
         return ingredientesIDs;
     }
+    public Pedido getPedido() {
+        return pedido;
+    }
 
     //Setters
     public void setCantidad(int cantidad) {
@@ -73,6 +76,9 @@ public class LineaPedido {
     }
     public void setIngredientesIDs(String ingredientesIDs) {
         this.ingredientesIDs = ingredientesIDs;
+    }
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     

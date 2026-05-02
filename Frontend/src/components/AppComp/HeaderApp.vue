@@ -35,9 +35,14 @@
                         {{ cantidadProductosCarrito }}
                     </span>
                 </button>
-                <button class="perfil" @click="navegar('/login')">
+                <button v-if="!sesionActiva"  class="perfil" @click="navegar('/login')">
                     <img src="/assets/user-icon.webp" alt="icono-user" />{{
                         $t('header.botones.iniciar')
+                    }}
+                </button>
+                <button  v-if="sesionActiva" class="perfil" @click="navegar('/perfil')">
+                    <img src="/assets/user-icon.webp" alt="icono-user" />{{
+                        $t('header.botones.perfil')
                     }}
                 </button>
                 <button
@@ -76,7 +81,8 @@ import { storeToRefs } from 'pinia'
 import { useCarritoStore } from '@/stores/counter'
 
 const userStore = useUserStore()
-const esAdmin = computed(() => userStore.esAdmin)
+const esAdmin = computed(() => userStore.esAdmin);
+const sesionActiva = computed(() => userStore.sesionActiva);
 
 const route = useRoute()
 const router = useRouter()

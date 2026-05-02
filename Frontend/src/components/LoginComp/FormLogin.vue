@@ -6,7 +6,7 @@
         </h2>
         <p class="pregunta">
             {{ !logueado ? $t('login.formRegistrar.noInicio') : $t('login.formIniciar.noInicio') }}
-            <span class="pregunta-rsp">
+            <span class="pregunta-rsp" @click="cambiarForm()">
                 {{ !logueado ? $t('login.formRegistrar.regist') : $t('login.formIniciar.regist') }}
             </span>
         </p>
@@ -82,18 +82,23 @@ const envio = async () => {
     if(props.logueado){
         const resultado = await userStore.login(datosFormulario.nombre,datosFormulario.email, datosFormulario.password);
         if(resultado){
-            //router.push('/tienda');
+            router.push('/tienda');
         } else {
             alert(resultado);
         }
     }else{
         const resultado = await userStore.registrarse(datosFormulario.nombre,datosFormulario.email, datosFormulario.password);
         if(resultado){
-            //router.push('/tienda');
+            router.push('/tienda');
         } else {
             alert(resultado);
         }
     }
+}
+
+const emit = defineEmits(['cambiar']);
+const cambiarForm = () => {
+    emit('cambiar');
 }
 
 const volver = () => {

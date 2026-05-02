@@ -18,7 +18,7 @@ public class Pedido {
     private Long id;
 
     //Campos de la tabla
-    private String precio;
+    private double precio;
 
     //Relacion 1 a N 
     //Varios pedidos pertenecen a UN usuario
@@ -39,7 +39,7 @@ public class Pedido {
     public Long getId() {
         return id;
     }
-    public String getPrecio() {
+    public double getPrecio() {
         return precio;
     }
     public Usuario getUsuario() {
@@ -50,7 +50,7 @@ public class Pedido {
     }
 
     //Setters
-    public void setPrecio(String precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
     public void setUsuario(Usuario usuario) {

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.redpanda.restaurante.entity.LineaPedido;
 import com.redpanda.restaurante.entity.Pedido;
 import com.redpanda.restaurante.repository.PedidoRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,10 +44,14 @@ public class PedidoController {
     }
 
     //Crear un nuevo pedido
-    @PostMapping("/pedido/create")
+   @PostMapping("/pedido/create")
     public Pedido createPedido(@RequestBody Pedido pedido) {
-        Pedido pedido2 = pedidoRepository.save(pedido);
-        return pedido2;
+        if (pedido.getLineasPedido() != null) {
+            for (LineaPedido linea : pedido.getLineasPedido()) {
+                linea.setPedido(pedido); 
+            }
+        }
+        return pedidoRepository.save(pedido);
     }
 
     //Borrar un pedido por id
