@@ -1,7 +1,7 @@
 -- 1. USUARIOS Y CARTA
-INSERT INTO usuarios (id, nombre, email, pwd, preferencia_idioma) VALUES
-(1, 'admin', 'admin@example.com', '1234', 'es'),
-(2, 'cliente1', 'cliente1@example.com', 'abcd', 'es');
+INSERT INTO usuarios (id, nombre, email, pwd) VALUES
+(1, 'admin', 'admin@example.com', '1234'),
+(2, 'cliente1', 'cliente1@example.com', 'abcd');
 
 INSERT INTO carta (id) VALUES (1);
 
@@ -108,3 +108,23 @@ INSERT INTO categoria (nombre, slug) VALUES
 ('tienda.categorias.postres', 'postre'),
 ('tienda.categorias.bebidas', 'bebida'),
 ('tienda.categorias.entrantes', 'entrante');
+
+-- PEDIDOS
+INSERT INTO pedido (precio, id_usuario) VALUES
+(31.50, 2),
+(16.50, 2),
+(91.50, 2);
+
+-- LUEGO LAS LÍNEAS DE PEDIDO
+INSERT INTO linea_pedido (cantidad, precio, nombre_plato, categoria_plato, ingredientes_quitados, ingredientesids, id_pedido) VALUES
+(1, 10.50, 'Sushi Salmón', 'sushi', '', '[]', 1),
+(1, 13.50, 'Ramen Tonkotsu', 'ramen', '', '[]', 1),
+(1, 3.00, 'Ramune', 'bebida', '', '[]', 1);
+
+INSERT INTO linea_pedido (cantidad, precio, nombre_plato, categoria_plato, ingredientes_quitados, ingredientesids, id_pedido) VALUES
+(2, 5.50, 'Gyozas', 'entrante', '', '[]', 2),
+(1, 1.50, 'Agua Mineral', 'bebida', '', '[]', 2);
+
+INSERT INTO linea_pedido (cantidad, precio, nombre_plato, categoria_plato, ingredientes_quitados, ingredientesids, id_pedido) VALUES
+(1, 45.00, 'Wagyu A5', 'carne', '', '[]', 3),
+(1, 25.00, 'Sashimi Variado', 'pescado', '', '[]', 3);

@@ -4,8 +4,8 @@
         <h2>{{ $t('tienda.descripcion') }}</h2>
     </div>
     <div class="contenedor-buscador-platos">
-        <img src="/assets/busqueda.webp" alt="buscar" />
-        <input type="text" :placeholder="$t('tienda.buscador.buscar') + '...'" />
+        <img @click="buscar()" src="/assets/busqueda.webp" alt="buscar" />
+        <input @change="guardarTexto" type="text" :placeholder="$t('tienda.buscador.buscar') + '...'" />
     </div>
     <div class="contenedor-categorias">
         <div class="nombre-categoria">
@@ -174,6 +174,17 @@ const manejarAnnadir = (plato: Plato, ingredientesQuitados: string, ingredientes
 const abrirConfigurador = async (plato: Plato) => {
     platoConfigurando.value = plato
     ingredientes.value = await obtenerIngredientes(plato.id, plato.categoria_slug)
+}
+
+const textoBusqueda = ref('');
+const guardarTexto = (event : Event) => {
+    const texto = event.target as HTMLInputElement;
+    textoBusqueda.value = texto.value;
+    console.log("Texto que estamos buscando: " , textoBusqueda)
+}
+
+const buscar = () => {
+
 }
 
 onMounted(async () => {

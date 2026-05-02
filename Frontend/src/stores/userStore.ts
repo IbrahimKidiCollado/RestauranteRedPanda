@@ -12,6 +12,7 @@ export const useUserStore = defineStore('user', () => {
     const sesionActiva = ref(false);
     const prefenciaIdioma = ref('');
     const id = ref(0);
+    const preferencia_idioma = ref('');
 
 
     async function login(nombre: string, email: string, pwd: string) {

@@ -2,16 +2,23 @@
     <div class="contenedor-info-usuario">
         <h1>{{ $t('usuario.perfil') }}</h1>
         <div>
-            <p class="texto-plantilla">{{ $t('usuario.nombre') }}</p>
+            <p class="texto">{{ $t('usuario.nombre') }}</p>
             <p>{{ nombreUsuario }}</p>
         </div>
         <div>
-            <p class="texto-plantilla">{{ $t('usuario.email') }}</p>
+            <p class="texto">{{ $t('usuario.email') }}</p>
             <p>{{ emailUsuario }}</p>
         </div>
         <div>
-            <p class="texto-plantilla">{{ $t('usuario.prefer') }}</p>
-            <p>{{ preferenciaIdioma }}</p>
+            <p class="texto">{{ $t('usuario.prefer') }}</p>
+            <select class="prefeIdioma" name="prefeIdioma">
+                <option value="">{{ $t('usuario.idiomas.ingles') }}</option>
+                <option value="">{{ $t('usuario.idiomas.español') }}</option>
+                <option value="">{{ $t('usuario.idiomas.frances') }}</option>
+                <option value="">{{ $t('usuario.idiomas.chino') }}</option>
+                <option value="">{{ $t('usuario.idiomas.japones') }}</option>
+                <option value="">{{ $t('usuario.idiomas.catalan') }}</option>
+            </select>
         </div>
         <button class="btn-cerrar" @click="cerrarSesion()">
             {{ $t('usuario.cerrar') }}
@@ -41,7 +48,7 @@ const cerrarSesion =async () => {
     flex-direction: column;
     justify-content: center;
     padding: 40px;
-    background-color: $color-fondo-tarjeta;
+    background : $color-rojo-degradado;
     border-radius: 20px;
     margin-bottom: 20px;
     border: 1px solid $color-rojo-oscuro;
@@ -53,7 +60,7 @@ const cerrarSesion =async () => {
         flex-direction: column;
     }
 
-    .texto-plantilla{
+    .texto{
         font-size: 14px;
         color: $color-gris;
         opacity: 0.8;
@@ -64,6 +71,10 @@ const cerrarSesion =async () => {
         font-size: 18px;
         color: $color-texto-blanco;
         margin: 0;
+    }
+
+    .prefeIdioma{
+        border-radius: 10px;
     }
 
     .btn-cerrar{

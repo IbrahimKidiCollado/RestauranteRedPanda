@@ -20,7 +20,6 @@ public class Usuario {
     private String pwd;
     private String nombre;
     private String email;
-    private String preferenciaIdioma;
 
     //Relacion 1 a N
     //Un usuario puede tener varios pedidos
@@ -42,9 +41,6 @@ public class Usuario {
     public String getEmail() {
         return email;
     }
-    public String getPreferenciaIdioma() {
-        return preferenciaIdioma;
-    }
     public List<Pedido> getPedidos() {
         return pedidos;
     }
@@ -61,9 +57,6 @@ public class Usuario {
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-    public void setPreferenciaIdioma(String preferenciaIdioma) {
-        this.preferenciaIdioma = preferenciaIdioma;
     }
 
 

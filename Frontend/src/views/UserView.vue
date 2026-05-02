@@ -3,7 +3,6 @@
         <div>
             <userInfo />
         </div>
-        <p>hola</p>
         <div>
             <HistorialPedidos />
         </div>
@@ -40,7 +39,8 @@ import HistorialPedidos from '@/components/UserComp/HistorialPedidos.vue'
 
 .contenedor {
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
+    align-items: center;
     gap: 30px;
     margin: 40px 25px;
     justify-content: center;
