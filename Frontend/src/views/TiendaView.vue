@@ -4,8 +4,8 @@
         <h2>{{ $t('tienda.descripcion') }}</h2>
     </div>
     <div class="contenedor-buscador-platos">
-        <img @click="buscar()" src="/assets/busqueda.webp" alt="buscar" />
-        <input @change="guardarTexto" type="text" :placeholder="$t('tienda.buscador.buscar') + '...'" />
+        <img src="/assets/busqueda.webp" alt="buscar" />
+        <input @input="guardarTexto" type="text" :placeholder="$t('tienda.buscador.buscar') + '...'" />
     </div>
     <div class="contenedor-categorias">
         <div class="nombre-categoria">
@@ -25,7 +25,7 @@
     </div>
     <div class="contenedor-platos">
         <TarjetaPlato
-            v-for="plato in platos"
+            v-for="plato in platosFiltrados"
             :key="`${plato.categoria_slug}-${plato.id}`"
             :nombre="$t(plato.nombre)"
             :descripcion="$t(plato.descripcion)"
@@ -70,9 +70,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, reactive } from 'vue'
+import { onMounted, ref, reactive, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { obtenerPlatos } from '@/services/Tienda/PlatosService'
+import { obtenerPlatos, obtenerCartaCompleta } from '@/services/Tienda/PlatosService'
 import { obtenerCategorias } from '@/services/Tienda/CategoriasService'
 import TarjetaPlato from '@/components/TiendaComp/TarjetaPlato.vue'
 import CategoriasFiltro from '@/components/TiendaComp/CategoriasFiltro.vue'
@@ -177,15 +177,34 @@ const abrirConfigurador = async (plato: Plato) => {
 }
 
 const textoBusqueda = ref('');
-const guardarTexto = (event : Event) => {
+const cartaCompleta = ref<Plato[]>([]);
+
+const guardarTexto = async (event : Event) => {
     const texto = event.target as HTMLInputElement;
     textoBusqueda.value = texto.value;
-    console.log("Texto que estamos buscando: " , textoBusqueda)
+
+    //Comprobamos que el usuario ha buscado algo y todavia no hemos obtenido la carta completa
+    if(textoBusqueda.value.length > 0 && cartaCompleta.value.length === 0){
+        cartaCompleta.value = await obtenerCartaCompleta();
+    }
 }
 
-const buscar = () => {
+const platosFiltrados = computed (() => {
+    const texto = textoBusqueda.value.toLocaleLowerCase().trim();
 
-}
+    if(!texto){
+        return platos.value
+    }
+
+    //obtenemos la carta entera 
+    return cartaCompleta.value.filter((plato) => {
+        const nombre = plato.nombre.toLocaleLowerCase();
+        const descripcion = plato.descripcion.toLocaleLowerCase();
+
+        return nombre.includes(texto) || descripcion.includes(texto);
+    })
+});
+
 
 onMounted(async () => {
     platos.value = await obtenerPlatos()

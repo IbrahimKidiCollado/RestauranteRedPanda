@@ -1,6 +1,8 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { annadirPlato } from '@/services/Tienda/PlatosService';
+  import { obtenerCategorias } from '@/services/Tienda/CategoriasService';
+  import { obtenerIngredientes, obtenerTodosIngredientes } from '@/services/Tienda/IngredientesService';
 
   //Variables que usamos para recoger los datos del formulario de creacion
   const categoria = ref("");
@@ -9,13 +11,19 @@
   const precio = ref<number>(0);
   const cantidad = ref(1);
   const img = ref("");
+  const ingredientes = ref<Ingrediente[]>([]);
+
+  interface Ingrediente {
+    id: number;
+    nombre: string;
+  }
 
   //mensaje 
   const emit = defineEmits(['actualizar-tabla']);
   
   //Para crear 
   const enviarDatos = async () => {
-    const res = await annadirPlato(nombre.value, descripcion.value, precio.value, cantidad.value, categoria.value, img.value);
+    const res = await annadirPlato(nombre.value, descripcion.value, precio.value, cantidad.value, categoria.value, img.value, ingredientes.value);
 
     if(res) {
       nombre.value = "";
@@ -23,6 +31,7 @@
       precio.value = 0;
       cantidad.value = 0;
       img.value = "";
+      ingredientes.value = [];
 
       //Avisamos al padre que necesita actualizar la carta
       emit('actualizar-tabla');
@@ -32,6 +41,20 @@
 
     
   }
+
+  const listaCategorias = ref<any[]>([]);
+  const listaIngredientes = ref<any[]>([])
+
+  onMounted (async () => {
+    const resultado = await obtenerCategorias();
+    const resultado2 = await obtenerTodosIngredientes();
+    if(resultado){
+      //filtro para que la categoria todos no aparezca en el desplegable
+      listaCategorias.value = resultado.filter((cat: any) =>cat.slug !== 'todos');
+      listaIngredientes.value = resultado2;
+    }
+  })
+
 </script>
 <template>
   <div class="contenedor-admin">
@@ -39,17 +62,15 @@
       <h2 class="titulo-panel">SELECCIONA EL ELEMENTO A AÑADIR</h2>
       
       <div class="seleccion-elemento">
-        <label for="entidad">Seleccione el elemento a introducir: </label>
-        <select id="entidad" v-model="categoria">
-          <option value="" disabled selected>-- Elige una opción --</option>
-          <option value="sushi">Sushi 🍣</option>
-          <option value="ramen">Ramen 🍜</option>
-          <option value="entrante">Entrante 🥟</option>
-          <option value="bebida">Bebida 🍺</option>
-          <option value="carne">Carne 🥩</option>
-          <option value="pescado">Pescado 🐟</option>
-          <option value="postre">Postre 🍰</option>
-        </select>
+          <label for="entidad">Seleccione el elemento a introducir: </label>
+          <select id="entidad" v-model="categoria">
+            <option value="" disabled selected>-- Elige una opción --</option>
+            <option 
+              v-for="cat in listaCategorias"
+              :key="cat.id"
+              :value="cat.slug"
+            >{{ $t(cat.nombre) }}</option>
+          </select>
       </div>
 
       <div class="introduccion-datos">
@@ -73,9 +94,21 @@
           <input v-model.number="cantidad" id="cantidad" type="number" placeholder="2.....">
         </div>
 
-        <div class="img">
+        <div class="campo">
           <label for="img">Imagen: </label>
           <input v-model="img" id="img" type="text" placeholder="URL de la imagen.....">
+        </div>
+
+        <div class="ingredientes">
+          <div v-for="ing in listaIngredientes" :key="ing.id">
+            <input type="checkbox"
+            :id="ing.id"
+            :value="ing"
+            v-model="ingredientes"
+            class="ingrediente">
+            <label :for="ing.id">{{ ing.nombre }}</label>
+
+          </div>
         </div>
 
         <button @click="enviarDatos" type="button" class="boton-enviar">AÑADIR A LA CARTA</button>
@@ -86,7 +119,7 @@
 
 <style lang="scss" scoped>
 .contenedor-admin {
-  background-color: #000000;
+  background-color: $color-fondo-tarjeta;
   min-height: 60vh;
   display: flex;
   justify-content: center;
@@ -97,13 +130,13 @@
     scroll-margin-top: 100px;
     width: 100%;
     max-width: 600px;
-    background-color: #050505;
+    background-color: $color-fondo-tarjeta;
     padding: 40px;
     border-radius: 20px;
     border: 1px solid $color-rojo-oscuro;
     border-bottom: 4px solid $color-rojo-panda;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px $color-fondo-tarjeta;
 
     .titulo-panel {
       color: $color-rojo-panda;
@@ -140,7 +173,7 @@
         label {
           flex: 1;
           text-align: right;
-          color: #ffffff;
+          color: $color-texto-blanco;
           font-size: 14px;
         }
 
@@ -152,16 +185,65 @@
 
     input, select {
       padding: 12px 15px;
-      background-color: #121212;
+      background-color: $color-fondo-controles;
       border: 1px solid $color-rojo-oscuro-claro;
       border-radius: 10px;
-      color: #ffffff;
+      color: $color-texto-blanco;
       outline: none;
       transition: all 0.3s ease;
 
       &:focus {
         border-color: $color-rojo-panda;
         box-shadow: 0 0 8px rgba($color-rojo-panda, 0.2);
+      }
+    }
+
+    .ingredientes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      padding: 15px;
+      background-color: $color-fondo-tarjeta;
+      border-radius: 12px;
+      border: 1px inset $color-fondo-controles;
+
+      div {
+        position: relative;
+
+        .ingrediente {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+
+  
+          &:checked + label {
+            background-color: $color-rojo-panda;
+            border-color: $color-rojo-panda;
+            transform: scale(1.05);
+          }
+        }
+
+        label {
+          display: inline-block;
+          padding: 8px 16px;
+          border: 1px solid $color-rojo-oscuro-claro;
+          border-radius: 20px;
+          color: $color-texto-blanco;
+          font-size: 13px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          background-color: $color-fondo-controles;
+
+          &:hover {
+            border-color: $color-rojo-claro;
+            color: $color-texto-blanco;
+          }
+        }
       }
     }
 

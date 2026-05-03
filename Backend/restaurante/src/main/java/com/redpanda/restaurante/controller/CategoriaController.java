@@ -34,14 +34,14 @@ public class CategoriaController {
 
     //Para crear una nueva categoria
     @PostMapping("/categoria/create")
-    public Categoria addCarne(@RequestBody Categoria nuevaCategoria) {
+    public Categoria addCat(@RequestBody Categoria nuevaCategoria) {
         // El repositorio guarda la bebida y nos devuelve la bebida guardada con su ID generado.
         return categoriaRepository.save(nuevaCategoria);
     }
 
     //Para borra una categoria de la carta
     @DeleteMapping("/categoria/delete/{id}")
-    public String eliminarCarne(@PathVariable Long id){
+    public String eliminarCat(@PathVariable Long id){
         //Comprobamos si existe un postre con dicho id
         if (categoriaRepository.existsById(id)) {
             //Si existe lo eliminamos
@@ -55,7 +55,7 @@ public class CategoriaController {
 
     //Para actualizar una categoria
     @PutMapping("/categoria/update/{id}")
-    public Categoria actualizarCarne(@PathVariable Long id, @RequestBody Categoria categoriaActualizada) {
+    public Categoria actualizarCat(@PathVariable Long id, @RequestBody Categoria categoriaActualizada) {
         if (categoriaRepository.existsById(id)) {
             categoriaActualizada.setId(id);
             return categoriaRepository.save(categoriaActualizada);

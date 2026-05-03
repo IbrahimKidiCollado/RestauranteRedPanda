@@ -1,4 +1,4 @@
-//import axios from 'axios';
+
 
 export const obtenerPlatos = async (categoria?: string, offset?: number) => {
 	console.log("Obteniendo platos de la categoria: ", categoria, " con offset: ", offset);
@@ -37,8 +37,12 @@ export const eliminarPlato = async (id: number, categoria: string): Promise<bool
 	}
 
 }
+interface Ingrediente {
+    id: number;
+    nombre: string;
+}
 
-export const annadirPlato = async(nombre: string, descripcion: string, precio: number, cantidad: number, categoria : string, imagen  : string) =>{
+export const annadirPlato = async(nombre: string, descripcion: string, precio: number, cantidad: number, categoria : string, imagen  : string, ingredientes:Ingrediente[] ) =>{
 	try {
 		const res = await fetch(`http://localhost:8081/${categoria}/create`,{
 			method: 'POST',
@@ -51,7 +55,8 @@ export const annadirPlato = async(nombre: string, descripcion: string, precio: n
 				precio: precio,
 				cantidad: cantidad,
 				imagen: "/assets/carta/"+ categoria + "/" + imagen,
-				carta: {id: 1}
+				carta: {id: 1}, 
+				ingredientes: ingredientes
 			})
 		})
 		
