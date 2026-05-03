@@ -77,11 +77,15 @@ const datosFormulario = reactive({
     email: '',
     password: ''
 });
+//constante para que espere unos segundos el codigo antes de continuar
+const esperar = (ms: number) => new Promise(resolve => setTimeout(resolve,ms))
 
 const envio = async () => {
     if(props.logueado){
         const resultado = await userStore.login(datosFormulario.nombre,datosFormulario.email, datosFormulario.password);
         if(resultado){
+            emit('exito');
+            await esperar(2000);
             router.push('/tienda');
         } else {
             alert(resultado);
@@ -89,6 +93,8 @@ const envio = async () => {
     }else{
         const resultado = await userStore.registrarse(datosFormulario.nombre,datosFormulario.email, datosFormulario.password);
         if(resultado){
+            emit('exito');
+            await esperar(2000);
             router.push('/tienda');
         } else {
             alert(resultado);
@@ -96,7 +102,7 @@ const envio = async () => {
     }
 }
 
-const emit = defineEmits(['cambiar']);
+const emit = defineEmits(['cambiar', 'exito']);
 const cambiarForm = () => {
     emit('cambiar');
 }

@@ -191,7 +191,16 @@
 			"titulo": "¡PAGO EXITOSO!",
 			"mensaje": "Se ha realizado el pago exitosamente."
 		},
-		"verCarrito": "Ver carrito"
+		"verCarrito": "Ver carrito",
+		"creado":{
+			"titulo" : "CREADO",
+			"mensaje": "El producto se ha añadido correctamente a la carta"
+		},
+		"logueado":{
+			"titulo" : "LOGIN EXITOSO",
+			"mensaje": "Se ha logueado exitosamente en el sistema"
+		}
+
 	},
 	"footer": {
 		"descripcion": "Auténtica comida asiática preparada con ingredientes frescos y recetas tradicionales.",

@@ -4,8 +4,14 @@
             <InfoLogin :logueado="logueado" />
         </div>
         <div >
-            <FormLogin :logueado="logueado" @cambiar="cambiarForm()"/>
+            <FormLogin :logueado="logueado" @cambiar="cambiarForm()" @exito="mostrarAlerta()"/>
         </div>
+        <AlertaCarrito
+            :visible="alerta.visible"
+            :titulo="alerta.titulo"
+            :mensaje="alerta.mensaje"
+            :mostrar-boton="alerta.mostrarBoton"
+        />
     </div>
 </template>
 
@@ -14,11 +20,26 @@ import InfoLogin from '@/components/LoginComp/InfoLogin.vue'
 import FormLogin from '@/components/LoginComp/FormLogin.vue'
 import { useUserStore } from '@/stores/userStore'
 import { computed } from 'vue'
-
+import { reactive } from 'vue';
+import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
+import { useI18n } from 'vue-i18n'
 
 const userStore = useUserStore()
 const logueado = computed(() => userStore.logueado)
 
+const alerta = reactive({
+    visible: false,
+    titulo: '',
+    mensaje: '',
+    mostrarBoton: false
+});
+
+const { t } = useI18n()
+const mostrarAlerta = () => {
+    alerta.visible = true;
+    alerta.titulo = t('alertas.logueado.titulo');
+    alerta.mensaje = t('alertas.logueado.mensaje');
+}
 const cambiarForm = ()  => {
     userStore.logueado = !userStore.logueado
 
