@@ -85,14 +85,10 @@ footer {
             margin-left: 40px;
 
             @include mobile-down {
-                margin-left: 40px;
+                margin-left: 0px;
             }
 
             padding-top: 50px;
-
-            @include movil-pequeño-down {
-                margin-left: 0px;
-            }
         }
 
         div > span {
@@ -103,6 +99,7 @@ footer {
 
         .contenedor-1 {
             margin-top: -13px;
+            margin: 0 auto;
 
             img {
                 width: 90px;
@@ -117,12 +114,14 @@ footer {
 
         .contenedor-2 {
             list-style: none;
+            margin: 0 auto;
             li {
                 margin-bottom: 10px;
             }
         }
 
         .contenedor-3 {
+            margin: 0 auto;
             div {
                 display: flex;
                 align-items: center;
@@ -136,6 +135,7 @@ footer {
         }
 
         .contenedor-4 {
+            margin: 0 auto;
             p {
                 margin-bottom: 10px;
             }

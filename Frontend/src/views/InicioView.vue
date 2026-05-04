@@ -1,31 +1,33 @@
 <template>
-    <EncabezadoInicio />
-    <h2 class="h2primero">{{ $t('inicio.razones') }}</h2>
-    <div class="contenedor-tarjetas">
-        <TarjetaInicio
-            v-for="(ventaja, i) in infoVentaja"
-            :key="i"
-            :imagen="ventaja.imagen"
-            :titulo="ventaja.titulo"
-            :descripcion="ventaja.descripcion"
-        />
-    </div>
-    <h2>{{ $t('inicio.especialidades') }}</h2>
-    <h3>{{ $t('inicio.especialidadesDescripcion') }}</h3>
-    <div class="contenedor-tarjetas contenedor-tarjetas-2">
-        <TarjetaInicio
-            v-for="(especialidad, i) in infoEspecialidades"
-            :key="i"
-            :imagen="especialidad.imagen"
-            :titulo="especialidad.titulo"
-            :descripcion="especialidad.descripcion"
-        />
-    </div>
-    <div class="contenedor-listo">
-        <h2>{{ $t('inicio.listo') }}</h2>
-        <h3>{{ $t('inicio.listoDescripcion') }}</h3>
-        <div>
-            <button @click="navegar('/tienda')">{{ $t('inicio.botones.verMenu') }}</button>
+    <div class="mainContainer">
+        <EncabezadoInicio />
+        <h2 class="h2primero">{{ $t('inicio.razones') }}</h2>
+        <div class="contenedor-tarjetas">
+            <TarjetaInicio
+                v-for="(ventaja, i) in infoVentaja"
+                :key="i"
+                :imagen="ventaja.imagen"
+                :titulo="ventaja.titulo"
+                :descripcion="ventaja.descripcion"
+            />
+        </div>
+        <h2>{{ $t('inicio.especialidades') }}</h2>
+        <h3>{{ $t('inicio.especialidadesDescripcion') }}</h3>
+        <div class="contenedor-tarjetas contenedor-tarjetas-2">
+            <TarjetaInicio
+                v-for="(especialidad, i) in infoEspecialidades"
+                :key="i"
+                :imagen="especialidad.imagen"
+                :titulo="especialidad.titulo"
+                :descripcion="especialidad.descripcion"
+            />
+        </div>
+        <div class="contenedor-listo">
+            <h2>{{ $t('inicio.listo') }}</h2>
+            <h3>{{ $t('inicio.listoDescripcion') }}</h3>
+            <div>
+                <button @click="navegar('/tienda')">{{ $t('inicio.botones.verMenu') }}</button>
+            </div>
         </div>
     </div>
 </template>
@@ -123,6 +125,9 @@ const infoEspecialidades = {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+.mainContainer {
 }
 
 h2 {

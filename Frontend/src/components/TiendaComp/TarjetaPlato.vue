@@ -23,7 +23,24 @@
 </template>
 
 <style lang="scss" scoped>
+@keyframes slideFromLeftScroll {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .contenedor-tarjeta {
+    /* 👇 Aquí está la magia del scroll añadida 👇 */
+    animation: slideFromLeftScroll linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 50%; /* Termina cuando asoma el 50% de la tarjeta */
+
+    /* El resto de tus estilos originales */
     overflow: hidden;
     max-width: 100px;
     min-width: 350px;
@@ -32,7 +49,6 @@
     gap: 10px;
     width: 100%;
     border: 1px solid $color-rojo-oscuro;
-    overflow: hidden;
     transition: transform 0.3s ease;
     background-color: #030303;
 

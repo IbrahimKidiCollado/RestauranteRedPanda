@@ -58,7 +58,7 @@ import { useUserStore } from '@/stores/userStore'
 
 const pedidoStore = usePedidoStore()
 const userStore = useUserStore()
-const carritoStore = useCarritoStore();
+const carritoStore = useCarritoStore()
 
 const router = useRouter()
 const carrito = useCarritoStore()
@@ -104,7 +104,7 @@ const mandarPedido = () => {
         id: p.id,
         cantidad: p.cantidad,
         nombre: p.nombre,
-        precio : p.precio,
+        precio: p.precio,
         categoria_slug: p.categoria_slug,
         ingredientesQuitados: p.listaIngredientesQuitados,
         ingredientesIDs: p.listaIngredientesIDs,
@@ -131,7 +131,7 @@ const manejarAccion = (accion: string, p?: ProductoCarrito) => {
             break
         case 'EXITO':
             mandarPedido()
-            carritoStore.limpiarTodoElCarrito();
+            carritoStore.limpiarTodoElCarrito()
             lanzarAlerta(accion)
             break
     }
@@ -179,25 +179,20 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
     gap: 30px;
     margin: 30px 50px 0px 50px;
 
-    @include tablet-down {
-    }
-
     @include mobile-down {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin: 0px 0px 0px 0px;
+    }
+
+    @include desktop-down {
+        flex-direction: column;
     }
 
     .productos-container {
         width: 80%;
         min-width: 30px;
-
-        :deep(> *) {
-            animation: slideFromLeft linear both;
-            animation-timeline: view();
-            animation-range: entry 5% cover 20%;
-        }
+        margin: 0 auto;
     }
 
     .resumen-container {
@@ -207,6 +202,13 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
         align-self: flex-start;
         min-width: 300px;
         animation: slideFromRight 0.8s ease-out both;
+
+        @include desktop-down {
+            width: 80%;
+            margin: 0 auto;
+            justify-content: center;
+            align-self: center;
+        }
     }
 }
 

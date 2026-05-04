@@ -8,9 +8,27 @@
 	}
 }
 
+@mixin desktop-down {
+	@media (max-width: #{$desktop}) {
+		@content;
+	}
+}
+
 // TAMAÑO TABLET
 @mixin tablet-down {
-	@media (max-width: #{$desktop - 1px}) {
+	@media (max-width: #{$tablet - 1px}) {
+		@content;
+	}
+}
+
+@mixin tablet-pequeña-down {
+	@media (max-width: #{$tablet-pequeña - 1px}) {
+		@content;
+	}
+}
+
+@mixin mobile-mediano-down {
+	@media (max-width: #{$mobile-mediano - 1px}) {
 		@content;
 	}
 }

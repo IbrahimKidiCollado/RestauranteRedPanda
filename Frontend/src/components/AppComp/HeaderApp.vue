@@ -35,12 +35,12 @@
                         {{ cantidadProductosCarrito }}
                     </span>
                 </button>
-                <button v-if="!sesionActiva"  class="perfil" @click="navegar('/login')">
+                <button v-if="!sesionActiva" class="perfil" @click="navegar('/login')">
                     <img src="/assets/user-icon.webp" alt="icono-user" />{{
                         $t('header.botones.iniciar')
                     }}
                 </button>
-                <button  v-if="sesionActiva" class="perfil" @click="navegar('/perfil')">
+                <button v-if="sesionActiva" class="perfil" @click="navegar('/perfil')">
                     <img src="/assets/user-icon.webp" alt="icono-user" />{{
                         $t('header.botones.perfil')
                     }}
@@ -81,8 +81,8 @@ import { storeToRefs } from 'pinia'
 import { useCarritoStore } from '@/stores/counter'
 
 const userStore = useUserStore()
-const esAdmin = computed(() => userStore.esAdmin);
-const sesionActiva = computed(() => userStore.sesionActiva);
+const esAdmin = computed(() => userStore.esAdmin)
+const sesionActiva = computed(() => userStore.sesionActiva)
 
 const route = useRoute()
 const router = useRouter()
@@ -400,6 +400,14 @@ header {
                 }
 
                 @include movil-grande-down {
+                    display: none;
+                }
+
+                @include mobile-mediano-down {
+                    display: none;
+                }
+
+                @include tablet-pequeña-down {
                     display: none;
                 }
 

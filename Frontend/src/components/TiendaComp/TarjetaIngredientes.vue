@@ -360,6 +360,10 @@ $text-grey: #a0a0a0;
             gap: 12px;
             animation: slideFromRight 0.5s ease-out 0.9s both;
 
+            @include mobile-mediano-down {
+                flex-direction: column;
+            }
+
             button {
                 border: none;
                 border-radius: 10px;
