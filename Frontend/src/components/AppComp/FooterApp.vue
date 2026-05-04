@@ -85,7 +85,7 @@ footer {
             margin-left: 40px;
 
             @include mobile-down {
-                margin-left: 0px;
+                margin-left: 40px;
             }
 
             padding-top: 50px;
@@ -174,6 +174,7 @@ footer {
 
         @include mobile-down {
             margin-left: 0px;
+            margin-right: 0px;
         }
     }
 }
