@@ -47,7 +47,7 @@ const cerrarSesion =async () => {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 40px;
+    padding: 60px;
     background : $color-rojo-degradado;
     border-radius: 20px;
     margin-bottom: 20px;
@@ -61,16 +61,19 @@ const cerrarSesion =async () => {
     }
 
     .texto{
-        font-size: 14px;
+        font-size: 18px;
         color: $color-gris;
         opacity: 0.8;
         
     }
 
     p {
-        font-size: 18px;
+        font-size: 22px;
         color: $color-texto-blanco;
         margin: 0;
+    }
+    select{
+        font-size: 18px;
     }
 
     .prefeIdioma{

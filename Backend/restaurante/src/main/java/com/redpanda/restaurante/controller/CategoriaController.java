@@ -46,21 +46,10 @@ public class CategoriaController {
         if (categoriaRepository.existsById(id)) {
             //Si existe lo eliminamos
             categoriaRepository.deleteById(id);
-            return "Carne eliminada correctamente: " + id; 
+            return "Categoria eliminada correctamente: " + id; 
         }else{
             //Si no existe devolvemos un mensaje de error
-            return "Error: no existe o no se ha podido eliminar la carne con id: " + id;
-        }
-    }
-
-    //Para actualizar una categoria
-    @PutMapping("/categoria/update/{id}")
-    public Categoria actualizarCat(@PathVariable Long id, @RequestBody Categoria categoriaActualizada) {
-        if (categoriaRepository.existsById(id)) {
-            categoriaActualizada.setId(id);
-            return categoriaRepository.save(categoriaActualizada);
-        } else {
-            throw new RuntimeException("Carne no encontrada con id: " + id);
+            return "Error: no existe o no se ha podido eliminar la categoria con id: " + id;
         }
     }
 

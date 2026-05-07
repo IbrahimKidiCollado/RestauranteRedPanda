@@ -1,5 +1,6 @@
 package com.redpanda.restaurante;
 
+//Clase que sirve para mandar los elementos del carrito  formateados para su uso en el Frontend
 public class ElementoCarrito {
     private int id;
     private String nombre;
@@ -21,20 +22,13 @@ public class ElementoCarrito {
         this.listaIngredientesIDs = listaIngredientesIDs;
     }
     
+    //Getters
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-    
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public double getPrecio() {
@@ -44,6 +38,7 @@ public class ElementoCarrito {
     public String getImagen() {
         return imagen;
     }
+
     public String getListaIngredientesQuitados() {
         return listaIngredientesQuitados;
     }
@@ -52,20 +47,29 @@ public class ElementoCarrito {
         return listaIngredientesIDs;
     }
 
+    public int getCantidad() {
+        return cantidad;
+    }
+    
+    public String getCategoria_slug() {
+        return categoria_slug;
+    }
+
+    //Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public void setPrecio(double precio) {
         this.precio = precio;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
-
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
-
-    public String getCategoria_slug() {
-        return categoria_slug;
     }
 
     public void setCategoria_slug(String categoria_slug) {

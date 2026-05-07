@@ -1,8 +1,9 @@
 -- 1. USUARIOS Y CARTA
+-- 1. USUARIOS Y CARTA
+-- Las contraseñas ahora están hasheadas con BCrypt
 INSERT INTO usuarios (id, nombre, email, pwd) VALUES
-(1, 'admin', 'admin@example.com', '1234'),
-(2, 'cliente1', 'cliente1@example.com', 'abcd');
-
+(1, 'admin', 'admin@example.com', '$2a$10$YusoqaJ.S.7o586llMOx4ufRd9LIldO6AZ0PmpX9aphpbm8a0J5A.'),
+(2, 'cliente1', 'cliente1@example.com', '$2a$10$KeAZwQj3/1DHOaKvqfftXOtr9xbl5LLg0Ny3BrBXUCaa6yzFSCJ4C');
 INSERT INTO carta (id) VALUES (1);
 
 -- 2. INGREDIENTES (Incluyendo los nuevos para carnes, pescados, etc.)

@@ -3,7 +3,6 @@ package com.redpanda.restaurante.controller;
 import com.redpanda.restaurante.entity.Ingrediente;
 //Importa la entidad Ramen para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Ramen;
-import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Ramen para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.RamenRepository;
 
@@ -44,7 +43,7 @@ public class RamenController {
     }
 
     //Para borra un ramen de la carta
-    @DeleteMapping("/ramen/delete{id}")
+    @DeleteMapping("/ramen/delete/{id}")
     public String eliminarRamen(@PathVariable Long id){
         //Comprobamos si existe un ramen con dicho id
         if (ramenRepository.existsById(id)) {

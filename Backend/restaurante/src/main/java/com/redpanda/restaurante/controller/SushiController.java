@@ -1,7 +1,6 @@
 package com.redpanda.restaurante.controller;
 
 import com.redpanda.restaurante.entity.Ingrediente;
-import com.redpanda.restaurante.entity.Ramen;
 //Importa la entidad Sushi para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Sushi;
 

@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useCarritoStore } from './stores/counter'
+import HeaderApp from './components/AppComp/HeaderApp.vue'
+import FooterApp from './components/AppComp/FooterApp.vue'
+import { useUserStore } from './stores/userStore';
 
 const carritoStore = useCarritoStore();
 
-import HeaderApp from './components/AppComp/HeaderApp.vue'
-import FooterApp from './components/AppComp/FooterApp.vue'
+const userStore = useUserStore();
 
 const tabletMovil = ref(false)
 
@@ -13,21 +15,24 @@ const revisarTamaño = () => {
     tabletMovil.value = window.innerWidth <= 768 && window.innerWidth > 391
 }
 
-onMounted(() => {
-    revisarTamaño()
-    window.addEventListener('resize', revisarTamaño)
+onMounted(async () => {
+    
+    revisarTamaño();
+    window.addEventListener('resize', revisarTamaño);
+
+    console.log("Intentando recuperar sesión del LocalStorage...");
+    userStore.recuperarSesion();
+
+    try {
+        console.log("Sincronizando carrito con el servidor...");
+        await carritoStore.sincronizarCarrito();
+    } catch (error) {
+        console.error("Error en la carga inicial:", error);
+    }
 })
 
 onUnmounted(() => {
     window.removeEventListener('resize', revisarTamaño)
-})
-
-onMounted( async() => {
-    try {
-        await carritoStore.sincronizarCarrito()
-    } catch (error) {
-        console.error('Error al sincronizar el carrito:', error)  
-    }
 })
 </script>
 

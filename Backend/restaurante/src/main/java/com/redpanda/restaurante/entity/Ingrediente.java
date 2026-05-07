@@ -25,4 +25,14 @@ public class Ingrediente {
         return nombre;
     }
 
+    //Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+
+
 }

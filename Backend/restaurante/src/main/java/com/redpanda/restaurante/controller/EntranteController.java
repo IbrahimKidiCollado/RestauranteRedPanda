@@ -3,7 +3,6 @@ package com.redpanda.restaurante.controller;
 //Importa la entidad Entrante para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Entrante;
 import com.redpanda.restaurante.entity.Ingrediente;
-import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Entrante para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.EntranteRepository;
 
@@ -42,7 +41,7 @@ public class EntranteController {
     }
 
     //Para borra un entrante de la carta
-    @DeleteMapping("/entrante/delete{id}")
+    @DeleteMapping("/entrante/delete/{id}")
     public String eliminarEntrante(@PathVariable Long id){
         //Comprobamos si existe un entrante con dicho id
         if (entranteRepository.existsById(id)) {

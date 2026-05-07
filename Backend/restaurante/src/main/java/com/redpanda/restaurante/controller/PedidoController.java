@@ -54,16 +54,5 @@ public class PedidoController {
         return pedidoRepository.save(pedido);
     }
 
-    //Borrar un pedido por id
-    @DeleteMapping("/pedido/{id}/delete")
-    public String deletePedido(@RequestParam Long id) {
-        if (pedidoRepository.existsById(id)) {
-            pedidoRepository.deleteById(id);
-            return "Pedido eliminado correctamente: " + id; 
-        } else {
-            return "Error: no existe o no se ha podido eliminar el pedido con id: " + id;
-        }
-    }
-
 
 }

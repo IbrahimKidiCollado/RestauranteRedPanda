@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 interface Ingrediente {
     id: number
@@ -69,14 +69,27 @@ const props = defineProps<{
 const emit = defineEmits(['cerrar', 'añadir'])
 const ingredientesSeleccionados = ref<number[]>([])
 
+//al inicio están todos los ingredientes en el array, para que así aparezcan todos seleccionados
+watch(() => props.ingredientes, (nuevosIngredientes) =>{
+    if (nuevosIngredientes && nuevosIngredientes.length > 0) {
+        ingredientesSeleccionados.value = nuevosIngredientes.map(ing => ing.id);
+    }
+}, {immediate : true});
+
 const añadirAlCarrito = () => {
-    const nombresQuitados = props.ingredientes
-        .filter((ingrediente) => ingredientesSeleccionados.value.includes(ingrediente.id))
-        .map((ingrediente) => ingrediente.nombre)
-        .join(', ')
+
+    //Revisamos cuales son los que ha quitado el usuario en comparacion con la lista de ingredientes inicial que habia
+    const quitados = props.ingredientes.filter((ingrediente) => !ingredientesSeleccionados.value.includes(ingrediente.id));
+
+    //Obtenemos sus nombres
+    const nombresQuitados = quitados.map((ingrediente)=> ingrediente.nombre).join(',');
+
+    //obtenemos sus IDs
+    const idsQuitados = quitados.map((ingrediente) => ingrediente.id);
 
     emit('añadir', {
-        ingredientesSeleccionados: ingredientesSeleccionados.value,
+        // Mandamos lo que el usuario ha decidido quitar
+        ingredientesIDs: JSON.stringify(idsQuitados), 
         listaIngredientesQuitados: nombresQuitados,
     })
 }

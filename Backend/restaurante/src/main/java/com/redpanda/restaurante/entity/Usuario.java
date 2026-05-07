@@ -17,6 +17,7 @@ public class Usuario {
     private Long id;
 
     //Campos de la tabla
+    @Column(length = 255)
     private String pwd;
     private String nombre;
     private String email;

@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; // IMPORTANTE: Añade esta importación
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -15,28 +16,29 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    // Registramos el codificador de contraseñas
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // 1. Deshabilitamos CSRF para que los POST desde el frontend no fallen
+            // Deshabilitamos CSRF para que los POST desde el frontend no fallen
             .csrf(csrf -> csrf.disable())
             
-            // 2. Activamos la configuración de CORS que definimos abajo
+            // Activamos la configuración de CORS que definimos abajo
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             
-            // 3. Gestión de permisos de rutas
+            // Gestión de permisos de rutas
             .authorizeHttpRequests(auth -> auth
-                // IMPORTANTE: Aquí añadimos todas las rutas que el frontend necesita leer libremente
-                .requestMatchers(
-                    "/**"
-
-                ).permitAll()
-                
-                // Cualquier otra ruta (como admin o perfiles) pedirá login
+                // Permitimos todo 
+                .requestMatchers("/**").permitAll()
                 .anyRequest().authenticated()
             )
             
-            // 4. DESACTIVAR EL CUADRO DE LOGIN GRIS DEL NAVEGADOR
+            // DESACTIVAR EL CUADRO DE LOGIN GRIS DEL NAVEGADOR
             .httpBasic(basic -> basic.disable())
             .formLogin(form -> form.disable());
         
@@ -47,16 +49,11 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         
-        // El origen debe ser exactamente el de tu Vite/Vue
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
-        
-        // Permitimos todos los métodos (GET para platos, POST para login, etc.)
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173","http://localhost:4173" ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        
-        // Cabeceras necesarias
         configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization", "X-Requested-With", "Accept"));
         
-        // ¡VITAL! Esto permite que el navegador guarde la sesión (cookies)
+        // Esto permite que el navegador guarde la sesión (cookies)
         configuration.setAllowCredentials(true);
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

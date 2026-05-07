@@ -2,7 +2,6 @@ package com.redpanda.restaurante.controller;
 
 //Importa la entidad Bebida para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Bebida;
-import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Bebida para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.BebidaRepository;
 
@@ -40,7 +39,7 @@ public class BebidaController {
     }
 
     //Para borra una bebida de la carta
-    @DeleteMapping("/bebida/delete{id}")
+    @DeleteMapping("/bebida/delete/{id}")
     public String eliminarBebida(@PathVariable Long id){
         //Comprobamos si existe un bebida con dicho id
         if (bebidaRepository.existsById(id)) {

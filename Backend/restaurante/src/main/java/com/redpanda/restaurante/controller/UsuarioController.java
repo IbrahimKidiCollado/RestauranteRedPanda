@@ -13,19 +13,19 @@ import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @RestController
 public class UsuarioController {
-
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
     private final UsuarioRepository usuarioRepository;
 
     UsuarioController(UsuarioRepository usuarioRepository) {
@@ -36,12 +36,14 @@ public class UsuarioController {
     //En el body se enviará un JSON con el email y la contraseña del usuario
     @PostMapping("/login")
     public ResponseEntity<?> iniciarSesion(@RequestBody Usuario datosLogin, HttpSession sesion) {
+        System.out.println("Hash para 1234: " + passwordEncoder.encode("1234"));
+        System.out.println("Hash para abcd: " + passwordEncoder.encode("abcd"));
         Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(datosLogin.getEmail());
         if (usuarioOpt.isPresent()) {
             Usuario usuario = usuarioOpt.get();
-            if (usuario.getPwd().equals(datosLogin.getPwd())) {
+            //Utilizamos en codificador para poder saber si la contraseña coincide o no
+           if (passwordEncoder.matches(datosLogin.getPwd(), usuario.getPwd())) {
                 sesion.setAttribute("usuario", usuario);
-                //devolvemos el usuario para mostrar su nombre en la interfaz
                 return ResponseEntity.ok(usuario);
             } else {
                 return ResponseEntity.status(401).body("Contraseña incorrecta");
@@ -54,12 +56,17 @@ public class UsuarioController {
 
     //Registrar un nuevo usuario
     @PostMapping("/register")
-    public ResponseEntity<Usuario> registrarUsuario(@RequestBody Usuario nuevoUsuario) {
+    public ResponseEntity<?> registrarUsuario(@RequestBody Usuario nuevoUsuario) {
        if (usuarioRepository.findByEmail(nuevoUsuario.getEmail()).isPresent()) {
-            return ResponseEntity.status(400).build(); // Usuario ya existe
+            return ResponseEntity.status(400).body("El usuario ya existe"); // Usuario ya existe
         }
-        Usuario usuarioGuardado = usuarioRepository.save(nuevoUsuario);
-        return ResponseEntity.ok(usuarioGuardado);
+
+        //Ciframos la contraseña
+        nuevoUsuario.setPwd(passwordEncoder.encode(nuevoUsuario.getPwd()));
+        usuarioRepository.save(nuevoUsuario);
+        
+        
+        return ResponseEntity.ok().body("{\"mensaje\": \"Usuario creado correctamente\"}");
         
     }
 

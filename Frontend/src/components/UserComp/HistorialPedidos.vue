@@ -84,7 +84,7 @@
 
 <style lang="scss" scoped>
     .contenedor {
-        padding: 2rem;
+        padding: 3rem;
         background : $color-rojo-degradado;
         border: 1px $color-rojo-oscuro-claro solid;
         border-radius: 15px;
@@ -93,6 +93,7 @@
 
         .titulo {
             color: $color-texto-blanco;
+            font-size: 26px;
         }
 
         .tabla-pedidos {
@@ -104,7 +105,7 @@
                 color: $color-gris;
                 text-align: left;
                 padding: 0 15px;
-                font-size: 0.85rem;
+                font-size: 20px;
             }
 
             .cuerpo-carta {

@@ -3,7 +3,6 @@ package com.redpanda.restaurante.controller;
 //Importa la entidad Carne para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Carne;
 import com.redpanda.restaurante.entity.Ingrediente;
-import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Carne para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.CarneRepository;
 
@@ -36,7 +35,7 @@ public class CarneController {
     //Para crear una nueva bebida y añadirlo a la carta
     @PostMapping("/carne/create")
     public Carne addCarne(@RequestBody Carne nuevaCarne) {
-        // El repositorio guarda la bebida y nos devuelve la bebida guardada con su ID generado.
+        // El repositorio guarda la bebida y nos devuelve la carne guardada con su ID generado.
         return carneRepository.save(nuevaCarne);
     }
 

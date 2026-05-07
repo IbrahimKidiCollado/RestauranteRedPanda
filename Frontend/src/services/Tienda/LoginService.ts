@@ -12,10 +12,17 @@ export const loguearse = async (email: string, pwd: string) => {
             })
         });
         const data = await res.json();
+
+        //Guardamos el usuario en el navegador
+        localStorage.setItem('usuario_redpanda', JSON.stringify({
+            id: data.id,
+            nombre: data.nombre,
+            email: data.email
+        }));
+
         return data;
     } catch (error) {
-        console.error('Error al iniciar sesión:', error);
-        throw error;
+        return null;
     }
 };
 
@@ -34,10 +41,18 @@ export const registrar = async (nombre: string, email: string, pwd: string) => {
             })
         });
         const data = await res.json();
+
+        //Guardamos el usuario en el navegador
+        localStorage.setItem('usuario_redpanda', JSON.stringify({
+            id: data.id,
+            nombre: data.nombre,
+            email: data.email,
+            preferencia_idioma: data.preferencia_idioma
+        }));
+
         return data;
     } catch (error) {
-        console.error('Error al registrarse:', error);
-        throw error;
+       return null
     }
 };
 
@@ -49,6 +64,10 @@ export const desloguearse = async () => {
             credentials: 'include'
         });
         const data = await res.json();
+
+        //Guardamos el usuario en el navegador
+        localStorage.removeItem('usuario_redpanda');
+        
         return data;
     } catch (error) {
         console.error('Error al cerrar sesión:', error);

@@ -17,9 +17,9 @@
 		"placeHolderEmail": "tu{'@'}email.com",
 		"placeHolderName": "Tu nombre",
 		"placeHolderPwd": "......",
-		"errorNombre": "El nombre es requerido",
-		"errorEmail": "El email es requerido",
-		"errorPwd": "La contraseña es requerida",
+		"errorNombre": "incorrecto",
+		"errorEmail": "incorrecto",
+		"errorPwd": "incorrecto",
 		"info": {
 			"infoInicio": {
 				"bienvenido": "Bienvenido de nuevo",
@@ -57,7 +57,7 @@
 	},
 	"ingredientes": {
 		"pers": "Personaliza tu plato",
-		"select": "Selecciona los ingredientes que deseas eliminar",
+		"select": "Deselecciona los ingredientes que deseas eliminar",
 		"cancel": "Cancelar",
 		"precio": "Precio",
 		"añadir":"Añadir al carrito"

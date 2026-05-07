@@ -32,7 +32,7 @@ public class IngredienteController {
         return ingredienteRepository.save(nuevoIgrediente);
     }
 
-    //Para borra una categoria de la carta
+    //Para borra un Ingrediente de la carta
     @DeleteMapping("/ingrediente/delete/{id}")
     public String eliminarIngrediente(@PathVariable Long id){
         //Comprobamos si existe un postre con dicho id

@@ -6,9 +6,11 @@ import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
+//Nombre de la tabla
 @Table(name = "linea_pedido")
 public class LineaPedido {
 
+    //ID que se genera automaticamente
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

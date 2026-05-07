@@ -1,5 +1,6 @@
 package com.redpanda.restaurante;
 
+//Clase que sirve para mandar los elementos de la carta formateados para su uso en el Frontend
 public class ElementoCarta {
     private Long id;
     private String nombre;

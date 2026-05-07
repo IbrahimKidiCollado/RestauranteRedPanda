@@ -3,7 +3,6 @@ package com.redpanda.restaurante.controller;
 import com.redpanda.restaurante.entity.Ingrediente;
 //Importa la entidad Postre para que el controlador sepa a qué tabla de la base de datos se refiere
 import com.redpanda.restaurante.entity.Postre;
-import com.redpanda.restaurante.entity.Sushi;
 //Importa el repositorio de Postre para que el controlador pueda acceder a los datos de la tabla correspondiente
 import com.redpanda.restaurante.repository.PostreRepository;
 
@@ -33,14 +32,14 @@ public class PostreController {
         return postreRepository.findAll();
     }
 
-    //Para crear una nueva bebida y añadirlo a la carta
+    //Para crear un nuevo postre y añadirlo a la carta
     @PostMapping("/postre/create")
     public Postre addPostre(@RequestBody Postre nuevoPostre) {
         // El repositorio guarda la bebida y nos devuelve la bebida guardada con su ID generado.
         return postreRepository.save(nuevoPostre);
     }
 
-    //Para borra una bebida de la carta
+    //Para borra un postre de la carta
     @DeleteMapping("/postre/delete/{id}")
     public String eliminarPostre(@PathVariable Long id){
         //Comprobamos si existe un postre con dicho id

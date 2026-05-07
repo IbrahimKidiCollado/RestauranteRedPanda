@@ -15,7 +15,10 @@
                 <label for="nombre" class="label-nombre">{{
                     $t('login.formRegistrar.nombre')
                 }}</label>
-                <div class="container-nombre">
+                <span class="error-nombre" :style="{ display: estilosError.nombre }">{{
+                        $t('login.errorNombre')
+                    }}</span>
+                <div class="container-nombre" :class="{ 'borde-error': estilosError.nombre === 'block' }">
                     <span class="material-symbols-outlined person"> person </span>
                     <input
                         type="text"
@@ -24,13 +27,13 @@
                         class="inputNombre"
                         v-model="datosFormulario.nombre"
                     />
-                    <span :style="{ display: 'none' }" class="error-nombre">{{
-                        $t('login.errorNombre')
-                    }}</span>
                 </div>
             </template>
             <label for="email" class="label-email">{{ $t('login.email') }}</label>
-            <div class="container-email">
+            <span class="error-email" :style="{ display: estilosError.email }">{{
+                    $t('login.errorEmail')
+                }}</span>
+            <div class="container-email" :class="{ 'borde-error': estilosError.email === 'block' }">
                 <span class="material-symbols-outlined mail"> mail </span>
                 <input
                     class="input-email"
@@ -39,17 +42,15 @@
                     :placeholder="$t('login.placeHolderEmail')"
                     v-model="datosFormulario.email"
                 />
-                <span class="error-email" :style="{ display: 'none' }">{{
-                    $t('login.errorEmail')
-                }}</span>
             </div>
             <label for="pwd" class="error-pwd">{{ $t('login.pwd') }}</label>
-            <div class="container-pwd">
+            <span class="error-pwd" :style="{ display: estilosError.password}">{{
+                    $t('login.errorPwd')
+                }}
+            </span>
+            <div class="container-pwd" :class="{ 'borde-error': estilosError.password === 'block' }">
                 <span class="material-symbols-outlined lock"> lock </span>
                 <input class="input-pwd" type="password" name="pwd" placeholder="••••••••" v-model="datosFormulario.password" />
-                <span class="error-pwd" :style="{ display: 'none' }">{{
-                    $t('login.errorPwd')
-                }}</span>
             </div>
             <button type="button" class="botonEnvio" @click="envio">
                 {{ !logueado ? $t('login.formRegistrar.inicio') : $t('login.formIniciar.inicio') }}
@@ -87,19 +88,31 @@ const envio = async () => {
             emit('exito');
             await esperar(2000);
             router.push('/tienda');
-        } else {
-            alert(resultado);
         }
+        activarAlerta();
+
     }else{
         const resultado = await userStore.registrarse(datosFormulario.nombre,datosFormulario.email, datosFormulario.password);
         if(resultado){
             emit('exito');
             await esperar(2000);
             router.push('/tienda');
-        } else {
-            alert(resultado);
         }
+        activarAlerta();
     }
+}
+
+const estilosError = reactive({
+    nombre: 'none',
+    email: 'none',
+    password: 'none'
+
+})
+
+const activarAlerta = () => {
+    estilosError.nombre = 'block';
+    estilosError.email = 'block';
+    estilosError.password = 'block';
 }
 
 const emit = defineEmits(['cambiar', 'exito']);
@@ -167,6 +180,14 @@ a {
             color: $color-texto-blanco;
             display: block;
         }
+        .error-nombre,
+        .error-email,
+        span.error-pwd {
+            color: $color-rojo-fuerte-textos;
+            font-size: 12px;
+            margin-left: auto;
+        }
+
 
         .container-nombre,
         .container-email,
@@ -213,14 +234,9 @@ a {
                     font-size: 20px;
                 }
             }
-
-            .error-nombre,
-            .error-email,
-            span.error-pwd {
-                color: $color-rojo-fuerte-textos;
-                font-size: 12px;
-                margin-left: auto;
-            }
+            &.borde-error {
+            border-color: $color-rojo-fuerte-textos !important;
+        }
         }
 
         .botonEnvio {

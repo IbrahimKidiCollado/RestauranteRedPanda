@@ -4,7 +4,7 @@ import { loguearse, desloguearse, registrar } from '@/services/Tienda/LoginServi
 
 export const useUserStore = defineStore('user', () => {
 
-    const logueado = ref(true);
+    const logueado = ref(false);
     const esAdmin = ref(false);
     const nombreUsuario = ref('');
     const emailUsuario = ref('');
@@ -47,19 +47,22 @@ export const useUserStore = defineStore('user', () => {
     }
 
     async function registrarse( nombre: string, email: string, pwd: string) {
-        logueado.value = true;
-        nombreUsuario.value = nombre;
-        emailUsuario.value = email;
-        passwordUsuario.value = pwd;
+        //Si el usuario manda datos vacios
+        if(!nombre.trim() || !email.trim() || !pwd.trim()){
+            return false
+        }
 
+        //Si el correo tiene formato incorrecto
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailRegex.test(email)){
+            return false
+        }
         const resultado = await registrar(nombre, email, pwd);
         if (resultado) {
             logueado.value = true;
-            console.log('Usuario registrado:', {
-                nombre: nombreUsuario.value,
-                email: emailUsuario.value,
-                password: passwordUsuario.value
-            });
+            nombreUsuario.value = nombre;
+            emailUsuario.value = email;
+            passwordUsuario.value = pwd;
             sesionActiva.value = true;
             return true;
         }
@@ -79,6 +82,35 @@ export const useUserStore = defineStore('user', () => {
         return true;
     }
 
+    //Para recuperar la sesión al recargar la pagina
+    function recuperarSesion() {
+        console.log("DEBUG: Entrando en recuperarSesion...");
+        const usuarioGuardado = localStorage.getItem('usuario_redpanda');
+        
+        if (!usuarioGuardado) {
+            console.warn("DEBUG: No hay nada en localStorage bajo 'usuario_redpanda'");
+            return;
+        }
+
+        try {
+            const data = JSON.parse(usuarioGuardado);
+            console.log("DEBUG: Datos encontrados en Storage:", data);
+            
+            id.value = data.id;
+            nombreUsuario.value = data.nombre;
+            emailUsuario.value = data.email;
+            sesionActiva.value = true;
+            logueado.value = true;
+            
+            if (data.nombre === 'admin') {
+                esAdmin.value = true;
+            }
+            console.log("DEBUG: Estado del Store actualizado correctamente.");
+        } catch (error) {
+            console.error("DEBUG: Error al parsear JSON del Storage:", error);
+        }
+    }
+
     return{
         logueado,
         nombreUsuario,
@@ -90,7 +122,8 @@ export const useUserStore = defineStore('user', () => {
         logout,
         esAdmin,
         sesionActiva,
-        prefenciaIdioma
+        prefenciaIdioma,
+        recuperarSesion
     }
 
 });
