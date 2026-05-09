@@ -36,15 +36,15 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { loadScript } from '@paypal/paypal-js'
-import { useUserStore } from '@/stores/userStore';
-import {useRouter} from 'vue-router';
+import { useUserStore } from '@/stores/userStore'
+import { useRouter } from 'vue-router'
 //importamos store de pedido para enviar el pedido al backend
-import { usePedidoStore } from '@/stores/pedidoStore';
+import { usePedidoStore } from '@/stores/pedidoStore'
 
-const userStore = useUserStore();
-const sesionActiva = computed(() => userStore.sesionActiva);
-const router = useRouter();
-const pedidoStore = usePedidoStore();
+const userStore = useUserStore()
+const sesionActiva = computed(() => userStore.sesionActiva)
+const router = useRouter()
+const pedidoStore = usePedidoStore()
 
 const props = defineProps<{
     subtotal: number
@@ -64,6 +64,7 @@ onMounted(async () => {
         const paypal = await loadScript({
             clientId: clienteID,
             currency: 'EUR',
+            disableFunding: 'card',
         })
 
         //Si el SDK se ha cargado correctamente, renderizamos el botón de PayPal en el contenedor designado
@@ -123,8 +124,6 @@ onMounted(async () => {
     width: 100%;
     max-width: 380px;
     box-shadow: 0 10px 30px rgba(200, 0, 0, 0.05);
-    margin-bottom: 30px;
-
     .resumen {
         display: flex;
         flex-direction: column;

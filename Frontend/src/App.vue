@@ -3,11 +3,11 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useCarritoStore } from './stores/counter'
 import HeaderApp from './components/AppComp/HeaderApp.vue'
 import FooterApp from './components/AppComp/FooterApp.vue'
-import { useUserStore } from './stores/userStore';
+import { useUserStore } from './stores/userStore'
 
-const carritoStore = useCarritoStore();
+const carritoStore = useCarritoStore()
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 
 const tabletMovil = ref(false)
 
@@ -16,18 +16,17 @@ const revisarTamaño = () => {
 }
 
 onMounted(async () => {
-    
-    revisarTamaño();
-    window.addEventListener('resize', revisarTamaño);
+    revisarTamaño()
+    window.addEventListener('resize', revisarTamaño)
 
-    console.log("Intentando recuperar sesión del LocalStorage...");
-    userStore.recuperarSesion();
+    console.log('Intentando recuperar sesión del LocalStorage...')
+    userStore.recuperarSesion()
 
     try {
-        console.log("Sincronizando carrito con el servidor...");
-        await carritoStore.sincronizarCarrito();
+        console.log('Sincronizando carrito con el servidor...')
+        await carritoStore.sincronizarCarrito()
     } catch (error) {
-        console.error("Error en la carga inicial:", error);
+        console.error('Error en la carga inicial:', error)
     }
 })
 

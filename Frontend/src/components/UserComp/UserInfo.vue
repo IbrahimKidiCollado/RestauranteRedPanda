@@ -22,10 +22,8 @@ import { computed } from 'vue'
 const userStore = useUserStore()
 const nombreUsuario = computed(() => userStore.nombreUsuario)
 const emailUsuario = computed(() => userStore.emailUsuario)
-const preferenciaIdioma = computed(() => userStore.prefenciaIdioma)
 
 const cerrarSesion = async () => {
-    const res = await userStore.logout()
     router.push('/tienda')
 }
 </script>
