@@ -2,14 +2,14 @@
     <div class="container-principal">
         <div class="container-info">
             <div><img :src="p.imagen" /></div>
-            <div class="container-datos">
-                <h3>{{ p.nombre }}</h3>
-                <p>{{ p.descripcion }}</p>
-                <p>{{ p.precio }}€</p>
-            </div>
-            <div v-if="p.listaIngredientesQuitados" class="container-ingredientes">
-                <p>{{ $t('carrito.ingredientes') }}: {{ p.listaIngredientesQuitados }}</p>
-            </div>
+        </div>
+        <div class="container-datos">
+            <h3>{{ p.nombre }}</h3>
+            <p>{{ p.descripcion }}</p>
+            <p>{{ p.precio }}€</p>
+        </div>
+        <div v-if="p.listaIngredientesQuitados" class="container-ingredientes">
+            <p>{{ $t('carrito.ingredientes') }}: {{ p.listaIngredientesQuitados }}</p>
         </div>
         <div class="container-acciones">
             <div class="container-eliminar-añadir">
@@ -53,6 +53,7 @@
         display: flex;
         align-items: center;
         text-align: center;
+        justify-content: space-around;
         gap: 20px;
 
         @include tablet-pequeña-down {
@@ -76,45 +77,46 @@
                 border-radius: 12px;
             }
         }
-        .container-ingredientes {
-            background-color: $color-caca-oscuro;
-            border: 1px solid $color-caca;
-            border-radius: 8px;
-            padding: 10px 16px;
+    }
+    .container-datos {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: 200px;
+
+        h3 {
             margin: 0;
-            color: $color-amarillo;
-            font-size: 14px;
-            font-weight: 500;
+            color: $color-texto-blanco;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
-        .container-datos {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+        p {
+            margin: 0;
 
-            h3 {
-                margin: 0;
-                color: $color-texto-blanco;
-                font-size: 1.2rem;
-                font-weight: 600;
+            &:first-of-type {
+                color: $color-blanco-sucioMas;
+                font-size: 0.9rem;
             }
 
-            p {
-                margin: 0;
-
-                &:first-of-type {
-                    color: $color-blanco-sucioMas;
-                    font-size: 0.9rem;
-                }
-
-                &:last-of-type {
-                    color: $color-rojo-panda;
-                    font-weight: bold;
-                    font-size: 1.1rem;
-                    margin-top: 4px;
-                }
+            &:last-of-type {
+                color: $color-rojo-panda;
+                font-weight: bold;
+                font-size: 1.1rem;
+                margin-top: 4px;
             }
         }
+    }
+
+    .container-ingredientes {
+        background-color: $color-caca-oscuro;
+        border: 1px solid $color-caca;
+        border-radius: 8px;
+        padding: 10px 16px;
+        margin: 0;
+        color: $color-amarillo;
+        font-size: 14px;
+        font-weight: 500;
     }
 
     .container-acciones {

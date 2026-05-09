@@ -185,6 +185,7 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
         margin: 5px auto;
         margin-left: 10px;
         margin-right: 10px;
+        margin-top: 30px;
     }
 
     @include mobile-down {
