@@ -43,7 +43,7 @@ export const useCarritoStore = defineStore('carrito', () => {
   //Obtenemos el carrito y lo asignamos a la variable que usamos en este archivo
   const sincronizarCarrito = async () => {
     const datos = await obtenerCarrito();
-    if(datos && datos.length > 0) productosCarrito.value = datos;
+    productosCarrito.value = datos || [];
   }
 
   //Añadimos productos a la cesta
@@ -56,10 +56,14 @@ export const useCarritoStore = defineStore('carrito', () => {
   }
 
   //Eliminar un producto del carrito
-  const eliminarProducto =  async (producto: ProductoCarrito) => {
+  
+  const eliminarProducto = async (producto: ProductoCarrito) => {
     await eliminarDelCarrito(producto.id, producto);
-    await sincronizarCarrito();
-  }
+
+    productosCarrito.value = productosCarrito.value.filter(
+        p => p.id !== producto.id
+    );
+}
 
   //Añadimos una unidad de un un producto al carrito
   const sumarCantidadProducto = async (producto: ProductoCarrito) => {

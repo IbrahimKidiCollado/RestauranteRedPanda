@@ -12,7 +12,7 @@
         <p>{{ $t('carrito.propuesta-añadir') }}</p>
         <button @click="navegar('/tienda')">{{ $t('carrito.ver-menu') }}</button>
     </div>
-    <div class="carrito-container" v-if="hayProductos">
+    <div class="carrito-container" v-else>
         <div class="productos-container">
             <TarjetaProducto
                 v-for="p in productosCarrito"
@@ -39,7 +39,7 @@
             :titulo="alerta.titulo"
             :mensaje="alerta.mensaje"
             :mostrar-boton="alerta.mostrarBoton"
-            :tipo="0"
+            :tipo="alerta.tipo"
         />
     </div>
 </template>
@@ -76,21 +76,24 @@ const alerta = reactive({
     titulo: '',
     mensaje: '',
     mostrarBoton: false, //Esto es para que al añadir salga un carrito que redirija al carrito :)
+    tipo: 1
 })
 
 const { t } = useI18n()
 
 const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
-    alerta.visible = true
+    alerta.visible = true;
 
     if (tipo == 'ELIMINAR') {
         alerta.titulo = t('alertas.eliminar.titulo')
         alerta.mensaje = `${nombreProducto} ${t('alertas.eliminar.mensaje')}`
         alerta.mostrarBoton = false
+        alerta.tipo = 1;
     } else if (tipo == 'EXITO') {
-        alerta.titulo = t('alertas.exito.titulo')
-        alerta.mensaje = t('alertas.exito.mensaje')
-        alerta.mostrarBoton = false
+        alerta.titulo = t('alertas.exito.titulo');
+        alerta.mensaje = t('alertas.exito.mensaje');
+        alerta.mostrarBoton = false;
+        alerta.tipo = 1;
     }
 
     setTimeout(() => {
@@ -98,7 +101,7 @@ const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
         if (tipo == 'EXITO') navegar('/tienda')
     }, 2500) // 2 segundos y medio :)
 }
-const mandarPedido = () => {
+const mandarPedido = async () => {
     //mandamos el pedido al backend, con los productos del carrito, el total y el id del usuario (si está logueado)
     const productos = productosCarrito.value.map((p) => ({
         id: p.id,
@@ -112,32 +115,33 @@ const mandarPedido = () => {
     const idUsuario = userStore.id
     const totalPedido = total.value
 
-    pedidoStore.realizarPedido(idUsuario, totalPedido, productos)
+    await pedidoStore.realizarPedido(idUsuario, totalPedido, productos)
 }
 
-const manejarAccion = (accion: string, p?: ProductoCarrito) => {
+const manejarAccion = async (accion: string, p?: ProductoCarrito) => {
     //if (!p) return
 
     switch (accion) {
         case 'ELIMINAR':
-            eliminarProducto(p!)
+            await eliminarProducto(p!)
             lanzarAlerta(accion, p!.nombre)
             break
         case 'SUMAR':
-            sumarCantidadProducto(p!)
+            await sumarCantidadProducto(p!)
             break
         case 'RESTAR':
-            restarCantidadProducto(p!)
+            await restarCantidadProducto(p!)
             break
         case 'EXITO':
-            mandarPedido()
-            carritoStore.limpiarTodoElCarrito()
+            await mandarPedido()
+            await carritoStore.limpiarTodoElCarrito()
             lanzarAlerta(accion)
             break
     }
 }
 
-const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 ? true : false))
+const hayProductos = computed(() => productosCarrito.value.length > 0)
+
 </script>
 <style lang="scss" scoped>
 @keyframes slideFromLeft {
