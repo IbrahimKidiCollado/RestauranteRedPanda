@@ -179,10 +179,19 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
     gap: 30px;
     margin: 30px 50px 0px 50px;
 
+    margin-top: 50px;
+
+    @include mobile-mediano-down {
+        margin: 5px auto;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
     @include mobile-down {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
     }
 
     @include desktop-down {
@@ -193,6 +202,13 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
         width: 80%;
         min-width: 30px;
         margin: 0 auto;
+
+        @include desktop-down {
+            width: 100%;
+            margin: 0 auto;
+            justify-content: center;
+            align-self: center;
+        }
     }
 
     .resumen-container {
@@ -202,9 +218,10 @@ const hayProductos = computed<boolean>(() => (productosCarrito.value.length > 0 
         align-self: flex-start;
         min-width: 300px;
         animation: slideFromRight 0.8s ease-out both;
+        display: flex;
 
         @include desktop-down {
-            width: 80%;
+            width: 100%;
             margin: 0 auto;
             justify-content: center;
             align-self: center;

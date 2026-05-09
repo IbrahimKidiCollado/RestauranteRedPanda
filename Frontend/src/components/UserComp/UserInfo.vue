@@ -9,38 +9,25 @@
             <p class="texto">{{ $t('usuario.email') }}</p>
             <p>{{ emailUsuario }}</p>
         </div>
-        <div>
-            <p class="texto">{{ $t('usuario.prefer') }}</p>
-            <select class="prefeIdioma" name="prefeIdioma">
-                <option value="">{{ $t('usuario.idiomas.ingles') }}</option>
-                <option value="">{{ $t('usuario.idiomas.español') }}</option>
-                <option value="">{{ $t('usuario.idiomas.frances') }}</option>
-                <option value="">{{ $t('usuario.idiomas.chino') }}</option>
-                <option value="">{{ $t('usuario.idiomas.japones') }}</option>
-                <option value="">{{ $t('usuario.idiomas.catalan') }}</option>
-            </select>
-        </div>
         <button class="btn-cerrar" @click="cerrarSesion()">
             {{ $t('usuario.cerrar') }}
         </button>
     </div>
 </template>
 <script setup lang="ts">
-import router from '@/router';
-import { useUserStore } from '@/stores/userStore';
-import { computed } from 'vue';
+import router from '@/router'
+import { useUserStore } from '@/stores/userStore'
+import { computed } from 'vue'
 
-const userStore = useUserStore();
-const nombreUsuario = computed(() => userStore.nombreUsuario);
-const emailUsuario = computed(() => userStore.emailUsuario);
+const userStore = useUserStore()
+const nombreUsuario = computed(() => userStore.nombreUsuario)
+const emailUsuario = computed(() => userStore.emailUsuario)
 const preferenciaIdioma = computed(() => userStore.prefenciaIdioma)
 
-const cerrarSesion =async () => {
-    const res = await userStore.logout();
-    router.push('/tienda');
+const cerrarSesion = async () => {
+    const res = await userStore.logout()
+    router.push('/tienda')
 }
-
-
 </script>
 <style lang="scss" scoped>
 .contenedor-info-usuario {
@@ -48,23 +35,21 @@ const cerrarSesion =async () => {
     flex-direction: column;
     justify-content: center;
     padding: 60px;
-    background : $color-rojo-degradado;
+    background: $color-rojo-degradado;
     border-radius: 20px;
     margin-bottom: 20px;
     border: 1px solid $color-rojo-oscuro;
     gap: 10px;
 
-
-    div{
+    div {
         display: flex;
         flex-direction: column;
     }
 
-    .texto{
+    .texto {
         font-size: 18px;
         color: $color-gris;
         opacity: 0.8;
-        
     }
 
     p {
@@ -72,19 +57,18 @@ const cerrarSesion =async () => {
         color: $color-texto-blanco;
         margin: 0;
     }
-    select{
+    select {
         font-size: 18px;
     }
 
-    .prefeIdioma{
+    .prefeIdioma {
         border-radius: 10px;
     }
 
-    .btn-cerrar{
+    .btn-cerrar {
         @include boton-rojo();
         margin-top: 20px;
         cursor: pointer;
     }
 }
-
 </style>

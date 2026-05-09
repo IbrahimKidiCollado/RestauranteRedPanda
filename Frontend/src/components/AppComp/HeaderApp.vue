@@ -35,6 +35,7 @@
                         {{ cantidadProductosCarrito }}
                     </span>
                 </button>
+                <SelectorIdioma />
                 <button v-if="!sesionActiva" class="perfil" @click="navegar('/login')">
                     <img src="/assets/user-icon.webp" alt="icono-user" />{{
                         $t('header.botones.iniciar')
@@ -79,6 +80,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
 import { storeToRefs } from 'pinia'
 import { useCarritoStore } from '@/stores/counter'
+import SelectorIdioma from './SelectorIdioma.vue'
 
 const userStore = useUserStore()
 const esAdmin = computed(() => userStore.esAdmin)
@@ -248,6 +250,10 @@ header {
                 margin: 20px 0px;
 
                 @include mobile-down {
+                    display: none;
+                }
+
+                @include mobile-mediano-down {
                     display: none;
                 }
 

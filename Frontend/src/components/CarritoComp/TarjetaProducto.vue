@@ -35,8 +35,13 @@
     padding: 12px 20px;
     margin-bottom: 15px;
     transition: 200ms;
+    min-width: 300px;
 
     @include mobile-down {
+        flex-direction: column;
+    }
+
+    @include desktop-mediano-down {
         flex-direction: column;
     }
 
@@ -49,6 +54,10 @@
         align-items: center;
         text-align: center;
         gap: 20px;
+
+        @include tablet-pequeña-down {
+            flex-direction: column;
+        }
 
         > div:first-child {
             width: 100px;
@@ -63,18 +72,15 @@
             }
         }
         .container-ingredientes {
-            margin-top: 6px;
-            color: $color-blanco-sucio;
-            font-size: 0.9rem;
-            background-color: $color-rojo-panda;
-            border: 2px solid $color-rojo-oscuro;
-            border-radius: 7px;
-            padding: 6px 10px;
-            //difuminado el background 
-            background: rgba($color-rojo-panda, 0.7);
-            cursor: pointer;
+            background-color: $color-caca-oscuro;
+            border: 1px solid $color-caca;
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin: 0;
+            color: $color-amarillo;
+            font-size: 14px;
+            font-weight: 500;
         }
-
 
         .container-datos {
             display: flex;
@@ -171,7 +177,6 @@ interface ProductoCarrito {
     cantidad: number
     listaIngredientesQuitados: string | undefined
     listaIngredientesIDs: number[] | undefined
-
 }
 
 defineProps<{

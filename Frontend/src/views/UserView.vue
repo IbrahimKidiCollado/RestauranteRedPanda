@@ -7,12 +7,10 @@
             <HistorialPedidos />
         </div>
     </div>
-
 </template>
 <script lang="ts" setup>
 import UserInfo from '@/components/UserComp/UserInfo.vue'
 import HistorialPedidos from '@/components/UserComp/HistorialPedidos.vue'
-
 </script>
 <style lang="scss" scoped>
 @keyframes slideFromLeft {
@@ -54,5 +52,4 @@ import HistorialPedidos from '@/components/UserComp/HistorialPedidos.vue'
         animation: slideFromRight 0.8s ease-out both;
     }
 }
-
 </style>

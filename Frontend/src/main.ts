@@ -10,11 +10,26 @@ import '@/styles/main.scss'
 
 // IMPORTACION DE LA CONFIGURACION DE IDIOMAS
 import es from "./locales/es.json"
+import en from '@/locales/en.json'
+import zh from '@/locales/zh.json'
+import fr from '@/locales/fr.json'
+import ja from '@/locales/ja.json'
+import ca from '@/locales/ca.json'
+
+const idiomaGuardado = localStorage.getItem('idioma-preferido') || 'es'
 
 const i18n = createI18n({
-	legacy: false,
-	locale: 'es',
-	messages: {es}
+    legacy: false,
+    locale: idiomaGuardado,
+    fallbackLocale: 'es',
+    messages: {
+        es,
+        en,
+        zh,
+        fr,
+        ja,
+        ca
+    }
 })
 
 // ARRANQUE DE APLICACION
