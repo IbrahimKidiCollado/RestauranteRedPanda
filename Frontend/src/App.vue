@@ -19,8 +19,6 @@ onMounted(async () => {
     revisarTamaño()
     window.addEventListener('resize', revisarTamaño)
 
-    console.log("Intentando recuperar sesión del LocalStorage...");
-    userStore.recuperarSesion();
 
     try {
         console.log('Sincronizando carrito con el servidor...')
