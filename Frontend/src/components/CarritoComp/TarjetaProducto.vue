@@ -64,6 +64,11 @@
             height: 100px;
             flex-shrink: 0;
 
+            @include tablet-pequeña-down {
+                height: 300px;
+                width: 300px;
+            }
+
             img {
                 width: 100%;
                 height: 100%;
