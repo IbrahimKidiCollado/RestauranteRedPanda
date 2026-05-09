@@ -11,6 +11,7 @@
             :titulo="alerta.titulo"
             :mensaje="alerta.mensaje"
             :mostrar-boton="alerta.mostrarBoton"
+            :tipo="alerta.tipo"
         />
     </div>
 </template>
@@ -31,7 +32,8 @@ const alerta = reactive({
     visible: false,
     titulo: '',
     mensaje: '',
-    mostrarBoton: false
+    mostrarBoton: false,
+    tipo : 1
 });
 
 const { t } = useI18n()
@@ -39,6 +41,7 @@ const mostrarAlerta = () => {
     alerta.visible = true;
     alerta.titulo = t('alertas.logueado.titulo');
     alerta.mensaje = t('alertas.logueado.mensaje');
+    alerta.tipo = 1;
 }
 const cambiarForm = ()  => {
     userStore.logueado = !userStore.logueado

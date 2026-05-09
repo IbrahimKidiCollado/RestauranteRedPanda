@@ -20,6 +20,8 @@
 		"errorNombre": "incorrecto",
 		"errorEmail": "incorrecto",
 		"errorPwd": "incorrecto",
+		"error" : "Credenciales incorrectas",
+		"error2" : "Credenciales no validas",
 		"info": {
 			"infoInicio": {
 				"bienvenido": "Bienvenido de nuevo",

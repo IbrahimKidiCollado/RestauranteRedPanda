@@ -16,7 +16,6 @@
                     $t('login.formRegistrar.nombre')
                 }}</label>
                 <span class="error-nombre" :style="{ display: estilosError.nombre }">{{
-                        $t('login.errorNombre')
                     }}</span>
                 <div class="container-nombre" :class="{ 'borde-error': estilosError.nombre === 'block' }">
                     <span class="material-symbols-outlined person"> person </span>
@@ -31,7 +30,6 @@
             </template>
             <label for="email" class="label-email">{{ $t('login.email') }}</label>
             <span class="error-email" :style="{ display: estilosError.email }">{{
-                    $t('login.errorEmail')
                 }}</span>
             <div class="container-email" :class="{ 'borde-error': estilosError.email === 'block' }">
                 <span class="material-symbols-outlined mail"> mail </span>
@@ -45,13 +43,18 @@
             </div>
             <label for="pwd" class="error-pwd">{{ $t('login.pwd') }}</label>
             <span class="error-pwd" :style="{ display: estilosError.password}">{{
-                    $t('login.errorPwd')
                 }}
             </span>
             <div class="container-pwd" :class="{ 'borde-error': estilosError.password === 'block' }">
                 <span class="material-symbols-outlined lock"> lock </span>
                 <input class="input-pwd" type="password" name="pwd" placeholder="••••••••" v-model="datosFormulario.password" />
             </div>
+            <span v-if="logueado" class="error-email" :style="{ display: estilosError.email }">{{
+                    $t('login.error')
+                }}</span>
+            <span v-if="!logueado" class="error-email" :style="{ display: estilosError.email }">{{
+                    $t('login.error2')
+            }}</span>
             <button type="button" class="botonEnvio" @click="envio">
                 {{ !logueado ? $t('login.formRegistrar.inicio') : $t('login.formIniciar.inicio') }}
             </button>
@@ -184,8 +187,10 @@ a {
         .error-email,
         span.error-pwd {
             color: $color-rojo-fuerte-textos;
-            font-size: 12px;
-            margin-left: auto;
+            font-size: 17px;
+            text-align: center;
+            margin-bottom: 7px;
+
         }
 
 
