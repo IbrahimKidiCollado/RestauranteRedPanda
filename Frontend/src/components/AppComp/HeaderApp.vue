@@ -43,7 +43,7 @@
                 </button>
                 <button v-if="sesionActiva" class="perfil" @click="navegar('/perfil')">
                     <img src="/assets/user-icon.webp" alt="icono-user" />{{
-                        $t('header.botones.perfil')
+                       nombreUsuario
                     }}
                 </button>
                 <button
@@ -85,6 +85,7 @@ import SelectorIdioma from './SelectorIdioma.vue'
 const userStore = useUserStore()
 const esAdmin = computed(() => userStore.esAdmin)
 const sesionActiva = computed(() => userStore.sesionActiva)
+const nombreUsuario = computed(() => userStore.nombreUsuario);
 
 const route = useRoute()
 const router = useRouter()

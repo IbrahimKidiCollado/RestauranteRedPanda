@@ -5,7 +5,7 @@
         <table class="tabla-pedidos">
             <thead>
                 <tr>
-                    <th class="titulo-fila">{{ $t('historialPedidos.tabla.id') }}</th>
+                    <th class="titulo-fila"></th>
                     <th class="titulo-fila">{{ $t('historialPedidos.tabla.total') }}</th>
                 </tr>
             </thead>
