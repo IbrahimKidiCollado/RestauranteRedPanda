@@ -3,7 +3,11 @@
         <div class="contenedor-1-footer">
             <div class="contenedor-1">
                 <div class="contenedor-1-imagenNombre">
-                    <img src="/assets/logo.webp" alt="Logo Profesional" />
+                    <img
+                        src="/assets/logo.webp"
+                        style="margin-bottom: 20px"
+                        alt="Logo Profesional"
+                    />
                     <h2>{{ $t('header.titulo') }}</h2>
                 </div>
                 <p>{{ $t('footer.descripcion') }}</p>
