@@ -11,7 +11,7 @@
             </thead>
             <tbody class="cuerpo-carta">
                 <!--Cada pedido del usuario :)-->
-                <template v-for="pedido in listaPedidos" :key="pedido.id">
+                <template v-for="(pedido, index ) in listaPedidos" :key="pedido.id">
                     <tr
                         class="fila-plato"
                         :class="{ 'fila-activa': pedidoSeleccionadoId === pedido.id }"
@@ -19,7 +19,7 @@
                     >
                         <td class="datos">
                             <div class="id">
-                                <strong># {{ pedido.id }}</strong>
+                                <strong># {{ index + 1 }}</strong>
                             </div>
                         </td>
                         <td class="datos">

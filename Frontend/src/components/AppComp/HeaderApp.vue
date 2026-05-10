@@ -22,6 +22,7 @@
                     class="barra-deslizante"
                     :style="{
                         transform: `translateX(${opcionMenuAbierto * 100}%) translateX(${opcionMenuAbierto * 30}px)`,
+                        visibility : opcionMenuAbierto >= 0 ? 'visible' : 'hidden'
                     }"
                 ></div>
             </nav>
@@ -62,7 +63,7 @@
                     v-if="!(tabletMovil && boton.id === 2)"
                     :class="{
                         'is-active2': opcionMenuAbierto === boton.id,
-                        none: opcionMenuAbierto === 2,
+                        none: opcionMenuAbierto === -1,
                     }"
                     @click="navegar(boton.path)"
                 >
@@ -101,8 +102,11 @@ const enlaces = [
 ]
 
 const opcionMenuAbierto = computed(() => {
-    const rutaActual = enlaces.find((e) => e.path === route.path)
-    return rutaActual ? rutaActual.id : 0
+    if (route.path === '/inicio') return 0
+
+    if (route.path.includes('/tienda')) return 1
+
+    return -1
 })
 
 const listaBotonesInicio = computed(() => [
