@@ -37,13 +37,13 @@ import HistorialPedidos from '@/components/UserComp/HistorialPedidos.vue'
 
 .contenedor {
     display: flex;
-    width: 100vw;
+    width: 90vw;
     flex-direction: column;
     align-items: center;
     gap: 30px;
     margin: 40px 25px;
+
     justify-content: center;
-    flex-wrap: wrap;
 
     .container-user {
         animation: slideFromLeft 0.8s ease-out both;

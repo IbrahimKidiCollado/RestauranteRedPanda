@@ -91,7 +91,6 @@ onMounted(async () => {
     padding: 35px 40px;
     max-width: 800px;
     width: 100%;
-    margin: 0 auto;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
 
     .titulo {

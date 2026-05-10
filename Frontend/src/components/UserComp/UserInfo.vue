@@ -55,11 +55,16 @@ const cerrarSesion = async () => {
     padding: 40px;
     max-width: 800px;
     width: 100%;
-    margin: 0 auto;
     border-top: 1px solid $color-rojo-oscuro-claro;
     box-shadow:
         0 -15px 30px rgba(255, 0, 0, 0.05),
         0 10px 30px rgba(0, 0, 0, 0.8);
+
+    @include mobile-down {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
     .cabecera-avatar {
         display: flex;
         align-items: center;
@@ -75,12 +80,6 @@ const cerrarSesion = async () => {
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-
-            svg {
-                width: 40px;
-                height: 40px;
-                color: #ffffff;
-            }
         }
 
         .avatar-textos {
