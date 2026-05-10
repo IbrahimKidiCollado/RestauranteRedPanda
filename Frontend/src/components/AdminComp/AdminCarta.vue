@@ -23,14 +23,14 @@
 </script>
 <template>
     <div class="gestion-carta">
-        <h1 class="titulo-gestion">CARTA</h1>
+        <h1 class="titulo-gestion">{{ $t('administrador.modificar.titulo') }}</h1>
         <table class="tabla-carta">
             <thead class="cabecera-carta">
                 <tr>
-                    <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Precio</th>
-                    <th>Acciones</th>
+                    <th>{{ $t('administrador.modificar.nombre') }}</th>
+                    <th>{{ $t('administrador.modificar.categoria') }}</th>
+                    <th>{{ $t('administrador.modificar.precio') }}</th>
+                    <th>{{ $t('administrador.modificar.acciones') }}</th>
                 </tr>
             </thead>
             <tbody class="cuerpo-carta">
@@ -52,7 +52,6 @@
                     </td>
                     <td>
                         <div class="celda-acciones">
-                            <button class="btn-editar">✏️</button>
                             <button class="btn-borrar" @click="borrarPlato(plato.id, plato.categoria_slug)">🗑️</button>
                         </div>
                     </td>

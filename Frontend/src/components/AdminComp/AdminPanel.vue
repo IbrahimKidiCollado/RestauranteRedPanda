@@ -1,15 +1,15 @@
 <template>
     <div class="contenedor-admin">
         <div class="panel-administracion">
-            <h2 class="titulo-panel">GESTIÓN DE LA CARTA</h2>
+            <h2 class="titulo-panel">{{ $t('administrador.titulo') }}</h2>
 
             <div class="opciones-admin">
                 <div class="opcion-admin modificar-carta" @click="hacerScroll('.gestion-carta')">
-                    MODIFICAR CARTA
+                    {{ $t('administrador.opciones.modificar') }}
                 </div>
 
                 <div class="opcion-admin annadir" @click="hacerScroll('.formulario-adicion')">
-                    AÑADIR A LA CARTA
+                    {{ $t('administrador.opciones.annadir') }}
                 </div>
             </div>
         </div>

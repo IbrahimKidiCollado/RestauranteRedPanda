@@ -247,5 +247,36 @@
     "detalles": {
       "vacio": "您的历史中未找到订单。"
     }
-  }
+  },
+  "administrador": {
+    "titulo": "菜单管理",
+    "opciones": {
+        "modificar": "修改菜单",
+        "annadir": "添加到菜单"
+    },
+    "modificar": {
+        "titulo": "菜单",
+        "nombre": "名称",
+        "categoria": "类别",
+        "precio": "价格",
+        "acciones": "操作"
+    },
+    "annadir": {
+        "titulo": "请选择要添加的项目",
+        "seleccionar-elemento": "请选择要添加的项目：",
+        "placeholder-elemento": "-- 请选择一个选项 --",
+        "nombre-label": "输入名称：",
+        "nombre-placeholder": "名称.....",
+        "descripcion-label": "项目描述：",
+        "descripcion-placeholder": "包含.....",
+        "precio-label": "价格 (€)：",
+        "precio-placeholder": "17€.....",
+        "cantidad-label": "数量：",
+        "cantidad-placeholder": "2.....",
+        "imagen-label": "图片：",
+        "imagen-placeholder": "图片URL.....",
+        "ingredientes": "配料",
+        "boton": "添加到菜单"
+    }
+}
 }

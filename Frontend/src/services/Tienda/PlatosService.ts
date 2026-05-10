@@ -1,12 +1,47 @@
-
+import { useUserStore } from '@/stores/userStore';
+import { watch } from 'vue';
 
 export const obtenerPlatos = async (categoria?: string, offset?: number) => {
+	const userStore = useUserStore();
+    const idioma = userStore.prefenciaIdioma || 'es';
+	
+
 	console.log("Obteniendo platos de la categoria: ", categoria, " con offset: ", offset);
 	const ruta = categoria 
         ? `http://localhost:8081/${categoria}?offset=${offset || 0}` 
         : `http://localhost:8081/carta?offset=${offset || 0}`;
 	const res = await fetch(ruta);
-	return await res.json();
+	const productos = await res.json();
+
+	if (idioma == 'es') return productos;
+
+	// Si no es español, traducimos los nombres y descripciones antes de devolverlos
+    const productosTraducidos = await Promise.all(
+        productos.map(async (p: any) => {
+            const nombreTraducido = await traducirConAPI(p.nombre, idioma);
+            const descTraducida = await traducirConAPI(p.descripcion, idioma);
+                
+            return {
+                ...p,
+                nombre: nombreTraducido,
+                descripcion: descTraducida
+            };
+        })
+    );
+	console.log(productosTraducidos)
+	return productosTraducidos;
+}
+
+async function traducirConAPI(texto: string, lang: string): Promise<string> {
+    if (!texto) return '';
+    try {
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(texto)}&langpair=es|${lang}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        return data.responseData.translatedText || texto;
+    } catch {
+        return texto;
+	}
 }
 
 //obtener toda la carta sin paginar

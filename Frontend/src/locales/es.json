@@ -248,6 +248,36 @@
         "detalles": {
             "vacio": "No se han encontrado pedidos en tu historial."
         }
+    },"administrador": {
+    "titulo": "GESTION DE LA CARTA",
+    "opciones": {
+        "modificar": "MODIFICAR CARTA",
+        "annadir": "AÑADIR A LA CARTA"
+    },
+    "modificar": {
+        "titulo": "CARTA",
+        "nombre": "Nombre",
+        "categoria": "Categoría",
+        "precio": "Precio",
+        "acciones": "Acciones"
+    },
+    "annadir": {
+        "titulo": "SELECCIONA EL ELEMENTO A AÑADIR",
+        "seleccionar-elemento": "Seleccione el elemento a introducir:",
+        "placeholder-elemento": "-- Elige una opción --",
+        "nombre-label": "Introduzca su nombre:",
+        "nombre-placeholder": "nombre.....",
+        "descripcion-label": "Descripción del elemento:",
+        "descripcion-placeholder": "elemento con.....",
+        "precio-label": "Precio en €:",
+        "precio-placeholder": "17€.....",
+        "cantidad-label": "Cantidad:",
+        "cantidad-placeholder": "2.....",
+        "imagen-label": "Imagen:",
+        "imagen-placeholder": "URL de la imagen.....",
+        "ingredientes": "Ingredientes",
+        "boton": "AÑADIR A LA CARTA"
     }
+}
 
 }

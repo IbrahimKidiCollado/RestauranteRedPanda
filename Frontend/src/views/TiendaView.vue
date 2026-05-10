@@ -81,6 +81,8 @@ import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
 import Paginacion from '@/components/TiendaComp/Paginacion.vue'
 import TarjetaIngredientes from '@/components/TiendaComp/TarjetaIngredientes.vue'
 import { obtenerIngredientes } from '@/services/Tienda/IngredientesService'
+import { watch } from 'vue'
+import { useUserStore } from '@/stores/userStore'
 
 interface Plato {
     id: number
@@ -105,6 +107,7 @@ const carrito = useCarritoStore()
 const { añadirProducto } = carrito
 const { t } = useI18n()
 const platoConfigurando = ref<Plato | null>(null)
+const userStore = useUserStore();
 
 const alerta = reactive({
     visible: false,
@@ -203,6 +206,13 @@ const platosFiltrados = computed (() => {
 
         return nombre.includes(texto) || descripcion.includes(texto);
     })
+});
+watch(() =>userStore.prefenciaIdioma , async (nuevoIdioma) => {
+    console.log("🔄 El idioma ha cambiado a:", nuevoIdioma, "traduciendo tienda...");
+    // Resetear carta completa para que se fuerce la traducción también en el buscador
+    cartaCompleta.value = [];
+    // Recargamos los platos: el servicio detectará el nuevo idioma y llamará a la API
+    await cargarPlatos(categoriaActiva.value, offset.value);
 });
 
 

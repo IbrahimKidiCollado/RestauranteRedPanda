@@ -18,8 +18,7 @@ const revisarTamaño = () => {
 onMounted(async () => {
     revisarTamaño()
     window.addEventListener('resize', revisarTamaño)
-
-
+    
     try {
         console.log('Sincronizando carrito con el servidor...')
         await carritoStore.sincronizarCarrito()

@@ -247,5 +247,36 @@
     "detalles": {
       "vacio": "No s'han trobat comandes al teu historial."
     }
-  }
+  },
+  "administrador": {
+    "titulo": "GESTIÓ DE LA CARTA",
+    "opciones": {
+        "modificar": "MODIFICAR CARTA",
+        "annadir": "AFEGIR A LA CARTA"
+    },
+    "modificar": {
+        "titulo": "CARTA",
+        "nombre": "Nom",
+        "categoria": "Categoria",
+        "precio": "Preu",
+        "acciones": "Accions"
+    },
+    "annadir": {
+        "titulo": "SELECCIONA L'ELEMENT A AFEGIR",
+        "seleccionar-elemento": "Selecciona l'element a introduir:",
+        "placeholder-elemento": "-- Tria una opció --",
+        "nombre-label": "Introdueix el seu nom:",
+        "nombre-placeholder": "nom.....",
+        "descripcion-label": "Descripció de l'element:",
+        "descripcion-placeholder": "element amb.....",
+        "precio-label": "Preu en €:",
+        "precio-placeholder": "17€.....",
+        "cantidad-label": "Quantitat:",
+        "cantidad-placeholder": "2.....",
+        "imagen-label": "Imatge:",
+        "imagen-placeholder": "URL de la imatge.....",
+        "ingredientes": "Ingredients",
+        "boton": "AFEGIR A LA CARTA"
+    }
+}
 }

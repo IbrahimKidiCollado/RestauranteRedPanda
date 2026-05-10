@@ -24,7 +24,9 @@ const nombreUsuario = computed(() => userStore.nombreUsuario)
 const emailUsuario = computed(() => userStore.emailUsuario)
 
 const cerrarSesion = async () => {
+    userStore.logout();
     router.push('/tienda')
+
 }
 </script>
 <style lang="scss" scoped>

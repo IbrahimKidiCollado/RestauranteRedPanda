@@ -21,6 +21,10 @@ import { obtenerCartaCompleta, obtenerPlatos } from '@/services/Tienda/PlatosSer
 import { reactive } from 'vue';
 import AlertaCarrito from '@/components/AlertaComp/AlertaCarrito.vue'
 import { useI18n } from 'vue-i18n'
+import { watch } from 'vue'
+import { useUserStore } from '@/stores/userStore'
+
+const userStore = useUserStore();
 
 const alerta = reactive({
     visible: false,
@@ -56,6 +60,7 @@ const lanzarAlerta =(accion: string) =>{
         alerta.visible = false;
     },2500) // 2 segundos y medio :)
 }
+
 
 onMounted(cargarPlatos);
 

@@ -247,5 +247,36 @@
     "detalles": {
       "vacio": "注文履歴が見つかりません。"
     }
-  }
+  },
+  "administrador": {
+    "titulo": "メニュー管理",
+    "opciones": {
+        "modificar": "メニューを編集",
+        "annadir": "メニューに追加"
+    },
+    "modificar": {
+        "titulo": "メニュー",
+        "nombre": "名前",
+        "categoria": "カテゴリー",
+        "precio": "価格",
+        "acciones": "操作"
+    },
+    "annadir": {
+        "titulo": "追加する項目を選択してください",
+        "seleccionar-elemento": "追加する項目を選択してください：",
+        "placeholder-elemento": "-- オプションを選択 --",
+        "nombre-label": "名前を入力してください：",
+        "nombre-placeholder": "名前.....",
+        "descripcion-label": "商品の説明：",
+        "descripcion-placeholder": "商品内容.....",
+        "precio-label": "価格 (€)：",
+        "precio-placeholder": "17€.....",
+        "cantidad-label": "数量：",
+        "cantidad-placeholder": "2.....",
+        "imagen-label": "画像：",
+        "imagen-placeholder": "画像URL.....",
+        "ingredientes": "材料",
+        "boton": "メニューに追加"
+    }
+}
 }

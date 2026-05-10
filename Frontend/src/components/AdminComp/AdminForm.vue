@@ -59,59 +59,119 @@
 <template>
   <div class="contenedor-admin">
     <div class="formulario-adicion">
-      <h2 class="titulo-panel">SELECCIONA EL ELEMENTO A AÑADIR</h2>
+      <h2 class="titulo-panel">{{ $t('administrador.annadir.titulo') }}</h2>
       
       <div class="seleccion-elemento">
-          <label for="entidad">Seleccione el elemento a introducir: </label>
+          <label for="entidad">
+            {{ $t('administrador.annadir.seleccionar-elemento') }}
+          </label>
+
           <select id="entidad" v-model="categoria">
-            <option value="" disabled selected>-- Elige una opción --</option>
+            <option value="" disabled selected>
+              {{ $t('administrador.annadir.placeholder-elemento') }}
+            </option>
+
             <option 
               v-for="cat in listaCategorias"
               :key="cat.id"
               :value="cat.slug"
-            >{{ $t(cat.nombre) }}</option>
+            >
+              {{ $t(cat.nombre) }}
+            </option>
           </select>
       </div>
 
       <div class="introduccion-datos">
+
         <div class="campo">
-          <label for="nombre">Introduzca su nombre: </label>
-          <input v-model="nombre" id="nombre" type="text" placeholder="nombre.....">
+          <label for="nombre">
+            {{ $t('administrador.annadir.nombre-label') }}
+          </label>
+
+          <input
+            v-model="nombre"
+            id="nombre"
+            type="text"
+            :placeholder="$t('administrador.annadir.nombre-placeholder')"
+          >
         </div>
         
         <div class="campo">
-          <label for="descripcion">Descripción del elemento: </label>
-          <input v-model="descripcion" id="descripcion" type="text" placeholder="elemento con.....">
+          <label for="descripcion">
+            {{ $t('administrador.annadir.descripcion-label') }}
+          </label>
+
+          <input
+            v-model="descripcion"
+            id="descripcion"
+            type="text"
+            :placeholder="$t('administrador.annadir.descripcion-placeholder')"
+          >
         </div>
 
         <div class="campo">
-          <label for="precio">Precio en €: </label>
-          <input v-model.number="precio" id="precio" type="text" placeholder="17€.....">
+          <label for="precio">
+            {{ $t('administrador.annadir.precio-label') }}
+          </label>
+
+          <input
+            v-model.number="precio"
+            id="precio"
+            type="text"
+            :placeholder="$t('administrador.annadir.precio-placeholder')"
+          >
         </div>
 
         <div class="campo">
-          <label for="cantidad">Cantidad: </label>
-          <input v-model.number="cantidad" id="cantidad" type="number" placeholder="2.....">
+          <label for="cantidad">
+            {{ $t('administrador.annadir.cantidad-label') }}
+          </label>
+
+          <input
+            v-model.number="cantidad"
+            id="cantidad"
+            type="number"
+            :placeholder="$t('administrador.annadir.cantidad-placeholder')"
+          >
         </div>
 
         <div class="campo">
-          <label for="img">Imagen: </label>
-          <input v-model="img" id="img" type="text" placeholder="URL de la imagen.....">
+          <label for="img">
+            {{ $t('administrador.annadir.imagen-label') }}
+          </label>
+
+          <input
+            v-model="img"
+            id="img"
+            type="text"
+            :placeholder="$t('administrador.annadir.imagen-placeholder')"
+          >
         </div>
 
         <div class="ingredientes">
-          <div v-for="ing in listaIngredientes" :key="ing.id">
-            <input type="checkbox"
-            :id="ing.id"
-            :value="ing"
-            v-model="ingredientes"
-            class="ingrediente">
-            <label :for="ing.id">{{ ing.nombre }}</label>
+          <h3>{{ $t('administrador.annadir.ingredientes') }}</h3>
 
+          <div v-for="ing in listaIngredientes" :key="ing.id">
+            <input
+              type="checkbox"
+              :id="ing.id"
+              :value="ing"
+              v-model="ingredientes"
+              class="ingrediente"
+            >
+
+            <label :for="ing.id">{{ ing.nombre }}</label>
           </div>
         </div>
 
-        <button @click="enviarDatos" type="button" class="boton-enviar">AÑADIR A LA CARTA</button>
+        <button
+          @click="enviarDatos"
+          type="button"
+          class="boton-enviar"
+        >
+          {{ $t('administrador.annadir.boton') }}
+        </button>
+
       </div>
     </div>
   </div>

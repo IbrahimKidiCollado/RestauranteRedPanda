@@ -247,5 +247,36 @@
     "detalles": {
       "vacio": "Aucune commande trouvée dans votre historique."
     }
-  }
+  },
+  "administrador": {
+    "titulo": "GESTION DU MENU",
+    "opciones": {
+        "modificar": "MODIFIER LE MENU",
+        "annadir": "AJOUTER AU MENU"
+    },
+    "modificar": {
+        "titulo": "MENU",
+        "nombre": "Nom",
+        "categoria": "Catégorie",
+        "precio": "Prix",
+        "acciones": "Actions"
+    },
+    "annadir": {
+        "titulo": "SÉLECTIONNEZ L'ÉLÉMENT À AJOUTER",
+        "seleccionar-elemento": "Sélectionnez l'élément à ajouter :",
+        "placeholder-elemento": "-- Choisissez une option --",
+        "nombre-label": "Entrez son nom :",
+        "nombre-placeholder": "nom.....",
+        "descripcion-label": "Description de l'élément :",
+        "descripcion-placeholder": "élément avec.....",
+        "precio-label": "Prix en € :",
+        "precio-placeholder": "17€.....",
+        "cantidad-label": "Quantité :",
+        "cantidad-placeholder": "2.....",
+        "imagen-label": "Image :",
+        "imagen-placeholder": "URL de l'image.....",
+        "ingredientes": "Ingrédients",
+        "boton": "AJOUTER AU MENU"
+    }
+}
 }

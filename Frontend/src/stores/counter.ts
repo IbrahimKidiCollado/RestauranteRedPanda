@@ -2,6 +2,8 @@ import { ref, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 //Servicios del backend
 import {obtenerCarrito, annadirCarrito, eliminarDelCarrito, sumarCantidad, restarCantidad, vaciarCarrito } from '@/services/Tienda/CarritoService';
+import { useUserStore } from './userStore'
+
 
   interface Producto{
     id: number;
@@ -20,7 +22,8 @@ import {obtenerCarrito, annadirCarrito, eliminarDelCarrito, sumarCantidad, resta
 
 export const useCarritoStore = defineStore('carrito', () => {
 
-
+  const userStore = useUserStore()
+  const productos = ref([])
 
   const envioMinimoGratis:number = 35;
   const precioEnvio:number = 4.99;

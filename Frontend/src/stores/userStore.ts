@@ -12,7 +12,6 @@ export const useUserStore = defineStore('user', () => {
     const sesionActiva = ref(false);
     const prefenciaIdioma = ref('');
     const id = ref(0);
-    const preferencia_idioma = ref('');
 
 
     async function login(nombre: string, email: string, pwd: string) {
@@ -82,35 +81,7 @@ export const useUserStore = defineStore('user', () => {
         return true;
     }
 
-    //Para recuperar la sesión al recargar la pagina
-    function recuperarSesion() {
-        console.log("DEBUG: Entrando en recuperarSesion...");
-        const usuarioGuardado = localStorage.getItem('usuario_redpanda');
-        
-        if (!usuarioGuardado) {
-            console.warn("DEBUG: No hay nada en localStorage bajo 'usuario_redpanda'");
-            return;
-        }
-
-        try {
-            const data = JSON.parse(usuarioGuardado);
-            console.log("DEBUG: Datos encontrados en Storage:", data);
-            
-            id.value = data.id;
-            nombreUsuario.value = data.nombre;
-            emailUsuario.value = data.email;
-            sesionActiva.value = true;
-            logueado.value = true;
-            
-            if (data.nombre === 'admin') {
-                esAdmin.value = true;
-            }
-            console.log("DEBUG: Estado del Store actualizado correctamente.");
-        } catch (error) {
-            console.error("DEBUG: Error al parsear JSON del Storage:", error);
-        }
-    }
-
+    
     return{
         logueado,
         nombreUsuario,
@@ -122,8 +93,7 @@ export const useUserStore = defineStore('user', () => {
         logout,
         esAdmin,
         sesionActiva,
-        prefenciaIdioma,
-        recuperarSesion
+        prefenciaIdioma
     }
 
 });

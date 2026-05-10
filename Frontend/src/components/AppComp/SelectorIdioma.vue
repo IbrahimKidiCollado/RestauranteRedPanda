@@ -33,8 +33,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useUserStore } from '@/stores/userStore'
 
 const { locale } = useI18n()
+const userStore = useUserStore()
 
 interface Idioma {
     codigo: string
@@ -59,6 +61,7 @@ const idiomaSeleccionado = ref<Idioma>(idiomaInicial)
 const seleccionarIdioma = (idioma: Idioma) => {
     idiomaSeleccionado.value = idioma
     locale.value = idioma.codigo
+    userStore.prefenciaIdioma = idioma.codigo
     localStorage.setItem('idioma-preferido', idioma.codigo)
     menuAbierto.value = false
 }

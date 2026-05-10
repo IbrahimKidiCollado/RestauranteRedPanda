@@ -247,5 +247,36 @@
     "detalles": {
       "vacio": "No orders were found in your history."
     }
-  }
+  },
+  "administrador": {
+    "titulo": "MENU MANAGEMENT",
+    "opciones": {
+        "modificar": "EDIT MENU",
+        "annadir": "ADD TO MENU"
+    },
+    "modificar": {
+        "titulo": "MENU",
+        "nombre": "Name",
+        "categoria": "Category",
+        "precio": "Price",
+        "acciones": "Actions"
+    },
+    "annadir": {
+        "titulo": "SELECT THE ITEM TO ADD",
+        "seleccionar-elemento": "Select the item to add:",
+        "placeholder-elemento": "-- Choose an option --",
+        "nombre-label": "Enter its name:",
+        "nombre-placeholder": "name.....",
+        "descripcion-label": "Item description:",
+        "descripcion-placeholder": "item with.....",
+        "precio-label": "Price in €:",
+        "precio-placeholder": "17€.....",
+        "cantidad-label": "Quantity:",
+        "cantidad-placeholder": "2.....",
+        "imagen-label": "Image:",
+        "imagen-placeholder": "Image URL.....",
+        "ingredientes": "Ingredients",
+        "boton": "ADD TO MENU"
+    }
+}
 }
