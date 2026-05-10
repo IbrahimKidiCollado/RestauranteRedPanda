@@ -102,6 +102,7 @@ const lanzarAlerta = (tipo: String, nombreProducto: String = '') => {
     }, 2500) // 2 segundos y medio :)
 }
 const mandarPedido = async () => {
+    console.log(productosCarrito.value)
     //mandamos el pedido al backend, con los productos del carrito, el total y el id del usuario (si está logueado)
     const productos = productosCarrito.value.map((p) => ({
         id: p.id,

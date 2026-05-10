@@ -37,6 +37,7 @@
                                             <div class="info-plato">
                                                 <span class="cantidad">{{ linea.cantidad }}x</span>
                                                 <span class="nombre">{{ linea.nombrePlato }}</span>
+                                                <span v-if="linea.ingredientesQuitados" class="quitados">Sin {{ linea.ingredientesQuitados }}</span>
                                             </div>
                                             <span class="precio-linea">{{ linea.precio }} €</span>
                                         </div>
@@ -234,6 +235,11 @@ onMounted(async () => {
                                 .nombre {
                                     color: $color-texto-blanco;
                                     font-size: 16px;
+                                }
+
+                                .quitados{
+                                    color: $color-rojo-panda;
+                                    margin-left: 2px;
                                 }
                             }
 

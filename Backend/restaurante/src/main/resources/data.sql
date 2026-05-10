@@ -118,7 +118,7 @@ INSERT INTO pedido (precio, id_usuario) VALUES
 
 -- LUEGO LAS LÍNEAS DE PEDIDO
 INSERT INTO linea_pedido (cantidad, precio, nombre_plato, categoria_plato, ingredientes_quitados, ingredientesids, id_pedido) VALUES
-(1, 10.50, 'Sushi Salmón', 'sushi', '', '[]', 1),
+(1, 10.50, 'Sushi Salmón', 'sushi', 'salmon', '[]', 1),
 (1, 13.50, 'Ramen Tonkotsu', 'ramen', '', '[]', 1),
 (1, 3.00, 'Ramune', 'bebida', '', '[]', 1);
 

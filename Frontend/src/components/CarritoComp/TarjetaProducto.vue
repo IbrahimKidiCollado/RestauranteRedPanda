@@ -201,8 +201,8 @@ interface ProductoCarrito {
     categoria_slug: string
     imagen: string
     cantidad: number
-    listaIngredientesQuitados: string | undefined
-    listaIngredientesIDs: number[] | undefined
+    listaIngredientesQuitados: string | ''
+    listaIngredientesIDs: number[] | []
 }
 
 defineProps<{

@@ -18,8 +18,8 @@ export const obtenerCarrito = async () => {
     }
 }
 
-export const annadirCarrito = async (producto: any, ingredientesQuitados: String | undefined, ingredientesIDs: number[] | undefined) => {
-    try{
+export const annadirCarrito = async (producto: any, ingredientesQuitados: string = '',ingredientesIDs: number[] = []) => {
+    try {
         const res = await fetch('http://localhost:8081/carrito/agregar', {
             method: 'POST',
             credentials: 'include',
@@ -33,6 +33,7 @@ export const annadirCarrito = async (producto: any, ingredientesQuitados: String
                 cantidad: producto.cantidad,
                 categoria_slug: producto.categoria_slug,
                 imagen: producto.imagen,
+
                 listaIngredientesQuitados: ingredientesQuitados,
                 listaIngredientesIDs: ingredientesIDs
             })
@@ -44,9 +45,7 @@ export const annadirCarrito = async (producto: any, ingredientesQuitados: String
 
         return await res.text();
 
-
-    }
-    catch(error){
+    } catch(error) {
         console.error("Error en el servicio de agregado al carrito: ", error);
         return null;
     }
