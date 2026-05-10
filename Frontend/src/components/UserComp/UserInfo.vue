@@ -56,7 +56,7 @@ const cerrarSesion = async () => {
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
-    border-top: 1px solid red;
+    border-top: 1px solid $color-rojo-oscuro-claro;
     box-shadow:
         0 -15px 30px rgba(255, 0, 0, 0.05),
         0 10px 30px rgba(0, 0, 0, 0.8);
