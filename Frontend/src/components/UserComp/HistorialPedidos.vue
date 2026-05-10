@@ -84,144 +84,221 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .contenedor {
-    padding: 3rem;
-    background: $color-rojo-degradado;
-    border: 1px $color-rojo-oscuro-claro solid;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
+    box-sizing: border-box;
+    background-color: $color-bg-exterior;
+    border: 1px solid $border-color;
+    border-radius: 24px;
+    padding: 35px 40px;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
 
     .titulo {
         color: $color-texto-blanco;
-        font-size: 26px;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 
-    .tabla-pedidos {
+    .sin-pedidos {
+        text-align: center;
+        color: $color-texto-gris;
+        padding: 40px 20px;
+    }
+}
+
+.tabla-pedidos {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+
+    thead {
+        display: none;
+    }
+
+    .cuerpo-carta {
+        box-sizing: border-box;
+        display: block;
         width: 100%;
-        border-collapse: separate;
-        border-spacing: 0 8px;
 
-        .titulo-fila {
-            color: $color-gris;
-            text-align: left;
-            padding: 0 15px;
-            font-size: 20px;
-        }
+        .fila-plato {
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: $color-bg-tarjeta;
+            border: 1px solid $color-borde-pedido;
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
 
-        .cuerpo-carta {
-            .fila-plato {
-                background-color: $color-fondo-main;
-                transition: all 0.2s ease;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: $color-fondo-controles;
-                }
-
-                &.fila-activa {
-                    background-color: $color-fondo-controles;
-                    border-left: 3px solid $color-rojo-panda;
-                }
-
-                .datos {
-                    padding: 20px 15px;
-                    color: $color-texto-blanco;
-
-                    .id strong {
-                        color: $color-rojo-panda;
-                    }
-
-                    .precio-total {
-                        font-weight: bold;
-                    }
-                }
+            &:hover {
+                background-color: $color-bg-hover;
             }
 
-            .fila-detalle {
-                .detalle-pedido {
-                    background-color: rgba(0, 0, 0, 0.2);
-                    padding: 20px;
-                    border-radius: 0 0 12px 12px;
-                    border: 1px solid rgba($color-rojo-panda, 0.2);
-                    border-top: none;
-                    animation: slideDown 0.3s ease-out;
+            &.fila-activa {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                border-bottom: none;
+                margin-bottom: 0;
+            }
 
-                    .lista-productos {
-                        display: flex;
-                        flex-direction: column;
-                    }
+            td {
+                box-sizing: border-box;
+                display: block;
+                border: none;
+                padding: 0;
+            }
+
+            td:last-child {
+                text-align: right;
+            }
+
+            .id strong {
+                color: $color-texto-blanco;
+                font-size: 20px;
+                font-weight: 700;
+                display: block;
+            }
+
+            .id {
+                color: $color-texto-gris;
+                font-size: 14px;
+            }
+
+            .precio-total {
+                background-color: $color-verde-bg;
+                color: $color-verde-txt;
+                border: 1px solid $color-verde-txt;
+                padding: 6px 16px;
+                border-radius: 20px;
+                font-size: 14px;
+                font-weight: 600;
+                display: inline-block;
+            }
+        }
+
+        .fila-detalle {
+            box-sizing: border-box;
+            display: block;
+            background-color: $color-bg-tarjeta;
+            border-left: 1px solid $color-borde-pedido;
+            border-right: 1px solid $color-borde-pedido;
+            border-bottom: 1px solid $color-borde-pedido;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            padding: 0 30px 30px 30px;
+            margin-bottom: 20px;
+
+            td {
+                box-sizing: border-box;
+                display: block;
+                padding: 0;
+                border: none;
+            }
+
+            .detalle-pedido {
+                box-sizing: border-box;
+                padding-top: 25px;
+                border-top: 1px solid $color-borde-pedido;
+
+                .lista-productos {
+                    margin-bottom: 25px;
 
                     .item-linea {
-                        padding: 10px 0;
-                        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                        margin-bottom: 16px;
 
                         &:last-child {
-                            border-bottom: none;
+                            margin-bottom: 0;
                         }
 
                         .fila-producto {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
-                            gap: 20px;
+
+                            .info-plato {
+                                display: flex;
+                                gap: 10px;
+
+                                .cantidad {
+                                    color: $color-texto-gris;
+                                    font-weight: 500;
+                                }
+
+                                .nombre {
+                                    color: $color-texto-blanco;
+                                    font-size: 16px;
+                                }
+                            }
+
+                            .precio-linea {
+                                color: $color-texto-gris;
+                                font-size: 15px;
+                            }
                         }
 
-                        .info-plato {
+                        .ingredientes-excluidos {
                             display: flex;
-                            gap: 12px;
+                            flex-wrap: wrap;
+                            gap: 8px;
+                            margin-top: 8px;
+                            padding-left: 25px;
 
-                            .cantidad {
-                                color: $color-rojo-panda;
-                                font-weight: bold;
+                            .pildora-sin {
+                                background-color: $color-pildora-bg;
+                                color: $color-pildora-txt;
+                                border: 1px solid $color-pildora-borde;
+                                padding: 3px 12px;
+                                border-radius: 12px;
+                                font-size: 12px;
+                                font-weight: 500;
                             }
-
-                            .nombre {
-                                color: $color-texto-blanco;
-                                font-size: 0.95rem;
-                            }
-                        }
-
-                        .precio-linea {
-                            color: $color-blanco-sucio;
-                            font-size: 0.9rem;
                         }
                     }
+                }
 
-                    .resumen-total {
-                        margin-top: 15px;
-                        padding-top: 15px;
-                        border-top: 1px dashed rgba(255, 255, 255, 0.1);
-                        display: flex;
-                        justify-content: flex-end;
-                        align-items: center;
-                        gap: 15px;
+                .resumen-total {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-top: 1px solid $color-borde-pedido;
+                    padding-top: 20px;
+
+                    span {
                         color: $color-texto-blanco;
+                        font-size: 18px;
+                        font-weight: 700;
+                    }
 
-                        strong {
-                            font-size: 1.2rem;
-                            color: $color-rojo-panda;
-                        }
+                    strong {
+                        color: $color-rojo-total;
+                        font-size: 22px;
+                        font-weight: 700;
                     }
                 }
             }
         }
     }
-
-    .sin-pedidos {
-        color: $color-blanco-sucio;
-        text-align: center;
-        padding: 3rem;
-    }
 }
 
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
+@media (max-width: 600px) {
+    .contenedor {
+        padding: 20px;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .tabla-pedidos .cuerpo-carta {
+        .fila-plato {
+            padding: 20px;
+        }
+        .fila-detalle {
+            padding: 0 20px 20px 20px;
+        }
     }
 }
 </style>

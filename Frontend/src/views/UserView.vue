@@ -1,9 +1,9 @@
 <template>
     <div class="contenedor">
-        <div>
+        <div class="container-user">
             <userInfo />
         </div>
-        <div>
+        <div class="container-historial">
             <HistorialPedidos />
         </div>
     </div>
@@ -37,6 +37,7 @@ import HistorialPedidos from '@/components/UserComp/HistorialPedidos.vue'
 
 .contenedor {
     display: flex;
+    width: 100vw;
     flex-direction: column;
     align-items: center;
     gap: 30px;
@@ -44,11 +45,11 @@ import HistorialPedidos from '@/components/UserComp/HistorialPedidos.vue'
     justify-content: center;
     flex-wrap: wrap;
 
-    > div:nth-child(odd) {
+    .container-user {
         animation: slideFromLeft 0.8s ease-out both;
     }
 
-    > div:nth-child(even) {
+    .container-historial {
         animation: slideFromRight 0.8s ease-out both;
     }
 }
